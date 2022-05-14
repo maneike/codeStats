@@ -1,0 +1,52 @@
+version: '3.9'
+
+services:
+
+  codestats:
+    image: 127.0.0.1:5000/codestats
+    build: .
+    container_name: proxydupli
+    command: python manage.py runserver 0.0.0.0:8000
+    env_file:
+      - .env.dev
+    depends_on:
+      - redis
+    volumes:
+      - .:/codestats
+      - /static:/static
+
+  nginx:
+    image: 127.0.0.1:5000/nginx_codestats
+    build:
+      context: .
+      dockerfile: nginx/Dockerfile
+    container_name: nginx_codestats
+    depends_on:
+      - codestats
+    restart: always
+    ports:
+     - "1341:80"
+    volumes:
+      - .:/codestats
+      - /static:/static
+
+  redis:
+    image: "redis:alpine"
+
+  celery:
+    build: .
+    image: 127.0.0.1:5000/celery_codestats
+    command: celery -A codestats worker -l INFO
+    volumes:
+      - .:/codestats
+    env_file:
+      - .env.dev
+    environment:
+      - DEBUG=1
+      - DJANGO_ALLOWED_HOSTS=*
+      - CELERY_BROKER=redis://redis:6379/0
+      - CELERY_BACKEND=redis://redis:6379/0
+    depends_on:
+      - redis
+      - proxydupli
+
