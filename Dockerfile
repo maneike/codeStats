@@ -1,5 +1,5 @@
 FROM python:3.10
-LABEL "mainteiner"="Mateusz Babul"
+LABEL "maintainer"="Mateusz Babul"
 ENV PYTHONUNBUFFERED 1
 ENV PYTHONDONTWRITEBYTECODE 1
 
