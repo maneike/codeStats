@@ -5,7 +5,7 @@ from django.views import View
 class ReportView(View):
 
     def get(self, request):
-        pass
+        return render(request, 'app/index.html')
 
     def post(self, request):
         pass
