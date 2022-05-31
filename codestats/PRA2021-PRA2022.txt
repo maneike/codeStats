@@ -1,0 +1,2441 @@
+PRA2021-PRA2022
+HEAD
+Autorzy: marcin.witkowski@e-qsg.com
+Commits count: 5
+File extensions: {'pack', 'sample', 'idx', 'xml', 'git'}
+------------------------------------------
+HibernateEnd
+Autorzy: witkowski.mar@gmail.com, marcin.witkowski@e-qsg.com
+Commits count: 32
+File extensions: {'java', 'pack', 'sample', 'properties', 'idx', 'md', 'xml', 'git', 'gitignore'}
+------------------------------------------
+HibernateStart
+Autorzy: witkowski.mar@gmail.com, marcin.witkowski@e-qsg.com
+Commits count: 30
+File extensions: {'java', 'pack', 'sample', 'properties', 'idx', 'md', 'xml', 'git', 'gitignore'}
+------------------------------------------
+IntroductionClassesEnd
+Autorzy: witkowski.mar@gmail.com, marcin.witkowski@e-qsg.com
+Commits count: 4
+File extensions: {'java', 'pack', 'sample', 'properties', 'idx', 'xml', 'git'}
+------------------------------------------
+IntroductionClassesStart
+Autorzy: marcin.witkowski@e-qsg.com
+Commits count: 4
+File extensions: {'java', 'pack', 'sample', 'idx', 'xml', 'git'}
+------------------------------------------
+JSONandXMLEnd
+Autorzy: tomek.zietkiewicz@gmail.com, witkowski.mar@gmail.com, marcin.witkowski@e-qsg.com
+Commits count: 41
+File extensions: {'java', 'pack', 'sample', 'xsd', 'properties', 'idx', 'yml', 'json', 'xml', 'git', 'gitignore'}
+------------------------------------------
+JSONandXMLStart
+Autorzy: tomek.zietkiewicz@gmail.com, witkowski.mar@gmail.com, marcin.witkowski@e-qsg.com
+Commits count: 42
+File extensions: {'java', 'pack', 'sample', 'properties', 'idx', 'yml', 'json', 'xml', 'git', 'gitignore'}
+------------------------------------------
+Master
+Autorzy: marcin.witkowski@e-qsg.com
+Commits count: 5
+File extensions: {'pack', 'sample', 'idx', 'xml', 'git'}
+------------------------------------------
+ReactEnd
+Autorzy: marcin.witkowski@rockwool.com, marcin.witkowski@e-qsg.com
+Commits count: 6
+File extensions: {'ico', 'pack', 'sample', 'idea', 'html', 'idx', 'json', 'js', 'md', 'xml', 'svg', 'css', 'git', 'iml', 'gitignore'}
+------------------------------------------
+ReactStart
+Autorzy: marcin.witkowski@rockwool.com, marcin.witkowski@e-qsg.com
+Commits count: 5
+File extensions: {'ico', 'pack', 'sample', 'idea', 'html', 'idx', 'json', 'js', 'md', 'xml', 'svg', 'css', 'git', 'iml', 'gitignore'}
+------------------------------------------
+SpringBootEnd
+Autorzy: donhuvy@Dos-MacBook-Pro.local, marcin.witkowski@rockwool.com, anwaar.ziani@gmail.com, marcin.witkowski@e-qsg.com
+Commits count: 35
+File extensions: {'java', 'pack', 'sample', 'idx', 'yml', 'xml', 'git', 'gitignore'}
+------------------------------------------
+SpringBootStart
+Autorzy: donhuvy@Dos-MacBook-Pro.local, marcin.witkowski@rockwool.com, witkowski.mar@gmail.com, marcin.witkowski@e-qsg.com, anwaar.ziani@gmail.com
+Commits count: 38
+File extensions: {'java', 'pack', 'sample', 'idx', 'yml', 'xml', 'git', 'gitignore'}
+------------------------------------------
+SpringEnd
+Autorzy: marcin.witkowski@e-qsg.com
+Commits count: 9
+File extensions: {'java', 'pack', 'sample', 'properties', 'idx', 'yml', 'xml', 'git', 'gitignore'}
+------------------------------------------
+SpringSecurityReactStart
+Autorzy: rajeevs@flock.co, callicoder@gmail.com, marcin.witkowski@rockwool.com, marcin.witkowski@e-qsg.com
+Commits count: 58
+File extensions: {'ico', 'pack', 'sample', 'html', 'lock', 'idx', 'json', 'js', 'png', 'md', 'css', 'git', 'gitignore'}
+------------------------------------------
+SpringSecurityStart
+Autorzy: rajeevs@flock.co, callicoder@gmail.com, marcin.witkowski@rockwool.com, marcin.witkowski@e-qsg.com
+Commits count: 56
+File extensions: {'java', 'pack', 'sample', 'idx', 'yml', 'cmd', 'png', 'md', 'xml', 'git', 'gitignore'}
+------------------------------------------
+SpringStart
+Autorzy: marcin.witkowski@e-qsg.com
+Commits count: 8
+File extensions: {'java', 'pack', 'sample', 'properties', 'idx', 'yml', 'xml', 'git', 'gitignore'}
+------------------------------------------
+StreamsAndCollectionsEnd
+Autorzy: witkowski.mar@gmail.com, marcin.witkowski@e-qsg.com
+Commits count: 40
+File extensions: {'java', 'pack', 'sample', 'properties', 'idx', 'md', 'xml', 'git', 'gitignore'}
+------------------------------------------
+StreamsAndCollectionsStart
+Autorzy: witkowski.mar@gmail.com, marcin.witkowski@e-qsg.com
+Commits count: 37
+File extensions: {'java', 'pack', 'sample', 'properties', 'idx', 'md', 'xml', 'git', 'gitignore'}
+------------------------------------------
+TestAndDebugEnd
+Autorzy: witkowski.mar@gmail.com, marcin.witkowski@e-qsg.com
+Commits count: 7
+File extensions: {'java', 'pack', 'sample', 'properties', 'idx', 'xml', 'git', 'gitignore'}
+------------------------------------------
+TestAndDebugStart
+Autorzy: witkowski.mar@gmail.com, marcin.witkowski@e-qsg.com
+Commits count: 6
+File extensions: {'java', 'pack', 'sample', 'properties', 'idx', 'xml', 'git', 'gitignore'}
+------------------------------------------
+Commit msg: Initial commit
+Date: 18/10/2020, 16:24:11
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: set up maven compilation version
+Date: 18/10/2020, 16:58:41
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: add resource file
+Date: 18/10/2020, 17:00:15
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Zmiana komunikatu
+Date: 03/10/2021, 17:54:27
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Master
+Date: 03/10/2021, 18:24:04
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Initial commit
+Date: 28/09/2017, 12:19:00
+Author: WitMar
+Email: witkowski.mar@gmail.com
+----------------------------------
+Commit msg: Hello World
+Date: 28/09/2017, 12:41:32
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: chnage Maven art name
+Date: 28/09/2017, 12:59:27
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Ignore Ideaj Files
+Date: 28/09/2017, 13:17:59
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Add loger
+Date: 28/09/2017, 16:25:06
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Chenage Package
+Date: 28/09/2017, 16:27:20
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Merge remote-tracking branch 'origin/Feature/Logger' into develop# Conflicts:#	PracowaniaProgramowania/src/main/java/example/HelloWorld.java
+Date: 05/10/2017, 22:29:22
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Merge branch 'Feature/Logger' into develop
+Date: 06/10/2017, 13:06:06
+Author: WitMar
+Email: witkowski.mar@gmail.com
+----------------------------------
+Commit msg: change pom
+Date: 06/10/2017, 13:17:58
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Merge remote-tracking branch 'origin/develop' into develop
+Date: 11/10/2017, 10:23:10
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Second Class start
+Date: 11/10/2017, 10:31:57
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Second Class
+Date: 11/10/2017, 12:20:39
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Second Class
+Date: 11/10/2017, 13:43:24
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Java 1_8
+Date: 11/10/2017, 13:50:32
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Hibernate
+Date: 31/10/2017, 09:26:39
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Hibernate
+Date: 31/10/2017, 10:18:44
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Hibernate
+Date: 31/10/2017, 13:50:23
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Hibernate
+Date: 31/10/2017, 20:49:09
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Hibernate
+Date: 31/10/2017, 23:33:23
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: fix
+Date: 03/11/2017, 11:09:56
+Author: witkowski.mar@gmail.com
+Email: witkowski.mar@gmail.com
+----------------------------------
+Commit msg: fix
+Date: 03/11/2017, 11:23:14
+Author: witkowski.mar@gmail.com
+Email: witkowski.mar@gmail.com
+----------------------------------
+Commit msg: gitignore, posprzatanie seconda
+Date: 03/11/2017, 21:23:44
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Start
+Date: 10/11/2018, 14:08:23
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Start
+Date: 10/11/2018, 14:08:55
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Add new elements
+Date: 10/11/2018, 15:29:35
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: start code 2020 changes
+Date: 29/11/2020, 20:26:35
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: fix driver
+Date: 30/11/2020, 19:09:33
+Author: THINK
+Email: witkowski.mar@gmail.com
+----------------------------------
+Commit msg: Refactor
+Date: 21/11/2021, 15:30:21
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Refactor
+Date: 21/11/2021, 15:57:17
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Refactor
+Date: 21/11/2021, 15:59:13
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Refactor
+Date: 21/11/2021, 20:15:05
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: code classes
+Date: 21/11/2021, 21:41:22
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Initial commit
+Date: 28/09/2017, 12:19:00
+Author: WitMar
+Email: witkowski.mar@gmail.com
+----------------------------------
+Commit msg: Hello World
+Date: 28/09/2017, 12:41:32
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: chnage Maven art name
+Date: 28/09/2017, 12:59:27
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Ignore Ideaj Files
+Date: 28/09/2017, 13:17:59
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Add loger
+Date: 28/09/2017, 16:25:06
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Chenage Package
+Date: 28/09/2017, 16:27:20
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Merge remote-tracking branch 'origin/Feature/Logger' into develop# Conflicts:#	PracowaniaProgramowania/src/main/java/example/HelloWorld.java
+Date: 05/10/2017, 22:29:22
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Merge branch 'Feature/Logger' into develop
+Date: 06/10/2017, 13:06:06
+Author: WitMar
+Email: witkowski.mar@gmail.com
+----------------------------------
+Commit msg: change pom
+Date: 06/10/2017, 13:17:58
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Merge remote-tracking branch 'origin/develop' into develop
+Date: 11/10/2017, 10:23:10
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Second Class start
+Date: 11/10/2017, 10:31:57
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Second Class
+Date: 11/10/2017, 12:20:39
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Second Class
+Date: 11/10/2017, 13:43:24
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Java 1_8
+Date: 11/10/2017, 13:50:32
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Hibernate
+Date: 31/10/2017, 09:26:39
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Hibernate
+Date: 31/10/2017, 10:18:44
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Hibernate
+Date: 31/10/2017, 13:50:23
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Hibernate
+Date: 31/10/2017, 20:49:09
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Hibernate
+Date: 31/10/2017, 23:33:23
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: fix
+Date: 03/11/2017, 11:09:56
+Author: witkowski.mar@gmail.com
+Email: witkowski.mar@gmail.com
+----------------------------------
+Commit msg: fix
+Date: 03/11/2017, 11:23:14
+Author: witkowski.mar@gmail.com
+Email: witkowski.mar@gmail.com
+----------------------------------
+Commit msg: gitignore, posprzatanie seconda
+Date: 03/11/2017, 21:23:44
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Start
+Date: 10/11/2018, 14:08:23
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Start
+Date: 10/11/2018, 14:08:55
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Add new elements
+Date: 10/11/2018, 15:29:35
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: start code 2020 changes
+Date: 29/11/2020, 20:26:35
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: fix driver
+Date: 30/11/2020, 19:09:33
+Author: THINK
+Email: witkowski.mar@gmail.com
+----------------------------------
+Commit msg: Refactor
+Date: 21/11/2021, 15:30:21
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Refactor
+Date: 21/11/2021, 15:58:05
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Refactor
+Date: 21/11/2021, 20:15:35
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Initial commit
+Date: 18/10/2020, 16:24:11
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: set up maven compilation version
+Date: 18/10/2020, 16:58:41
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: add resource file
+Date: 18/10/2020, 17:00:15
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Final code
+Date: 18/10/2020, 17:18:07
+Author: witkowski.mar@gmail.com
+Email: witkowski.mar@gmail.com
+----------------------------------
+Commit msg: Initial commit
+Date: 18/10/2020, 16:24:11
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: set up maven compilation version
+Date: 18/10/2020, 16:58:41
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: add resource file
+Date: 18/10/2020, 17:00:15
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Zmiana komunikatu
+Date: 03/10/2021, 17:54:27
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Initial commit
+Date: 28/09/2017, 12:19:00
+Author: WitMar
+Email: witkowski.mar@gmail.com
+----------------------------------
+Commit msg: Hello World
+Date: 28/09/2017, 12:41:32
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: chnage Maven art name
+Date: 28/09/2017, 12:59:27
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Ignore Ideaj Files
+Date: 28/09/2017, 13:17:59
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Add loger
+Date: 28/09/2017, 16:25:06
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Chenage Package
+Date: 28/09/2017, 16:27:20
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Merge remote-tracking branch 'origin/Feature/Logger' into develop# Conflicts:#	PracowaniaProgramowania/src/main/java/example/HelloWorld.java
+Date: 05/10/2017, 22:29:22
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Merge branch 'Feature/Logger' into develop
+Date: 06/10/2017, 13:06:06
+Author: WitMar
+Email: witkowski.mar@gmail.com
+----------------------------------
+Commit msg: change pom
+Date: 06/10/2017, 13:17:58
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Merge remote-tracking branch 'origin/develop' into develop
+Date: 11/10/2017, 10:23:10
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Second Class start
+Date: 11/10/2017, 10:31:57
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Second Class
+Date: 11/10/2017, 12:20:39
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Second Class
+Date: 11/10/2017, 13:43:24
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Java 1_8
+Date: 11/10/2017, 13:50:32
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Hibernate
+Date: 31/10/2017, 09:26:39
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Hibernate
+Date: 31/10/2017, 10:18:44
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Hibernate
+Date: 31/10/2017, 13:50:23
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Hibernate
+Date: 31/10/2017, 20:49:09
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Hibernate
+Date: 31/10/2017, 23:32:33
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Hibernate
+Date: 01/11/2017, 00:12:29
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: iml
+Date: 07/11/2017, 10:38:43
+Author: witkowski.mar@gmail.com
+Email: witkowski.mar@gmail.com
+----------------------------------
+Commit msg: JSON serialization example
+Date: 07/11/2017, 10:43:26
+Author: Tomasz Zietkiewicz
+Email: tomek.zietkiewicz@gmail.com
+----------------------------------
+Commit msg: Added travic yml config file
+Date: 07/11/2017, 10:43:26
+Author: Tomasz Zietkiewicz
+Email: tomek.zietkiewicz@gmail.com
+----------------------------------
+Commit msg: Fixed travis file location
+Date: 07/11/2017, 10:43:26
+Author: Tomasz Zietkiewicz
+Email: tomek.zietkiewicz@gmail.com
+----------------------------------
+Commit msg: Added cd before build
+Date: 07/11/2017, 10:43:26
+Author: Tomasz Zietkiewicz
+Email: tomek.zietkiewicz@gmail.com
+----------------------------------
+Commit msg: Gson tests and examples
+Date: 07/11/2017, 10:46:14
+Author: Tomasz Zietkiewicz
+Email: tomek.zietkiewicz@gmail.com
+----------------------------------
+Commit msg: Jackson
+Date: 07/11/2017, 17:21:26
+Author: Tomasz Zietkiewicz
+Email: tomek.zietkiewicz@gmail.com
+----------------------------------
+Commit msg: Added course materials
+Date: 07/11/2017, 17:24:00
+Author: Tomasz Zietkiewicz
+Email: tomek.zietkiewicz@gmail.com
+----------------------------------
+Commit msg: change pom
+Date: 09/11/2017, 19:38:55
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Starting Code
+Date: 09/11/2017, 21:52:23
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: pom add Jackson
+Date: 10/11/2017, 10:23:42
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: 2018/2019 class start
+Date: 24/10/2018, 20:46:46
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: add lambdas
+Date: 24/10/2018, 21:36:01
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: add lambdas
+Date: 24/10/2018, 21:38:15
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: add pom
+Date: 24/10/2018, 21:40:02
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: add xjc
+Date: 24/10/2019, 11:24:03
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: add xjc
+Date: 24/10/2019, 11:26:01
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: changes for class 2020
+Date: 15/11/2020, 18:53:40
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: changes for class 2020
+Date: 15/11/2020, 18:56:54
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: changes for class 2020
+Date: 15/11/2020, 18:58:26
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: final code 2020 changes
+Date: 15/11/2020, 20:26:44
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Initial commit
+Date: 28/09/2017, 12:19:00
+Author: WitMar
+Email: witkowski.mar@gmail.com
+----------------------------------
+Commit msg: Hello World
+Date: 28/09/2017, 12:41:32
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: chnage Maven art name
+Date: 28/09/2017, 12:59:27
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Ignore Ideaj Files
+Date: 28/09/2017, 13:17:59
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Add loger
+Date: 28/09/2017, 16:25:06
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Chenage Package
+Date: 28/09/2017, 16:27:20
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Merge remote-tracking branch 'origin/Feature/Logger' into develop# Conflicts:#	PracowaniaProgramowania/src/main/java/example/HelloWorld.java
+Date: 05/10/2017, 22:29:22
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Merge branch 'Feature/Logger' into develop
+Date: 06/10/2017, 13:06:06
+Author: WitMar
+Email: witkowski.mar@gmail.com
+----------------------------------
+Commit msg: change pom
+Date: 06/10/2017, 13:17:58
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Merge remote-tracking branch 'origin/develop' into develop
+Date: 11/10/2017, 10:23:10
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Second Class start
+Date: 11/10/2017, 10:31:57
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Second Class
+Date: 11/10/2017, 12:20:39
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Second Class
+Date: 11/10/2017, 13:43:24
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Java 1_8
+Date: 11/10/2017, 13:50:32
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Hibernate
+Date: 31/10/2017, 09:26:39
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Hibernate
+Date: 31/10/2017, 10:18:44
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Hibernate
+Date: 31/10/2017, 13:50:23
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Hibernate
+Date: 31/10/2017, 20:49:09
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Hibernate
+Date: 31/10/2017, 23:32:33
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Hibernate
+Date: 01/11/2017, 00:12:29
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: iml
+Date: 07/11/2017, 10:38:43
+Author: witkowski.mar@gmail.com
+Email: witkowski.mar@gmail.com
+----------------------------------
+Commit msg: JSON serialization example
+Date: 07/11/2017, 10:43:26
+Author: Tomasz Zietkiewicz
+Email: tomek.zietkiewicz@gmail.com
+----------------------------------
+Commit msg: Added travic yml config file
+Date: 07/11/2017, 10:43:26
+Author: Tomasz Zietkiewicz
+Email: tomek.zietkiewicz@gmail.com
+----------------------------------
+Commit msg: Fixed travis file location
+Date: 07/11/2017, 10:43:26
+Author: Tomasz Zietkiewicz
+Email: tomek.zietkiewicz@gmail.com
+----------------------------------
+Commit msg: Added cd before build
+Date: 07/11/2017, 10:43:26
+Author: Tomasz Zietkiewicz
+Email: tomek.zietkiewicz@gmail.com
+----------------------------------
+Commit msg: Gson tests and examples
+Date: 07/11/2017, 10:46:14
+Author: Tomasz Zietkiewicz
+Email: tomek.zietkiewicz@gmail.com
+----------------------------------
+Commit msg: Jackson
+Date: 07/11/2017, 17:21:26
+Author: Tomasz Zietkiewicz
+Email: tomek.zietkiewicz@gmail.com
+----------------------------------
+Commit msg: Added course materials
+Date: 07/11/2017, 17:24:00
+Author: Tomasz Zietkiewicz
+Email: tomek.zietkiewicz@gmail.com
+----------------------------------
+Commit msg: change pom
+Date: 09/11/2017, 19:38:55
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Starting Code
+Date: 09/11/2017, 21:52:23
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: pom add Jackson
+Date: 10/11/2017, 10:23:42
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: 2018/2019 class start
+Date: 24/10/2018, 20:46:46
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: add lambdas
+Date: 24/10/2018, 21:36:01
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: add lambdas
+Date: 24/10/2018, 21:38:15
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: add pom
+Date: 24/10/2018, 21:40:02
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: add xjc
+Date: 24/10/2019, 11:24:03
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: add xjc
+Date: 24/10/2019, 11:26:01
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: changes for class 2020
+Date: 15/11/2020, 18:53:40
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: changes for class 2020
+Date: 15/11/2020, 18:56:54
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: changes for class 2020
+Date: 15/11/2020, 18:58:26
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: start code 2020 changes
+Date: 15/11/2020, 20:28:16
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Change in POM
+Date: 27/10/2021, 23:49:46
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Initial commit
+Date: 18/10/2020, 16:24:11
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: set up maven compilation version
+Date: 18/10/2020, 16:58:41
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: add resource file
+Date: 18/10/2020, 17:00:15
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Zmiana komunikatu
+Date: 03/10/2021, 17:54:27
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Master
+Date: 03/10/2021, 18:24:04
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: React init
+Date: 28/12/2020, 17:43:46
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: readme clean
+Date: 28/12/2020, 17:45:10
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: update todo model
+Date: 28/12/2020, 19:37:38
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: db.json change
+Date: 28/12/2020, 20:50:44
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: change index
+Date: 19/12/2021, 16:25:30
+Author: mawit
+Email: marcin.witkowski@rockwool.com
+----------------------------------
+Commit msg: final code
+Date: 19/12/2021, 17:27:33
+Author: mawit
+Email: marcin.witkowski@rockwool.com
+----------------------------------
+Commit msg: React init
+Date: 28/12/2020, 17:43:46
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: readme clean
+Date: 28/12/2020, 17:45:10
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: update todo model
+Date: 28/12/2020, 19:37:38
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: db.json change
+Date: 28/12/2020, 20:50:44
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: change index
+Date: 19/12/2021, 16:25:30
+Author: mawit
+Email: marcin.witkowski@rockwool.com
+----------------------------------
+Commit msg: init
+Date: 30/12/2015, 02:58:41
+Author: Anwar Ziani
+Email: anwaar.ziani@gmail.com
+----------------------------------
+Commit msg: Update
+Date: 30/12/2015, 03:46:09
+Author: Anwar Ziani
+Email: anwaar.ziani@gmail.com
+----------------------------------
+Commit msg: Create README
+Date: 30/12/2015, 23:38:14
+Author: Anwar Ziani
+Email: anwaar.ziani@gmail.com
+----------------------------------
+Commit msg: Update README
+Date: 30/12/2015, 23:41:42
+Author: Anwar Ziani
+Email: anwaar.ziani@gmail.com
+----------------------------------
+Commit msg: Update README
+Date: 30/12/2015, 23:49:13
+Author: Anwar Ziani
+Email: anwaar.ziani@gmail.com
+----------------------------------
+Commit msg: Update README
+Date: 05/01/2016, 03:16:18
+Author: Anwar Ziani
+Email: anwaar.ziani@gmail.com
+----------------------------------
+Commit msg: update
+Date: 12/07/2016, 02:52:09
+Author: Anwar Ziani
+Email: anwaar.ziani@gmail.com
+----------------------------------
+Commit msg: Update Spring Boot, Bootstrap version, polish source code
+Date: 06/11/2016, 20:25:57
+Author: Do Nhu Vy
+Email: donhuvy@Dos-MacBook-Pro.local
+----------------------------------
+Commit msg: Add database script.
+Date: 06/11/2016, 20:29:13
+Author: Do Nhu Vy
+Email: donhuvy@Dos-MacBook-Pro.local
+----------------------------------
+Commit msg: Merge pull request #1 from donhuvy/masterUpdate SpringBoot, Bootstrap version, add database script and polish source code
+Date: 06/11/2016, 15:21:37
+Author: Anwar Ziani
+Email: anwaar.ziani@gmail.com
+----------------------------------
+Commit msg: Spring Project
+Date: 26/11/2017, 18:00:33
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Spring second update
+Date: 07/12/2017, 17:31:40
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Spring second update
+Date: 07/12/2017, 17:59:11
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Spring update
+Date: 07/12/2017, 18:03:26
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Spring update
+Date: 07/12/2017, 18:03:55
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Spring update
+Date: 07/12/2017, 18:07:11
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Spring update
+Date: 07/12/2017, 18:07:31
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Spring fix ManyToOne
+Date: 07/12/2017, 22:29:09
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: fix redirect
+Date: 16/12/2018, 15:42:29
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: fix maven build
+Date: 20/12/2018, 09:59:45
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: corrections
+Date: 15/12/2019, 20:03:45
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: corrections
+Date: 15/12/2019, 20:28:32
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: upgrade Spring to 2 and make work with java 11
+Date: 28/01/2020, 20:26:23
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: changes 2021, upgrade sprin version
+Date: 21/12/2020, 10:18:45
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: change mappings annotations
+Date: 21/12/2020, 11:33:47
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: change mappings annotations
+Date: 21/12/2020, 11:52:52
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Change date to Joda
+Date: 21/12/2020, 13:13:11
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: update controller
+Date: 21/12/2020, 13:16:02
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: code classes
+Date: 05/12/2021, 13:32:40
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: pom update
+Date: 05/12/2021, 13:43:48
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: code update
+Date: 05/12/2021, 14:14:47
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: final code
+Date: 05/12/2021, 16:12:25
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: code changes fot Tomcat java 1.8 safe
+Date: 12/12/2021, 19:51:16
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: code changes fot Tomcat java 1.8 safe
+Date: 12/12/2021, 19:54:16
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: revert pom
+Date: 13/12/2021, 13:33:20
+Author: mawit
+Email: marcin.witkowski@rockwool.com
+----------------------------------
+Commit msg: init
+Date: 30/12/2015, 02:58:41
+Author: Anwar Ziani
+Email: anwaar.ziani@gmail.com
+----------------------------------
+Commit msg: Update
+Date: 30/12/2015, 03:46:09
+Author: Anwar Ziani
+Email: anwaar.ziani@gmail.com
+----------------------------------
+Commit msg: Create README
+Date: 30/12/2015, 23:38:14
+Author: Anwar Ziani
+Email: anwaar.ziani@gmail.com
+----------------------------------
+Commit msg: Update README
+Date: 30/12/2015, 23:41:42
+Author: Anwar Ziani
+Email: anwaar.ziani@gmail.com
+----------------------------------
+Commit msg: Update README
+Date: 30/12/2015, 23:49:13
+Author: Anwar Ziani
+Email: anwaar.ziani@gmail.com
+----------------------------------
+Commit msg: Update README
+Date: 05/01/2016, 03:16:18
+Author: Anwar Ziani
+Email: anwaar.ziani@gmail.com
+----------------------------------
+Commit msg: update
+Date: 12/07/2016, 02:52:09
+Author: Anwar Ziani
+Email: anwaar.ziani@gmail.com
+----------------------------------
+Commit msg: Update Spring Boot, Bootstrap version, polish source code
+Date: 06/11/2016, 20:25:57
+Author: Do Nhu Vy
+Email: donhuvy@Dos-MacBook-Pro.local
+----------------------------------
+Commit msg: Add database script.
+Date: 06/11/2016, 20:29:13
+Author: Do Nhu Vy
+Email: donhuvy@Dos-MacBook-Pro.local
+----------------------------------
+Commit msg: Merge pull request #1 from donhuvy/masterUpdate SpringBoot, Bootstrap version, add database script and polish source code
+Date: 06/11/2016, 15:21:37
+Author: Anwar Ziani
+Email: anwaar.ziani@gmail.com
+----------------------------------
+Commit msg: Spring Project
+Date: 26/11/2017, 18:00:33
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Spring second update
+Date: 07/12/2017, 17:31:40
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Spring second update
+Date: 07/12/2017, 17:59:11
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Spring update
+Date: 07/12/2017, 18:03:26
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Spring update
+Date: 07/12/2017, 18:03:55
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Spring update
+Date: 07/12/2017, 18:07:11
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Spring update
+Date: 07/12/2017, 18:07:31
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Spring fix ManyToOne
+Date: 07/12/2017, 22:29:09
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: fix redirect
+Date: 16/12/2018, 15:42:29
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: fix maven build
+Date: 20/12/2018, 09:59:45
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: corrections
+Date: 15/12/2019, 20:03:45
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: corrections
+Date: 15/12/2019, 20:28:32
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: upgrade Spring to 2 and make work with java 11
+Date: 28/01/2020, 20:26:23
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: changes 2021, upgrade sprin version
+Date: 21/12/2020, 10:18:45
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: change mappings annotations
+Date: 21/12/2020, 11:33:47
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: change mappings annotations
+Date: 21/12/2020, 11:52:52
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Change date to Joda
+Date: 21/12/2020, 13:13:11
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: update controller
+Date: 21/12/2020, 13:16:02
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: code classes
+Date: 05/12/2021, 13:32:40
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: pom update
+Date: 05/12/2021, 13:43:48
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: code update
+Date: 05/12/2021, 14:14:47
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: code changes
+Date: 05/12/2021, 17:39:50
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: startClass
+Date: 05/12/2021, 20:19:10
+Author: THINK
+Email: witkowski.mar@gmail.com
+----------------------------------
+Commit msg: code changes fot Tomcat java 1.8 safe
+Date: 12/12/2021, 19:53:04
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Merge remote-tracking branch 'NOWE/SpringBootStart' into SpringBootStartaa
+Date: 12/12/2021, 19:53:22
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: code changes fot Tomcat java 1.8 safe
+Date: 12/12/2021, 19:54:46
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Merge remote-tracking branch 'NOWE/SpringBootStart' into SpringBootStartss# Conflicts:#	pom.xml
+Date: 12/12/2021, 19:55:29
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: revert pom
+Date: 13/12/2021, 13:34:42
+Author: mawit
+Email: marcin.witkowski@rockwool.com
+----------------------------------
+Commit msg: InitialCommit
+Date: 28/11/2018, 20:40:43
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: InitialCommit
+Date: 28/11/2018, 20:43:24
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: InitialCommit
+Date: 28/11/2018, 20:44:02
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: add gitignore
+Date: 12/12/2020, 11:54:13
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: add gitignore
+Date: 12/12/2020, 11:54:39
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: add http request
+Date: 13/12/2020, 20:43:07
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: code classes
+Date: 28/11/2021, 18:39:51
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: code classes
+Date: 28/11/2021, 19:02:09
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: code classes
+Date: 28/11/2021, 19:04:32
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Initial Commit
+Date: 01/10/2018, 09:52:57
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: Refactor backend
+Date: 01/10/2018, 10:27:14
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: cleanup
+Date: 01/10/2018, 11:16:42
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: Add imageUrl in UserProfile
+Date: 01/10/2018, 11:42:53
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: added userprofile api
+Date: 01/10/2018, 12:18:59
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: Frontend Project Setup
+Date: 01/10/2018, 12:30:48
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: Frontend Functionalities
+Date: 03/10/2018, 11:30:13
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: Respond with OAuth2AuthenticationProcessingException in case of OAuth2 errors
+Date: 03/10/2018, 11:50:42
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: Added CORS config
+Date: 03/10/2018, 12:29:08
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: Fixed Github id mapping and added imageUrl in Oauth2User
+Date: 03/10/2018, 12:41:08
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: Profile picture of FB user
+Date: 03/10/2018, 12:50:16
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: cleanup
+Date: 03/10/2018, 13:43:49
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: Validate Redirect URIs
+Date: 04/10/2018, 09:19:40
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: Login and Signup CSS
+Date: 04/10/2018, 14:48:03
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: UI
+Date: 04/10/2018, 15:22:24
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: AppHeader and Profile UI
+Date: 04/10/2018, 15:48:38
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: Using header in login and signup pages as well
+Date: 04/10/2018, 16:02:15
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: UI changes
+Date: 04/10/2018, 23:01:08
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: Home page UI
+Date: 04/10/2018, 23:15:16
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: UI for Profile page and Home page
+Date: 05/10/2018, 12:33:42
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: Added NavLink
+Date: 05/10/2018, 12:54:14
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: Text Avatar
+Date: 05/10/2018, 13:01:36
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: UI
+Date: 05/10/2018, 13:54:09
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: Added Toast Notifications
+Date: 05/10/2018, 15:25:09
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: OAuth2 Error Handling
+Date: 05/10/2018, 15:49:42
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: UI changes
+Date: 05/10/2018, 15:54:47
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: NotFound component css
+Date: 05/10/2018, 15:57:02
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: fix typo
+Date: 05/10/2018, 15:57:43
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: Readme
+Date: 05/10/2018, 16:15:31
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: Readme
+Date: 05/10/2018, 16:17:06
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: Readme
+Date: 05/10/2018, 16:30:46
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: reduced timeout
+Date: 05/10/2018, 17:48:33
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: Screenshot
+Date: 05/10/2018, 17:53:40
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: Readme
+Date: 05/10/2018, 17:57:40
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: Readme
+Date: 05/10/2018, 17:58:35
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: Readme
+Date: 05/10/2018, 17:59:36
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: Readme
+Date: 05/10/2018, 18:00:06
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: UI
+Date: 20/10/2018, 11:40:22
+Author: Rajeev Kumar Singh
+Email: callicoder@gmail.com
+----------------------------------
+Commit msg: picture width
+Date: 20/10/2018, 11:45:44
+Author: Rajeev Kumar Singh
+Email: callicoder@gmail.com
+----------------------------------
+Commit msg: Use InnoDB dialect
+Date: 20/10/2018, 11:47:21
+Author: Rajeev Kumar Singh
+Email: callicoder@gmail.com
+----------------------------------
+Commit msg: cleanup
+Date: 20/10/2018, 15:14:39
+Author: Rajeev Kumar Singh
+Email: callicoder@gmail.com
+----------------------------------
+Commit msg: Cleanup
+Date: 09/11/2018, 10:22:19
+Author: Rajeev Kumar Singh
+Email: callicoder@gmail.com
+----------------------------------
+Commit msg: cleanup
+Date: 09/11/2018, 11:26:11
+Author: Rajeev Kumar Singh
+Email: callicoder@gmail.com
+----------------------------------
+Commit msg: Cleanup
+Date: 09/11/2018, 15:36:58
+Author: Rajeev Kumar Singh
+Email: callicoder@gmail.com
+----------------------------------
+Commit msg: cleanup
+Date: 09/11/2018, 15:39:37
+Author: Rajeev Kumar Singh
+Email: callicoder@gmail.com
+----------------------------------
+Commit msg: comment
+Date: 17/11/2018, 18:48:43
+Author: Rajeev Kumar Singh
+Email: callicoder@gmail.com
+----------------------------------
+Commit msg: Changes for spring boot 2.1.0 upgrade
+Date: 21/11/2018, 23:45:17
+Author: Rajeev Kumar Singh
+Email: callicoder@gmail.com
+----------------------------------
+Commit msg: fix name
+Date: 22/11/2018, 00:01:31
+Author: Rajeev Kumar Singh
+Email: callicoder@gmail.com
+----------------------------------
+Commit msg:  Bump up spring boot version to 2.1.6
+Date: 21/06/2019, 07:15:40
+Author: Rajeev Singh
+Email: callicoder@gmail.com
+----------------------------------
+Commit msg: Bump up spring boot version to 2.2.1
+Date: 26/11/2019, 13:38:25
+Author: Rajeev Singh
+Email: callicoder@gmail.com
+----------------------------------
+Commit msg: Fix redirectUri property
+Date: 05/01/2020, 21:39:14
+Author: Rajeev Singh
+Email: callicoder@gmail.com
+----------------------------------
+Commit msg: Spring Security
+Date: 18/01/2021, 00:23:53
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: React Spring Security
+Date: 18/01/2021, 00:26:28
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: simplifying the model
+Date: 09/01/2022, 20:18:19
+Author: mawit
+Email: marcin.witkowski@rockwool.com
+----------------------------------
+Commit msg: changes
+Date: 09/01/2022, 20:19:16
+Author: mawit
+Email: marcin.witkowski@rockwool.com
+----------------------------------
+Commit msg: Merge remote-tracking branch 'origin/SpringSecurityReactEnd' into SpringSecurityReactEnd
+Date: 09/01/2022, 20:20:13
+Author: mawit
+Email: marcin.witkowski@rockwool.com
+----------------------------------
+Commit msg: delete spring
+Date: 09/01/2022, 20:22:22
+Author: mawit
+Email: marcin.witkowski@rockwool.com
+----------------------------------
+Commit msg: delete redirect unused
+Date: 09/01/2022, 21:36:47
+Author: mawit
+Email: marcin.witkowski@rockwool.com
+----------------------------------
+Commit msg: Initial Commit
+Date: 01/10/2018, 09:52:57
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: Refactor backend
+Date: 01/10/2018, 10:27:14
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: cleanup
+Date: 01/10/2018, 11:16:42
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: Add imageUrl in UserProfile
+Date: 01/10/2018, 11:42:53
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: added userprofile api
+Date: 01/10/2018, 12:18:59
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: Frontend Project Setup
+Date: 01/10/2018, 12:30:48
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: Frontend Functionalities
+Date: 03/10/2018, 11:30:13
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: Respond with OAuth2AuthenticationProcessingException in case of OAuth2 errors
+Date: 03/10/2018, 11:50:42
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: Added CORS config
+Date: 03/10/2018, 12:29:08
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: Fixed Github id mapping and added imageUrl in Oauth2User
+Date: 03/10/2018, 12:41:08
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: Profile picture of FB user
+Date: 03/10/2018, 12:50:16
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: cleanup
+Date: 03/10/2018, 13:43:49
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: Validate Redirect URIs
+Date: 04/10/2018, 09:19:40
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: Login and Signup CSS
+Date: 04/10/2018, 14:48:03
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: UI
+Date: 04/10/2018, 15:22:24
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: AppHeader and Profile UI
+Date: 04/10/2018, 15:48:38
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: Using header in login and signup pages as well
+Date: 04/10/2018, 16:02:15
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: UI changes
+Date: 04/10/2018, 23:01:08
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: Home page UI
+Date: 04/10/2018, 23:15:16
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: UI for Profile page and Home page
+Date: 05/10/2018, 12:33:42
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: Added NavLink
+Date: 05/10/2018, 12:54:14
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: Text Avatar
+Date: 05/10/2018, 13:01:36
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: UI
+Date: 05/10/2018, 13:54:09
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: Added Toast Notifications
+Date: 05/10/2018, 15:25:09
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: OAuth2 Error Handling
+Date: 05/10/2018, 15:49:42
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: UI changes
+Date: 05/10/2018, 15:54:47
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: NotFound component css
+Date: 05/10/2018, 15:57:02
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: fix typo
+Date: 05/10/2018, 15:57:43
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: Readme
+Date: 05/10/2018, 16:15:31
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: Readme
+Date: 05/10/2018, 16:17:06
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: Readme
+Date: 05/10/2018, 16:30:46
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: reduced timeout
+Date: 05/10/2018, 17:48:33
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: Screenshot
+Date: 05/10/2018, 17:53:40
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: Readme
+Date: 05/10/2018, 17:57:40
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: Readme
+Date: 05/10/2018, 17:58:35
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: Readme
+Date: 05/10/2018, 17:59:36
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: Readme
+Date: 05/10/2018, 18:00:06
+Author: Rajeev Kumar Singh
+Email: rajeevs@flock.co
+----------------------------------
+Commit msg: UI
+Date: 20/10/2018, 11:40:22
+Author: Rajeev Kumar Singh
+Email: callicoder@gmail.com
+----------------------------------
+Commit msg: picture width
+Date: 20/10/2018, 11:45:44
+Author: Rajeev Kumar Singh
+Email: callicoder@gmail.com
+----------------------------------
+Commit msg: Use InnoDB dialect
+Date: 20/10/2018, 11:47:21
+Author: Rajeev Kumar Singh
+Email: callicoder@gmail.com
+----------------------------------
+Commit msg: cleanup
+Date: 20/10/2018, 15:14:39
+Author: Rajeev Kumar Singh
+Email: callicoder@gmail.com
+----------------------------------
+Commit msg: Cleanup
+Date: 09/11/2018, 10:22:19
+Author: Rajeev Kumar Singh
+Email: callicoder@gmail.com
+----------------------------------
+Commit msg: cleanup
+Date: 09/11/2018, 11:26:11
+Author: Rajeev Kumar Singh
+Email: callicoder@gmail.com
+----------------------------------
+Commit msg: Cleanup
+Date: 09/11/2018, 15:36:58
+Author: Rajeev Kumar Singh
+Email: callicoder@gmail.com
+----------------------------------
+Commit msg: cleanup
+Date: 09/11/2018, 15:39:37
+Author: Rajeev Kumar Singh
+Email: callicoder@gmail.com
+----------------------------------
+Commit msg: comment
+Date: 17/11/2018, 18:48:43
+Author: Rajeev Kumar Singh
+Email: callicoder@gmail.com
+----------------------------------
+Commit msg: Changes for spring boot 2.1.0 upgrade
+Date: 21/11/2018, 23:45:17
+Author: Rajeev Kumar Singh
+Email: callicoder@gmail.com
+----------------------------------
+Commit msg: fix name
+Date: 22/11/2018, 00:01:31
+Author: Rajeev Kumar Singh
+Email: callicoder@gmail.com
+----------------------------------
+Commit msg:  Bump up spring boot version to 2.1.6
+Date: 21/06/2019, 07:15:40
+Author: Rajeev Singh
+Email: callicoder@gmail.com
+----------------------------------
+Commit msg: Bump up spring boot version to 2.2.1
+Date: 26/11/2019, 13:38:25
+Author: Rajeev Singh
+Email: callicoder@gmail.com
+----------------------------------
+Commit msg: Fix redirectUri property
+Date: 05/01/2020, 21:39:14
+Author: Rajeev Singh
+Email: callicoder@gmail.com
+----------------------------------
+Commit msg: Spring Security
+Date: 18/01/2021, 00:23:53
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: React Spring Security
+Date: 18/01/2021, 00:26:28
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: simplifying the model
+Date: 09/01/2022, 20:18:19
+Author: mawit
+Email: marcin.witkowski@rockwool.com
+----------------------------------
+Commit msg: refactor
+Date: 09/01/2022, 20:21:44
+Author: mawit
+Email: marcin.witkowski@rockwool.com
+----------------------------------
+Commit msg: remove react
+Date: 10/01/2022, 16:15:38
+Author: mawit
+Email: marcin.witkowski@rockwool.com
+----------------------------------
+Commit msg: InitialCommit
+Date: 28/11/2018, 20:40:43
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: InitialCommit
+Date: 28/11/2018, 20:43:24
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: InitialCommit
+Date: 28/11/2018, 20:44:02
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: add gitignore
+Date: 12/12/2020, 11:54:13
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: add gitignore
+Date: 12/12/2020, 11:54:39
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: add http request
+Date: 13/12/2020, 20:43:07
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: code classes
+Date: 28/11/2021, 18:39:51
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: code classes
+Date: 28/11/2021, 19:04:57
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Initial commit
+Date: 28/09/2017, 12:19:00
+Author: WitMar
+Email: witkowski.mar@gmail.com
+----------------------------------
+Commit msg: Hello World
+Date: 28/09/2017, 12:41:32
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: chnage Maven art name
+Date: 28/09/2017, 12:59:27
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Ignore Ideaj Files
+Date: 28/09/2017, 13:17:59
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Add loger
+Date: 28/09/2017, 16:25:06
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Chenage Package
+Date: 28/09/2017, 16:27:20
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Merge remote-tracking branch 'origin/Feature/Logger' into develop# Conflicts:#	PracowaniaProgramowania/src/main/java/example/HelloWorld.java
+Date: 05/10/2017, 22:29:22
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Merge branch 'Feature/Logger' into develop
+Date: 06/10/2017, 13:06:06
+Author: WitMar
+Email: witkowski.mar@gmail.com
+----------------------------------
+Commit msg: change pom
+Date: 06/10/2017, 13:17:58
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Merge remote-tracking branch 'origin/develop' into develop
+Date: 11/10/2017, 10:23:10
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Second Class start
+Date: 11/10/2017, 10:31:57
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Second Class
+Date: 11/10/2017, 12:20:39
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Second Class
+Date: 11/10/2017, 13:43:24
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Java 1_8
+Date: 11/10/2017, 13:50:32
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Hibernate
+Date: 31/10/2017, 09:26:39
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Hibernate
+Date: 31/10/2017, 10:18:44
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Hibernate
+Date: 31/10/2017, 13:50:23
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Hibernate
+Date: 31/10/2017, 20:49:09
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Hibernate
+Date: 31/10/2017, 23:33:23
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: fix
+Date: 03/11/2017, 11:09:56
+Author: witkowski.mar@gmail.com
+Email: witkowski.mar@gmail.com
+----------------------------------
+Commit msg: fix
+Date: 03/11/2017, 11:23:14
+Author: witkowski.mar@gmail.com
+Email: witkowski.mar@gmail.com
+----------------------------------
+Commit msg: gitignore, posprzatanie seconda
+Date: 03/11/2017, 21:23:44
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Start
+Date: 10/11/2018, 14:08:23
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Start
+Date: 10/11/2018, 14:08:55
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Add new elements
+Date: 10/11/2018, 15:29:35
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Classes streams and Collections
+Date: 16/10/2019, 17:43:52
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Classes streams and Collections start
+Date: 16/10/2019, 17:58:35
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: delete import
+Date: 17/10/2019, 18:17:11
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: task reorder
+Date: 17/10/2019, 18:19:49
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Refactor
+Date: 08/11/2020, 19:41:31
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Change name
+Date: 08/11/2020, 19:46:17
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Classes end
+Date: 08/11/2020, 20:28:39
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Add lazy
+Date: 08/11/2020, 21:11:25
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Add lazy
+Date: 08/11/2020, 21:12:20
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: change names, move classes
+Date: 11/11/2020, 20:30:41
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Merge remote-tracking branch 'NOEW/StreamsAndCollectionsEnd' into StreamsAndCollectionsStart# Conflicts:#	src/main/java/MainLazy.java#	src/main/java/collections/MainEclipseCollections.java#	src/main/java/streams/Task.java
+Date: 11/11/2020, 20:31:14
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: change names, move classes
+Date: 11/11/2020, 20:35:43
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Add elements
+Date: 17/10/2021, 18:39:47
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: move classes
+Date: 17/10/2021, 18:41:00
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: fixes
+Date: 18/10/2021, 21:41:00
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Initial commit
+Date: 28/09/2017, 12:19:00
+Author: WitMar
+Email: witkowski.mar@gmail.com
+----------------------------------
+Commit msg: Hello World
+Date: 28/09/2017, 12:41:32
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: chnage Maven art name
+Date: 28/09/2017, 12:59:27
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Ignore Ideaj Files
+Date: 28/09/2017, 13:17:59
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Add loger
+Date: 28/09/2017, 16:25:06
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Chenage Package
+Date: 28/09/2017, 16:27:20
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Merge remote-tracking branch 'origin/Feature/Logger' into develop# Conflicts:#	PracowaniaProgramowania/src/main/java/example/HelloWorld.java
+Date: 05/10/2017, 22:29:22
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Merge branch 'Feature/Logger' into develop
+Date: 06/10/2017, 13:06:06
+Author: WitMar
+Email: witkowski.mar@gmail.com
+----------------------------------
+Commit msg: change pom
+Date: 06/10/2017, 13:17:58
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Merge remote-tracking branch 'origin/develop' into develop
+Date: 11/10/2017, 10:23:10
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Second Class start
+Date: 11/10/2017, 10:31:57
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Second Class
+Date: 11/10/2017, 12:20:39
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Second Class
+Date: 11/10/2017, 13:43:24
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Java 1_8
+Date: 11/10/2017, 13:50:32
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Hibernate
+Date: 31/10/2017, 09:26:39
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Hibernate
+Date: 31/10/2017, 10:18:44
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Hibernate
+Date: 31/10/2017, 13:50:23
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Hibernate
+Date: 31/10/2017, 20:49:09
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Hibernate
+Date: 31/10/2017, 23:33:23
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: fix
+Date: 03/11/2017, 11:09:56
+Author: witkowski.mar@gmail.com
+Email: witkowski.mar@gmail.com
+----------------------------------
+Commit msg: fix
+Date: 03/11/2017, 11:23:14
+Author: witkowski.mar@gmail.com
+Email: witkowski.mar@gmail.com
+----------------------------------
+Commit msg: gitignore, posprzatanie seconda
+Date: 03/11/2017, 21:23:44
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Start
+Date: 10/11/2018, 14:08:23
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Start
+Date: 10/11/2018, 14:08:55
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Add new elements
+Date: 10/11/2018, 15:29:35
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Classes streams and Collections
+Date: 16/10/2019, 17:43:52
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Classes streams and Collections start
+Date: 16/10/2019, 17:58:35
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: delete import
+Date: 17/10/2019, 18:17:11
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: task reorder
+Date: 17/10/2019, 18:19:49
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Refactor
+Date: 08/11/2020, 19:41:31
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Change name
+Date: 08/11/2020, 19:46:17
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Add lazy
+Date: 08/11/2020, 21:12:20
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: change names, move classes
+Date: 11/11/2020, 20:30:41
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: add functions
+Date: 17/10/2021, 17:13:24
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: move classes
+Date: 17/10/2021, 18:42:01
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: fix Person constructor
+Date: 18/10/2021, 21:39:25
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: delete getMe
+Date: 18/10/2021, 21:40:09
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Initial commit
+Date: 18/10/2020, 16:24:11
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: set up maven compilation version
+Date: 18/10/2020, 16:58:41
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: add resource file
+Date: 18/10/2020, 17:00:15
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: fix repo
+Date: 26/10/2020, 19:12:52
+Author: THINK
+Email: witkowski.mar@gmail.com
+----------------------------------
+Commit msg: Change java to 11
+Date: 10/10/2021, 18:17:31
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: ugly code
+Date: 10/10/2021, 18:19:39
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: końcowy kod
+Date: 10/10/2021, 18:45:11
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: Initial commit
+Date: 18/10/2020, 16:24:11
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: set up maven compilation version
+Date: 18/10/2020, 16:58:41
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: add resource file
+Date: 18/10/2020, 17:00:15
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: fix repo
+Date: 26/10/2020, 19:12:52
+Author: THINK
+Email: witkowski.mar@gmail.com
+----------------------------------
+Commit msg: Change java to 11
+Date: 10/10/2021, 18:17:31
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
+Commit msg: ugly code
+Date: 10/10/2021, 18:19:39
+Author: marcin witkowski
+Email: marcin.witkowski@e-qsg.com
+----------------------------------
