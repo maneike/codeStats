@@ -1,3 +1,4 @@
 django
 GitPython
 gunicorn
+djangorestframework
