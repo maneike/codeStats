@@ -2,7 +2,8 @@ import os
 from django.db import IntegrityError
 from git import Repo
 from pathlib import Path
-from .models import Repositories, Authors, Branches, Commits
+from .models import Repositories, Authors, Branches, Commits, Changes
+from django.core.exceptions import ObjectDoesNotExist
 import numpy as np
 
 
@@ -11,7 +12,11 @@ def generate_basic_report(url):
     repo_name = url.split('.git')[0].split('/')[-1]
     path = os.getcwd()
     repo = Repo.clone_from(url, os.path.join(path, f"{repo_name}"))
-    Repositories.objects.create(repo_name=repo_name)
+    try:
+        Repositories.objects.get(repo_name=repo_name).delete()
+        Repositories.objects.create(repo_name=repo_name)
+    except ObjectDoesNotExist:
+        Repositories.objects.create(repo_name=repo_name)
     report['repo_name'] = Repositories.objects.latest('id').repo_name
     remote_refs = repo.remote().refs
     for refs in remote_refs:
@@ -36,6 +41,11 @@ def generate_basic_report(url):
                                    branch=Branches.objects.latest('id'),
                                    date=commit.committed_datetime,
                                    message=commit.message.replace('\n', ''))
+            for key in commit.stats.files:
+                stats = commit.stats.files[f'{key}']
+                Changes.objects.create(commit=Commits.objects.latest('id'), file_name=key,
+                                       insertions=stats['insertions'],
+                                       deletions=stats['deletions'], lines=stats['lines'])
             report[f'{branch}']['commits'].append({'author': Authors.objects.get(email=commit.author.email).name,
                                                    'branch': Branches.objects.latest('id').name,
                                                    'date': commit.committed_datetime,

@@ -35,3 +35,11 @@ class Commits(models.Model):
 
     def __str__(self):
         return self.message
+
+
+class Changes(models.Model):
+    commit = models.ForeignKey(Commits, on_delete=models.CASCADE)
+    file_name = models.CharField(max_length=200)
+    insertions = models.IntegerField()
+    deletions = models.IntegerField()
+    lines = models.IntegerField()
