@@ -1,3 +1,37 @@
 from django.db import models
 
-# Create your models here.
+
+class Repositories(models.Model):
+    repo_name = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.repo_name
+
+
+class Authors(models.Model):
+    name = models.CharField(max_length=200)
+    email = models.EmailField(unique=True)
+    repository = models.ForeignKey(Repositories, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+
+
+class Branches(models.Model):
+    name = models.CharField(max_length=200)
+    commits_count = models.IntegerField()
+    repository = models.ForeignKey(Repositories, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+
+
+class Commits(models.Model):
+    author = models.ForeignKey(Authors, on_delete=models.CASCADE)
+    branch = models.ForeignKey(Branches, on_delete=models.CASCADE)
+    date = models.DateTimeField()
+    message = models.CharField(max_length=500)
+    edited_files = models.CharField(max_length=1000)
+
+    def __str__(self):
+        return self.message

@@ -2,3 +2,5 @@ django
 GitPython
 gunicorn
 djangorestframework
+numpy
+psycopg2
