@@ -6,6 +6,7 @@
     "build": "vite build"
   },
   "dependencies": {
+    "axios": "^0.27.2",
     "preact": "^10.4.1"
   },
   "devDependencies": {
