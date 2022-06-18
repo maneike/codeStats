@@ -1,7 +1,8 @@
 import { useState } from "preact/hooks";
 import FileUploader from "./components/FileUploader";
 
-import axios from "redaxios";
+import { postUrls } from "./services/postUrls";
+import { postFiles } from "./services/postFiles";
 
 export function App() {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -9,25 +10,8 @@ export function App() {
 
   const submitForm = (e) => {
     const formData = new FormData();
-    if (repoUrl) {
-      axios
-        .post("http://localhost:8000/api/url/", { url: repoUrl })
-        .then((res) => {
-          alert("File Upload success", res);
-        })
-        .catch((err) => {
-          alert("File Upload Error", err);
-        });
-    }
-    if (selectedFile) {
-      formData.append("file", selectedFile);
-      axios
-        .post("http://localhost:8000/api/zip/", formData)
-        .then((res) => {
-          alert("File Upload success", res);
-        })
-        .catch((err) => alert("File Upload Error", err));
-    }
+    repoUrl && postUrls(repoUrl);
+    selectedFile && postFiles(selectedFile, formData);
     e.preventDefault();
   };
 
