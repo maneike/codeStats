@@ -10,12 +10,12 @@ import numpy as np
 def generate_basic_report(url):
     report = {}
     repo_name = url.split('.git')[0].split('/')[-1]
+    os.system(f"rm -rf {repo_name}")
     path = os.getcwd()
     try:
         repo = Repo.clone_from(url, os.path.join(path, f"{repo_name}"))
-    except exc.GitError:
-        os.system(f"rm -rf {repo_name}")
-        repo = Repo.clone_from(url, os.path.join(path, f"{repo_name}"))
+    except exc.GitError or exc.GitCommandError:
+        return {"Error": "Invalid repo url or repo is private"}
     try:
         Repositories.objects.get(repo_name=repo_name).delete()
         Repositories.objects.create(repo_name=repo_name)
