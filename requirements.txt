@@ -4,3 +4,4 @@ gunicorn
 djangorestframework
 numpy
 psycopg2
+django-cors-headers
