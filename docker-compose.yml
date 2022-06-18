@@ -1,66 +1,45 @@
-version: '3.9'
-
-services:
-  db:
-      image: postgres:14.1-alpine
-      restart: always
-      env_file:
-        - .env.dev
-      ports:
-        - '5432:5432'
-      volumes:
-        - db:/var/lib/postgresql/data
-
-  codestats:
-    image: 127.0.0.1:5000/codestats
-    build: .
-    container_name: codestats
-    command: python codestatsapi/manage.py runserver 0.0.0.0:8000
-    env_file:
-      - .env.dev
-    ports:
-      - "8000:8000"
-    depends_on:
-      - db
-    volumes:
-      - .:/codestats
-      - /static:/static
-
-  #nginx:
-  #  image: 127.0.0.1:5000/nginx_codestats
-  #  build:
-  #    context: .
-  #    dockerfile: nginx/Dockerfile
-  #  container_name: nginx_codestats
-  #  depends_on:
-  #    - codestats
-  #  restart: always
-  #  ports:
-  #   - "1341:80"
-  #  volumes:
-  #    - .:/codestats
-  #    - /static:/static
-
-  #redis:
-  #  image: "redis:alpine"
-
-  #celery:
-  #  build: .
-  #  image: 127.0.0.1:5000/celery_codestats
-  #  command: celery -A codestats worker -l INFO
-  #  volumes:
-  #    - .:/codestats
-  #  env_file:
-  #    - .env.dev
-  #  environment:
-  #    - DEBUG=1
-  #    - DJANGO_ALLOWED_HOSTS=*
-  #    - CELERY_BROKER=redis://redis:6379/0
-  #    - CELERY_BACKEND=redis://redis:6379/0
-  #  depends_on:
-  #    - redis
-  #    - codestats
+version: "3.9"
 
 volumes:
-  db:
-    driver: local
+  postgres_data: {}
+  postgres_data_backups: {}
+
+services:
+  django:
+    restart: always
+    build:
+      context: ./backend
+      dockerfile: ./compose/django/Dockerfile
+    image: api_v1
+    container_name: api_v1
+    volumes:
+      - ./backend:/app/backend
+    depends_on:
+      - postgres
+    env_file:
+      - ./backend/.envs/.django
+      - ./backend/.envs/.postgres
+    ports:
+      - "8000:8000"
+    command: /start
+
+  postgres:
+    restart: always
+    build:
+      context: ./backend
+      dockerfile: ./compose/postgres/Dockerfile
+    image: postgres_django
+    container_name: postgres_django
+    volumes:
+      - postgres_data:/var/lib/postgresql/data:Z
+      - postgres_data_backups:/backups:z
+      
+    env_file:
+      - ./backend/.envs/.postgres
+
+  react:
+    build: ./dist
+    ports:
+      - "80:80"
+    depends_on:
+      - django

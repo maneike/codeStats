@@ -3,11 +3,13 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
+    "start": "docker-compose up --build",
     "build": "vite build"
   },
   "dependencies": {
     "preact": "^10.4.1",
-    "redaxios": "^0.5.0"
+    "redaxios": "^0.5.0",
+    "serve": "^13.0.2"
   },
   "devDependencies": {
     "@prefresh/vite": "^1.2.1",

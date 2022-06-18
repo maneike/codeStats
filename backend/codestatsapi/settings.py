@@ -12,20 +12,44 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 import os
+import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+APPS_DIR = BASE_DIR / "backend"
+env = environ.Env()
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
+#NOTE make sure in your .django env file you have "DJANGO_READ_DOT_ENV_FILE=True" to read the envs
+READ_DOT_ENV_FILE = env.bool("DJANGO_READ_DOT_ENV_FILE", default=False)
+if READ_DOT_ENV_FILE:
+    # OS environment variables take precedence over variables from .env
+    env.read_env(str(ROOT_DIR / ".env"))
+    # env.read_env("")
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
 
-# SECURITY WARNING: don't run with debug turned on in production!
+# ENVS
+ # ------------------------------------------------------------------------------
+
+EMAIL_BACKEND = env('EMAIL_BACKEND')
+EMAIL_HOST = env('EMAIL_HOST')
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+EMAIL_PORT = env('EMAIL_PORT')
+EMAIL_USE_TLS = env('EMAIL_USE_TLS')
+DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
+S3_ACCESS_KEY_ID = env('S3_ACCESS_KEY_ID')
+S3_SECRET_ACCESS_KEY = env('S3_SECRET_ACCESS_KEY')
+S3_BUCKET = env('S3_BUCKET')
+AWS_SNS_ID = env('AWS_SNS_ID')
+AWS_SNS_KEY = env('AWS_SNS_KEY')
+CODE_SCANNING_TOKEN = env('CODE_SCANNING_TOKEN')
+# ....
+
+
 DEBUG = True
-
+SECRET_KEY = os.environ.get('SECRET_KEY')
+# https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
 ALLOWED_HOSTS=['*',]
 
 CORS_ORIGIN_ALLOW_ALL = True
@@ -77,18 +101,31 @@ TEMPLATES = [
 WSGI_APPLICATION = 'codestatsapi.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/4.0/ref/settings/#databases
+# DATABASES
+#DATABASE_URL is set by entrypoint script
+# ------------------------------------------------------------------------------
+DATABASES["default"] = env.db("DATABASE_URL")
+DATABASES["default"]["ATOMIC_REQUESTS"] = True
+DATABASES["default"]["CONN_MAX_AGE"] = env.int("CONN_MAX_AGE", default=60)
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get("POSTGRES_DB"),
-        'USER': os.environ.get("POSTGRES_USER"),
-        'PASSWORD': os.environ.get("POSTGRES_PASSWORD"),
-        'HOST': os.environ.get("POSTGRES_HOST"),
-        'PORT': os.environ.get("POSTGRES_PORT")
-    }
+
+
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+# URLS
+# ------------------------------------------------------------------------------
+# https://docs.djangoproject.com/en/dev/ref/settings/#root-urlconf
+ROOT_URLCONF = "django_settings_dir.urls"
+# https://docs.djangoproject.com/en/dev/ref/settings/#wsgi-application
+WSGI_APPLICATION = "django_settings_dir.wsgi.application"
+
+
+
+# GRAPHENE
+# ------------------------------------------------------------------------------
+GRAPHENE = {
+    "SCHEMA": "django_settings_dir.root_schema.schema",
 }
 
 
@@ -126,7 +163,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field

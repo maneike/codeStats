@@ -1,5 +1,4 @@
 FROM python:3.10
-LABEL "maintainer"="Mateusz Babul"
 ENV PYTHONUNBUFFERED 1
 ENV PYTHONDONTWRITEBYTECODE 1
 
@@ -20,8 +19,6 @@ RUN apt-get update
 RUN pip install --upgrade pip
 RUN pip3 install -r requirements.txt --use-deprecated=html5lib --use-deprecated=legacy-resolver
 COPY . /codestats/
-
-WORKDIR /codestats
 
 RUN adduser user
 USER user
