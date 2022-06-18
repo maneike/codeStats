@@ -4,7 +4,7 @@ ENV PYTHONDONTWRITEBYTECODE 1
 
 RUN mkdir /codestats
 WORKDIR /codestats
-COPY requirements.txt /codestats/
+COPY /codestatsapi/requirements.txt /codestats/
 
 RUN apt-get update \
 && apt-get install apt-utils -y \

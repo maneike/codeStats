@@ -8,17 +8,17 @@ services:
   django:
     restart: always
     build:
-      context: ./backend
+      context: ./codestatsapi
       dockerfile: ./compose/django/Dockerfile
     image: api_v1
     container_name: api_v1
     volumes:
-      - ./backend:/app/backend
+      - ./codestatsapi:/codestatsapi
     depends_on:
       - postgres
     env_file:
-      - ./backend/.envs/.django
-      - ./backend/.envs/.postgres
+      - ./codestatsapi/.envs/.django
+      - ./codestatsapi/.envs/.postgres
     ports:
       - "8000:8000"
     command: /start
@@ -26,7 +26,7 @@ services:
   postgres:
     restart: always
     build:
-      context: ./backend
+      context: ./codestatsapi
       dockerfile: ./compose/postgres/Dockerfile
     image: postgres_django
     container_name: postgres_django
@@ -35,7 +35,7 @@ services:
       - postgres_data_backups:/backups:z
       
     env_file:
-      - ./backend/.envs/.postgres
+      - ./codestatsapi/.envs/.postgres
 
   react:
     build: ./dist

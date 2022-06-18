@@ -4,6 +4,6 @@
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/PRA2021-PRA2022" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/codestats/PRA2021-PRA2022" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/backend/PRA2021-PRA2022" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/codestatsapi/PRA2021-PRA2022" vcs="Git" />
   </component>
 </project>

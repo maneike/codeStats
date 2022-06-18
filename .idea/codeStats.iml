@@ -3,8 +3,8 @@
   <component name="FacetManager">
     <facet type="django" name="Django">
       <configuration>
-        <option name="rootFolder" value="$MODULE_DIR$/backend" />
-        <option name="settingsModule" value="backend/settings.py" />
+        <option name="rootFolder" value="$MODULE_DIR$/codestatsapi" />
+        <option name="settingsModule" value="codestatsapi/settings.py" />
         <option name="manageScript" value="manage.py" />
         <option name="environment" value="&lt;map/&gt;" />
         <option name="doNotUseTestRunner" value="false" />
