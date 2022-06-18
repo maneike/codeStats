@@ -7,6 +7,7 @@ const FileUploader = ({ onFileSelectError, onFileSelectSuccess }) => {
         error: "File size cannot exceed more than 1MB",
       });
     else onFileSelectSuccess(file);
+    console.log(file);
   };
 
   return (
