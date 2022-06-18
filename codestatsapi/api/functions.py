@@ -1,6 +1,6 @@
 import os
 from django.db import IntegrityError
-from git import Repo
+from git import Repo, exc
 from pathlib import Path
 from .models import Repositories, Authors, Branches, Commits, Changes
 from django.core.exceptions import ObjectDoesNotExist
@@ -11,7 +11,11 @@ def generate_basic_report(url):
     report = {}
     repo_name = url.split('.git')[0].split('/')[-1]
     path = os.getcwd()
-    repo = Repo.clone_from(url, os.path.join(path, f"{repo_name}"))
+    try:
+        repo = Repo.clone_from(url, os.path.join(path, f"{repo_name}"))
+    except exc.GitError:
+        os.system(f"rm -rf {repo_name}")
+        repo = Repo.clone_from(url, os.path.join(path, f"{repo_name}"))
     try:
         Repositories.objects.get(repo_name=repo_name).delete()
         Repositories.objects.create(repo_name=repo_name)
