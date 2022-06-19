@@ -53,7 +53,7 @@ const SubmitButton = styled.button`
   margin-bottom: 1rem;
   cursor: pointer;
   &:hover {
-    background-color: #lightgray;
+    background-color: #353649;
   }
   max-width: 50%;
   margin-left: 100px;
