@@ -33,6 +33,7 @@ const HeaderStyled = styled.header`
 const Hamburger = styled.div`
   & > svg {
     fill: white;
+    width: 30px;
   }
   & > svg:hover {
     fill: lightgray;
