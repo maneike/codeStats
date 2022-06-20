@@ -53,3 +53,18 @@ def generate_basic_report(url):
                                                    'changes': commit.stats.files})
     os.system(f"rm -rf {repo_name}")
     return report
+
+
+def get_all_users(url):
+    users = []
+    repo_name = url.split('.git')[0].split('/')[-1]
+    path = os.getcwd()
+    repo = Repo.clone_from(url, os.path.join(path, f"{repo_name}"))
+    remote_refs = repo.remote().refs
+    for refs in remote_refs:
+        refs.checkout()
+        commits_list = list(repo.iter_commits())
+        for author in reversed(commits_list):
+            users.append(author.author.name)
+    os.system(f"rm -rf {repo_name}")
+    return list(set(users))
