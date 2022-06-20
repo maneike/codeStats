@@ -3,9 +3,9 @@ import axios from "redaxios";
 export const postFiles = (selectedFile, formData) => {
   formData.append("file", selectedFile);
   axios
-    .post("http://localhost:8000/api/zip/", formData)
+    .post("http://localhost:80/api/zip/", formData)
     .then((res) => {
-      alert("File Upload success", res);
+      alert("File upload success ✔", res);
     })
-    .catch((err) => alert("File Upload Error", err));
+    .catch((err) => alert("File upload error ✘", err));
 };
