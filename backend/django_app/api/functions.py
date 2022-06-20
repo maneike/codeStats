@@ -67,4 +67,4 @@ def get_all_users(url):
         for author in reversed(commits_list):
             users.append(author.author.name)
     os.system(f"rm -rf {repo_name}")
-    return list(set(users))
+    return {"users": list(set(users))}
