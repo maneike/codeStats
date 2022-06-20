@@ -2,7 +2,7 @@ import axios from "redaxios";
 
 export const postUrls = (repoUrl) => {
   axios
-    .post("http://localhost:8000/api/url/", { url: repoUrl })
+    .post("http://localhost:80/api/url/", { url: repoUrl })
     .then((res) => {
       alert("Link upload success ✔", res);
     })
