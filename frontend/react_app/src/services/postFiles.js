@@ -5,7 +5,7 @@ export const postFiles = (selectedFile, formData) => {
   axios
     .post("http://localhost:8000/api/zip/", formData)
     .then((res) => {
-      alert("File Upload success", res);
+      alert("File upload success ✔", res);
     })
-    .catch((err) => alert("File Upload Error", err));
+    .catch((err) => alert("File upload error ✘", err));
 };
