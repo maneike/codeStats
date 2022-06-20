@@ -1,12 +1,12 @@
-# Uruchomienie api
+# Uruchomienie aplikacji
+
+```docker-compose up --build```
+
+# Wymagane pliki środowiskowe
 <ul>
-    <li>docker-compose up --build lub docker-compose up --build -d</li>
-    <li>Nastepnie w nowym terminalu:</li>
-    <ul>
-        <li>docker exec -it codestats bash</li>
-        <li>python manage.py migrate</li>
-        <li>python manage.py createsuperuser</li>
-    </ul>
+    <li>root/.env</li>
+    <li>backend/.env</li>
+    <li>postgres/.env</li>
 </ul>
 
 # Dostepne sa dwa endpointy
