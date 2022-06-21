@@ -65,6 +65,5 @@ def get_all_users(url):
         refs.checkout()
         commits_list = list(repo.iter_commits())
         for author in reversed(commits_list):
-            users.append(author.author.name)
-    os.system(f"rm -rf {repo_name}")
-    return {"users": list(set(users))}
+            users.append({"name": author.author.name, "email": author.author.email})
+    return {"repo_name": repo_name, "users": list({v['email']: v for v in users}.values())}
