@@ -10,7 +10,8 @@ class ZipRepoView(views.APIView):
     def post(self, request):
         file_obj = request.FILES['file']
         # do some stuff with uploaded file
-        return JsonResponse({"test": "test"}, status=200)
+        # return file name to the client
+        return JsonResponse({'file_name': file_obj.name}, status=200)
 
 
 class UrlRepoView(views.APIView):
