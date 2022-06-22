@@ -1,16 +1,16 @@
 from rest_framework import views
-from rest_framework.parsers import FileUploadParser
+from rest_framework.parsers import MultiPartParser
 from django.http import JsonResponse
 from .functions import generate_basic_report, get_all_users
 
 
 class ZipRepoView(views.APIView):
-    parser_classes = (FileUploadParser,)
+    parser_classes = (MultiPartParser,)
 
     def post(self, request):
         file_obj = request.FILES['file']
         # do some stuff with uploaded file
-        return JsonResponse({"test": "test"}, status=200)
+        return JsonResponse({"test": "name"}, status=200)
 
 
 class UrlRepoView(views.APIView):

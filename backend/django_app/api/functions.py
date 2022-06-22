@@ -3,6 +3,9 @@ from git import Repo, exc
 from .models import Repositories, Authors, Branches, Commits, Changes
 from django.core.exceptions import ObjectDoesNotExist
 import numpy as np
+import zipfile
+from django.core.files.storage import default_storage
+from django.core.files.base import ContentFile
 
 
 def generate_basic_report(repo_name, merged_users):
@@ -67,3 +70,11 @@ def get_all_users(url):
         for author in reversed(commits_list):
             users.append({"name": author.author.name, "email": author.author.email})
     return {"repo_name": repo_name, "users": list({v['email']: v for v in users}.values())}
+
+
+def handle_zip_save(file_obj):
+    name = file_obj.name
+    default_storage.save(name, ContentFile(file_obj.read()))
+    with zipfile.ZipFile(name, "r") as zip_ref:
+        zip_ref.extractall("./from_zip")
+    return name
