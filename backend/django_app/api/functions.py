@@ -77,4 +77,28 @@ def handle_zip_save(file_obj):
     default_storage.save(name, ContentFile(file_obj.read()))
     with zipfile.ZipFile(name, "r") as zip_ref:
         zip_ref.extractall("./from_zip")
-    return name
+        names = [info.filename for info in zip_ref.infolist() if info.is_dir()]
+    try:
+        if len(names) == 1:
+            to_return = names[0]
+        else:
+            to_return = "files"
+    except IndexError:
+        to_return = "files"
+    return to_return
+
+
+def get_all_users_from_zip(repo_name):
+    users = []
+    if repo_name == "files":
+        repo = Repo(f"./from_zip")
+    else:
+        repo = Repo(f"./from_zip/{repo_name}")
+    remote_refs = repo.remote().refs
+    for refs in remote_refs:
+        refs.checkout()
+        commits_list = list(repo.iter_commits())
+        for author in reversed(commits_list):
+            users.append({"name": author.author.name, "email": author.author.email})
+    new_repo_name = repo.remote().url.split('.git')[0].split('/')[-1]
+    return {"repo_name": new_repo_name, "users": list({v['email']: v for v in users}.values())}
