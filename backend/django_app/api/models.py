@@ -10,7 +10,9 @@ class Repositories(models.Model):
 
 class Authors(models.Model):
     name = models.CharField(max_length=200)
-    email = models.EmailField(unique=True)
+    email = models.EmailField()
+    old_name = models.CharField(max_length=200, default="def")
+    old_email = models.EmailField(default="def@def.com")
     repository = models.ForeignKey(Repositories, on_delete=models.CASCADE)
 
     def __str__(self):
