@@ -12,7 +12,7 @@ class ZipRepoView(views.APIView):
         file_obj = request.FILES['file']
         name = handle_zip_save(file_obj)
         users = get_all_users_from_zip(name)
-        os.system("rm -rf *zip")
+        os.system("rm -rf *.zip")
         return JsonResponse(users, status=200)
 
 
