@@ -45,7 +45,26 @@ services:
     depends_on:
       - react
 
+  redis:
+    image: redis:alpine
+    depends_on:
+      - db
+  celery:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: celery_codestats
+    command: celery -A codestatsapi worker -l INFO
+    volumes:
+      - django_static_volume:/usr/src/app/static
+    env_file:
+      - ./backend/.env
+    depends_on:
+      - redis
+      - django
+
 volumes:
   postgres_data:
   django_static_volume:
   react_static_volume:
+  celery_volume:
