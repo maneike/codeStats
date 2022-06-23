@@ -47,7 +47,8 @@ services:
 
   redis:
     image: redis:alpine
-
+    depends_on:
+      - db
   celery:
     build:
       context: ./backend
