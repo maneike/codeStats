@@ -7,6 +7,7 @@ services:
       dockerfile: Dockerfile
     volumes:
       - django_static_volume:/usr/src/app/static
+      - static-content:/usr/src/app/
     env_file:
       - ./backend/.env
     command: gunicorn --bind 0.0.0.0:8000 codestatsapi.wsgi --timeout 100000000
@@ -56,7 +57,7 @@ services:
     image: celery_codestats
     command: celery -A codestatsapi worker -l INFO
     volumes:
-      - django_static_volume:/usr/src/app/static
+      - static-content:/usr/src/app/
     env_file:
       - ./backend/.env
     depends_on:
@@ -68,3 +69,4 @@ volumes:
   django_static_volume:
   react_static_volume:
   celery_volume:
+  static-content:
