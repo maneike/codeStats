@@ -4,32 +4,32 @@ import { Global, css } from "@emotion/react";
 import { postUrls } from "./services/postUrls";
 import { postFiles } from "./services/postFiles";
 import FileUploader from "./components/FileUploader";
-import Header from "./components/Header";
+import NavBar from "./components/NavBar";
 
 export function App() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [repoUrl, setRepoUrl] = useState("");
 
   const submitForm = (e) => {
+    e.preventDefault();
     const formData = new FormData();
     selectedFile && postFiles(selectedFile, formData);
-    e.preventDefault();
   };
 
   const submitUrl = (e) => {
-    repoUrl && postUrls(repoUrl);
     e.preventDefault();
+    repoUrl && postUrls(repoUrl);
   };
 
   return (
     <>
       <Global styles={GlobalStyles} />
-      <Header />
+      <NavBar />
       <AppWrapper>
         <Form>
           <InputsWrapper>
             <TextAreaStyled
-              placeholder="Paste a repo URL..."
+              placeholder="Paste a repo URL... (with .git at the end)"
               value={repoUrl}
               onChange={(e) => setRepoUrl(e.target.value)}
             ></TextAreaStyled>
@@ -109,6 +109,7 @@ const GlobalStyles = css`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-family: "Roboto Mono", monospace;
+    overflow-x: hidden;
   }
   ::-webkit-scrollbar {
     width: 0px;

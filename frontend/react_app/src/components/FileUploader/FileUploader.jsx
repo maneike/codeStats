@@ -3,10 +3,9 @@ import styled from "@emotion/styled";
 const FileUploader = ({ onFileSelectError, onFileSelectSuccess }) => {
   const handleFileInput = (e) => {
     const file = e.target.files[0];
-    console.log(file);
-
-    if (file) onFileSelectSuccess(file);
-    else onFileSelectError({ error: "Please select a file" });
+    file
+      ? onFileSelectSuccess(file)
+      : onFileSelectError({ error: "Please select a file" });
   };
 
   return (
@@ -27,8 +26,8 @@ const FileUploader = ({ onFileSelectError, onFileSelectSuccess }) => {
       </CloudSVG>
       <h2>Drag & Drop</h2>
       <p>or</p>
-      <FileInputStyled type="file" onChange={handleFileInput} />
-      <Htag>Supports: ZIP</Htag>
+      <FileInputStyled type="file" onChange={handleFileInput} multiple />
+      <H5>Supports: ZIP containing .git</H5>
     </>
   );
 };
@@ -43,10 +42,10 @@ const FileInputStyled = styled.input`
 `;
 
 const CloudSVG = styled.div`
-style="display:flex; justify-content:center;"
+  display: flex;
+  justify-content: center;
 `;
 
-const Htag = styled.h5`
-  margin: 0;
-  margin-bottom: 1em;
+const H5 = styled.h5`
+  color: lightgray;
 `;
