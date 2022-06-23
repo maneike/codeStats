@@ -6,21 +6,24 @@ from django.core.files.base import ContentFile
 
 
 def get_all_users(url):
-    users = []
-    repo_name = url.split('.git')[0].split('/')[-1]
-    path = os.getcwd()
-    try:
-        repo = Repo.clone_from(url, os.path.join(path, f"{repo_name}"))
-    except exc.GitError:
-        os.system(f"rm -rf {repo_name}")
-        repo = Repo.clone_from(url, os.path.join(path, f"{repo_name}"))
-    remote_refs = repo.remote().refs
-    for refs in remote_refs:
-        refs.checkout()
-        commits_list = list(repo.iter_commits())
-        for author in reversed(commits_list):
-            users.append({"name": author.author.name, "email": author.author.email})
-    return {"repo_name": repo_name, "users": list({v['email']: v for v in users}.values())}
+    all_data = []
+    for u in url:
+        users = []
+        repo_name = u.split('.git')[0].split('/')[-1]
+        path = os.getcwd()
+        try:
+            repo = Repo.clone_from(u, os.path.join(path, f"{repo_name}"))
+        except exc.GitError:
+            os.system(f"rm -rf {repo_name}")
+            repo = Repo.clone_from(u, os.path.join(path, f"{repo_name}"))
+        remote_refs = repo.remote().refs
+        for refs in remote_refs:
+            refs.checkout()
+            commits_list = list(repo.iter_commits())
+            for author in reversed(commits_list):
+                users.append({"name": author.author.name, "email": author.author.email})
+        all_data = {"repo_name": repo_name, "users": list({v['email']: v for v in users}.values())}
+    return {"data": all_data}
 
 
 def handle_zip_save(file_obj):

@@ -22,7 +22,7 @@ class UrlRepoView(views.APIView):
     def post(self, request):
         url = self.request.data
         users = get_all_users(url['url'])
-        return JsonResponse({"test": "test"}, status=200)
+        return JsonResponse(users, status=200)
 
 
 class UsersReportView(views.APIView):
