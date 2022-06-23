@@ -2,7 +2,8 @@ import os
 from rest_framework import views
 from rest_framework.parsers import MultiPartParser
 from django.http import JsonResponse
-from .functions import generate_basic_report, get_all_users, get_all_users_from_zip, handle_zip_save
+from .functions import get_all_users, get_all_users_from_zip, handle_zip_save
+from .tasks import generate_basic_report
 
 
 class ZipRepoView(views.APIView):
@@ -21,7 +22,7 @@ class UrlRepoView(views.APIView):
     def post(self, request):
         url = self.request.data
         users = get_all_users(url['url'])
-        return JsonResponse(users, status=200)
+        return JsonResponse({"test": "test"}, status=200)
 
 
 class UsersReportView(views.APIView):
