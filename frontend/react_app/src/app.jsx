@@ -29,7 +29,7 @@ export function App() {
         <Form>
           <InputsWrapper>
             <TextAreaStyled
-              placeholder="Paste a repo URL..."
+              placeholder="Paste a repo URL... (with .git at the end)"
               value={repoUrl}
               onChange={(e) => setRepoUrl(e.target.value)}
             ></TextAreaStyled>
@@ -131,39 +131,3 @@ const TextAreaStyled = styled.textarea`
   width: var(--text-area-width);
   height: var(--text-area-height);
 `;
-
-function AppWrapperComponent({
-  repoUrl,
-  e,
-  setRepoUrl,
-  submitUrl,
-  file,
-  setSelectedFile,
-  alert,
-  error,
-  submitForm,
-}) {
-  return (
-    <AppWrapper>
-      <Form>
-        <InputsWrapper>
-          <TextAreaStyled
-            placeholder="Paste a repo URL..."
-            value={repoUrl}
-            onChange={(e) => setRepoUrl(e.target.value)}
-          ></TextAreaStyled>
-          <SubmitButton onClick={submitUrl}>Submit</SubmitButton>
-        </InputsWrapper>
-      </Form>
-      <Form>
-        <InputsWrapper>
-          <FileUploader
-            onFileSelectSuccess={(file) => setSelectedFile(file)}
-            onFileSelectError={({ error }) => alert(error)}
-          />
-          <SubmitButton onClick={submitForm}>Submit</SubmitButton>
-        </InputsWrapper>
-      </Form>
-    </AppWrapper>
-  );
-}

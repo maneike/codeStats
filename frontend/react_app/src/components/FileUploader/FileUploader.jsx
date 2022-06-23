@@ -28,7 +28,7 @@ const FileUploader = ({ onFileSelectError, onFileSelectSuccess }) => {
       <h2>Drag & Drop</h2>
       <p>or</p>
       <FileInputStyled type="file" onChange={handleFileInput} />
-      <Htag>Supports: ZIP</Htag>
+      <Htag>Supports: ZIP containing .git</Htag>
     </>
   );
 };
@@ -49,4 +49,5 @@ style="display:flex; justify-content:center;"
 const Htag = styled.h5`
   margin: 0;
   margin-bottom: 1em;
+  opacity: 0.7;
 `;
