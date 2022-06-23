@@ -28,5 +28,6 @@ class UsersReportView(views.APIView):
 
     def post(self, request):
         merged_users = self.request.data
-        report = generate_basic_report(merged_users['repo_name'], merged_users['merged_users'])
+        report = generate_basic_report(
+            merged_users['repo_name'], merged_users['merged_users'])
         return JsonResponse(report, status=200)

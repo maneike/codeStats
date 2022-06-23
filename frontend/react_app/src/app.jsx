@@ -12,8 +12,12 @@ export function App() {
 
   const submitForm = (e) => {
     const formData = new FormData();
-    repoUrl && postUrls(repoUrl);
     selectedFile && postFiles(selectedFile, formData);
+    e.preventDefault();
+  };
+
+  const submitUrl = (e) => {
+    repoUrl && postUrls(repoUrl);
     e.preventDefault();
   };
 
@@ -29,13 +33,16 @@ export function App() {
               value={repoUrl}
               onChange={(e) => setRepoUrl(e.target.value)}
             ></TextAreaStyled>
-            <SubmitButton onClick={submitForm}>Submit</SubmitButton>
+            <SubmitButton onClick={submitUrl}>Submit</SubmitButton>
           </InputsWrapper>
+        </Form>
+        <Form>
           <InputsWrapper>
             <FileUploader
               onFileSelectSuccess={(file) => setSelectedFile(file)}
               onFileSelectError={({ error }) => alert(error)}
             />
+            <SubmitButton onClick={submitForm}>Submit</SubmitButton>
           </InputsWrapper>
         </Form>
       </AppWrapper>
