@@ -11,14 +11,14 @@ export function App() {
   const [repoUrl, setRepoUrl] = useState("");
 
   const submitForm = (e) => {
+    e.preventDefault();
     const formData = new FormData();
     selectedFile && postFiles(selectedFile, formData);
-    e.preventDefault();
   };
 
   const submitUrl = (e) => {
-    repoUrl && postUrls(repoUrl);
     e.preventDefault();
+    repoUrl && postUrls(repoUrl);
   };
 
   return (
