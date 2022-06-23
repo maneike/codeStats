@@ -1,7 +1,8 @@
+import os
 from rest_framework import views
 from rest_framework.parsers import MultiPartParser
 from django.http import JsonResponse
-from .functions import generate_basic_report, get_all_users
+from .functions import generate_basic_report, get_all_users, get_all_users_from_zip, handle_zip_save
 
 
 class ZipRepoView(views.APIView):
@@ -9,7 +10,10 @@ class ZipRepoView(views.APIView):
 
     def post(self, request):
         file_obj = request.FILES['file']
-        return JsonResponse({'file_name': file_obj.name}, status=200)
+        name = handle_zip_save(file_obj)
+        users = get_all_users_from_zip(name)
+        os.system("rm -rf *.zip")
+        return JsonResponse(users, status=200)
 
 
 class UrlRepoView(views.APIView):
