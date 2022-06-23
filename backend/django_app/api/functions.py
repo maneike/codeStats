@@ -22,7 +22,7 @@ def get_all_users(url):
             commits_list = list(repo.iter_commits())
             for author in reversed(commits_list):
                 users.append({"name": author.author.name, "email": author.author.email})
-        all_data = {"repo_name": repo_name, "users": list({v['email']: v for v in users}.values())}
+        all_data.append({"repo_name": repo_name, "users": list({v['email']: v for v in users}.values())})
     return {"data": all_data}
 
 
