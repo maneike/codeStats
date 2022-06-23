@@ -4,7 +4,7 @@ import { Global, css } from "@emotion/react";
 import { postUrls } from "./services/postUrls";
 import { postFiles } from "./services/postFiles";
 import FileUploader from "./components/FileUploader";
-import Header from "./components/Header";
+import NavBar from "./components/NavBar";
 
 export function App() {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -24,7 +24,7 @@ export function App() {
   return (
     <>
       <Global styles={GlobalStyles} />
-      <Header />
+      <NavBar />
       <AppWrapper>
         <Form>
           <InputsWrapper>
@@ -109,6 +109,7 @@ const GlobalStyles = css`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-family: "Roboto Mono", monospace;
+    overflow-x: hidden;
   }
   ::-webkit-scrollbar {
     width: 0px;
@@ -130,3 +131,39 @@ const TextAreaStyled = styled.textarea`
   width: var(--text-area-width);
   height: var(--text-area-height);
 `;
+
+function AppWrapperComponent({
+  repoUrl,
+  e,
+  setRepoUrl,
+  submitUrl,
+  file,
+  setSelectedFile,
+  alert,
+  error,
+  submitForm,
+}) {
+  return (
+    <AppWrapper>
+      <Form>
+        <InputsWrapper>
+          <TextAreaStyled
+            placeholder="Paste a repo URL..."
+            value={repoUrl}
+            onChange={(e) => setRepoUrl(e.target.value)}
+          ></TextAreaStyled>
+          <SubmitButton onClick={submitUrl}>Submit</SubmitButton>
+        </InputsWrapper>
+      </Form>
+      <Form>
+        <InputsWrapper>
+          <FileUploader
+            onFileSelectSuccess={(file) => setSelectedFile(file)}
+            onFileSelectError={({ error }) => alert(error)}
+          />
+          <SubmitButton onClick={submitForm}>Submit</SubmitButton>
+        </InputsWrapper>
+      </Form>
+    </AppWrapper>
+  );
+}
