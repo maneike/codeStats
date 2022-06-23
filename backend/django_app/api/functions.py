@@ -3,17 +3,26 @@ from git import Repo, exc
 from .models import Repositories, Authors, Branches, Commits, Changes
 from django.core.exceptions import ObjectDoesNotExist
 import numpy as np
+import zipfile
+from django.core.files.storage import default_storage
+from django.core.files.base import ContentFile
 
 
 def generate_basic_report(repo_name, merged_users):
     report = {"branches": []}
-    path = os.getcwd()
-    repo = Repo(os.path.join(path, f"{repo_name}"))
+    try:
+        path = os.getcwd()
+        repo = Repo(os.path.join(path, f"{repo_name}"))
+    except exc.GitError:
+        if repo_name == "files":
+            repo = Repo(f"./from_zip")
+        else:
+            repo = Repo(f"./from_zip/{repo_name}")
     try:
         Repositories.objects.get(repo_name=repo_name).delete()
-        Repositories.objects.create(repo_name=repo_name)
+        Repositories.objects.create(repo_name=repo.remote().url.split('.git')[0].split('/')[-1])
     except ObjectDoesNotExist:
-        Repositories.objects.create(repo_name=repo_name)
+        Repositories.objects.create(repo_name=repo.remote().url.split('.git')[0].split('/')[-1])
     report['repo_name'] = Repositories.objects.latest('id').repo_name
     remote_refs = repo.remote().refs
     for mu in merged_users:
@@ -28,11 +37,14 @@ def generate_basic_report(repo_name, merged_users):
                                 repository=Repositories.objects.latest('id'))
         branch = Branches.objects.latest('id').name
         curr_branch = {"branch_name": branch, 'commits': [], 'authors': list(
-            np.unique([Authors.objects.get(old_email=author.author.email).name for author in reversed(commits_list)]))}
+            np.unique([Authors.objects.get(old_email=author.author.email,
+                                           repository=Repositories.objects.latest('id')).name for author in
+                       reversed(commits_list)]))}
         # if extensions:
         #    f.write(f"File extensions: {extensions}\n")
         for commit in reversed(commits_list):
-            Commits.objects.create(author=Authors.objects.get(old_email=commit.author.email),
+            Commits.objects.create(author=Authors.objects.get(old_email=commit.author.email,
+                                                              repository=Repositories.objects.latest('id')),
                                    branch=Branches.objects.latest('id'),
                                    date=commit.committed_datetime,
                                    message=commit.message.replace('\n', ''))
@@ -41,7 +53,8 @@ def generate_basic_report(repo_name, merged_users):
                 Changes.objects.create(commit=Commits.objects.latest('id'), file_name=key,
                                        insertions=stats['insertions'],
                                        deletions=stats['deletions'], lines=stats['lines'])
-            curr_branch['commits'].append({'author': Authors.objects.get(old_email=commit.author.email).name,
+            curr_branch['commits'].append({'author': Authors.objects.get(old_email=commit.author.email,
+                                                                         repository=Repositories.objects.latest('id')).name,
                                            'branch': Branches.objects.latest('id').name,
                                            'date': commit.committed_datetime,
                                            'message': commit.message.replace('\n', ''),
@@ -60,6 +73,37 @@ def get_all_users(url):
     except exc.GitError:
         os.system(f"rm -rf {repo_name}")
         repo = Repo.clone_from(url, os.path.join(path, f"{repo_name}"))
+    remote_refs = repo.remote().refs
+    for refs in remote_refs:
+        refs.checkout()
+        commits_list = list(repo.iter_commits())
+        for author in reversed(commits_list):
+            users.append({"name": author.author.name, "email": author.author.email})
+    return {"repo_name": repo_name, "users": list({v['email']: v for v in users}.values())}
+
+
+def handle_zip_save(file_obj):
+    name = file_obj.name
+    default_storage.save(name, ContentFile(file_obj.read()))
+    with zipfile.ZipFile(name, "r") as zip_ref:
+        zip_ref.extractall("./from_zip")
+        names = [name for name in os.listdir("./from_zip") if os.path.isdir(os.path.join("./from_zip", name))]
+    try:
+        if len(names) == 1 and names[0] != ".git":
+            to_return = names[0]
+        else:
+            to_return = "files"
+    except IndexError:
+        to_return = "files"
+    return to_return
+
+
+def get_all_users_from_zip(repo_name):
+    users = []
+    if repo_name == "files":
+        repo = Repo(f"./from_zip")
+    else:
+        repo = Repo(f"./from_zip/{repo_name}")
     remote_refs = repo.remote().refs
     for refs in remote_refs:
         refs.checkout()
