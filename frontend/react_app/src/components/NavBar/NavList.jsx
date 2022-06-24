@@ -6,7 +6,7 @@ const Ul = styled.ul`
   background-color: #323345;
   position: fixed;
   padding: 15px 20px;
-  top: -15px;
+  top: -16px;
   right: 0;
   height: 100vh;
   width: 180px;

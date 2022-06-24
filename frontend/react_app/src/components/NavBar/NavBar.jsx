@@ -10,20 +10,20 @@ const Nav = styled.nav`
   display: flex;
   justify-content: space-between;
   color: #fff;
+`;
 
-  .logo {
-    font-size: 2rem;
-    font-weight: 700;
-    padding: 0px 15px;
-  }
+const Logo = styled.div`
+  color: lightgreen;
+  font-size: 2rem;
+  font-weight: 700;
+  padding: 0px 15px;
 `;
 
 const NavBar = () => {
   return (
     <>
       <Nav>
-        <div className="logo">codeStats</div>
-
+        <Logo>codeStats</Logo>
         <Burger />
       </Nav>
     </>

@@ -1,51 +1,146 @@
-import { useState } from "preact/hooks";
+import { useEffect, useState } from "preact/hooks";
 import styled from "@emotion/styled";
-import { Global, css } from "@emotion/react";
 import { postUrls } from "./services/postUrls";
 import { postFiles } from "./services/postFiles";
 import FileUploader from "./components/FileUploader";
 import NavBar from "./components/NavBar";
+import "./index.css";
+import aggregateRepoData from "./helpers/aggregateRepoData";
 
 export function App() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [repoUrl, setRepoUrl] = useState("");
+  const [fetchedRepos, setFetchedRepos] = useState(null);
+  const [aggregatedRepos, setAggregatedRepos] = useState(fetchedRepos ?? []);
+
+  // fetchedRepos?.data?.map((repo) => {
+  //   console.log(aggregateRepoData(repo));
+  // });
+
+  console.log(fetchedRepos?.data);
+
+  // TODO: naprawić pętlę rerenderów
+  useEffect(() => {
+    fetchedRepos?.data?.map((repo) => {
+      setAggregatedRepos(aggregateRepoData(repo));
+    });
+  }),
+    [fetchedRepos];
+
+  // useEffect(() => {
+  //   fetchedRepos?.data?.map((repo) => {
+  //     setAggregatedRepos(aggregateRepoData(repo));
+  //   });
+  // }),
+  //   [fetchedRepos];
 
   const submitForm = (e) => {
     e.preventDefault();
     const formData = new FormData();
-    selectedFile && postFiles(selectedFile, formData);
+    selectedFile && postFiles(selectedFile, formData, setFetchedRepos);
   };
 
   const submitUrl = (e) => {
     e.preventDefault();
-    repoUrl && postUrls(repoUrl);
+    repoUrl && postUrls(repoUrl, setFetchedRepos);
+  };
+
+  const submitRepoForm = (e) => {
+    e.preventDefault();
   };
 
   return (
     <>
-      <Global styles={GlobalStyles} />
       <NavBar />
-      <AppWrapper>
-        <Form>
-          <InputsWrapper>
-            <TextAreaStyled
-              placeholder="Paste a repo URL... (with .git at the end)"
-              value={repoUrl}
-              onChange={(e) => setRepoUrl(e.target.value)}
-            ></TextAreaStyled>
-            <SubmitButton onClick={submitUrl}>Submit</SubmitButton>
-          </InputsWrapper>
-        </Form>
-        <Form>
-          <InputsWrapper>
-            <FileUploader
-              onFileSelectSuccess={(file) => setSelectedFile(file)}
-              onFileSelectError={({ error }) => alert(error)}
-            />
-            <SubmitButton onClick={submitForm}>Submit</SubmitButton>
-          </InputsWrapper>
-        </Form>
-      </AppWrapper>
+
+      <form>
+        <InputsWrapper>
+          <TextAreaStyled
+            placeholder="Paste a repo URL... (with .git at the end)"
+            value={repoUrl}
+            onChange={(e) => setRepoUrl(e.target.value)}
+          ></TextAreaStyled>
+          <SubmitButton onClick={submitUrl}>Submit</SubmitButton>
+        </InputsWrapper>
+      </form>
+
+      <form>
+        <InputsWrapper>
+          <FileUploader
+            onFileSelectSuccess={(file) => setSelectedFile(file)}
+            onFileSelectError={({ error }) => alert(error)}
+          />
+          <SubmitButton onClick={submitForm}>Submit</SubmitButton>
+        </InputsWrapper>
+      </form>
+
+      <form>
+        {aggregatedRepos?.map((repo) => {
+          {
+            return (
+              repo.merged_users && (
+                <InputsWrapper>
+                  <RepoTitle>{repo.repoName}</RepoTitle>
+                  {repo?.merged_users.map((user, userId) => {
+                    return (
+                      user && (
+                        <>
+                          <Ul>
+                            <Li>
+                              <DropdownSelect
+                                onChange={(e) => {
+                                  setAggregatedRepos((aggregatedRepos) => [
+                                    ...aggregatedRepos,
+                                    (repo.merged_users[userId].new_name =
+                                      e.target.value),
+                                  ]);
+                                }}
+                              >
+                                {repo.merged_users.map(
+                                  (selectUser, selectUserId) => (
+                                    <option
+                                      selected={userId === selectUserId}
+                                      value={selectUser.old_name}
+                                    >
+                                      {selectUser.old_name}
+                                    </option>
+                                  )
+                                )}
+                              </DropdownSelect>
+
+                              <DropdownSelect
+                                onChange={(e) => {
+                                  setAggregatedRepos((aggregatedRepos) => [
+                                    ...aggregatedRepos,
+                                    (repo.merged_users[userId].new_email =
+                                      e.target.value),
+                                  ]);
+                                }}
+                              >
+                                {repo.merged_users.map(
+                                  (selectUser, selectUserId) => (
+                                    <option
+                                      selected={userId === selectUserId}
+                                      value={selectUser.old_email}
+                                    >
+                                      {selectUser.old_email}
+                                    </option>
+                                  )
+                                )}
+                              </DropdownSelect>
+                            </Li>
+                          </Ul>
+                        </>
+                      )
+                    );
+                  })}
+                  <SubmitButton onClick={submitRepoForm}>Submit</SubmitButton>
+                </InputsWrapper>
+              )
+            );
+          }
+        })}
+      </form>
     </>
   );
 }
@@ -62,63 +157,21 @@ const SubmitButton = styled.button`
   &:hover {
     background-color: #353649;
   }
-  max-width: 50%;
-  margin-left: 100px;
   padding: 0.5rem;
-`;
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: row;
-`;
-
-const AppWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  width: 100%;
 `;
 
 const InputsWrapper = styled.div`
   display: grid;
   place-content: center;
-
   text-align: center;
   background-color: #47485b;
   color: #fff;
   font-size: 1em;
   padding-top: 20px;
-  margin: 30px 30px;
   border-radius: 1em;
-  width: 500px;
-  max-height: 500px;
-`;
-
-const GlobalStyles = css`
-  @import url("https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap");
-  html,
-  body {
-    height: 100%;
-    width: 100%;
-    padding: 0;
-    margin: 0;
-    background: #131b30;
-    font-family: "Roboto", monospace;
-    font-weight: 400;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    font-family: "Roboto Mono", monospace;
-    overflow-x: hidden;
-  }
-  ::-webkit-scrollbar {
-    width: 0px;
-    background: transparent;
-  }
-  :root {
-    --text-area-width: 450px;
-    --text-area-height: 350px;
-  }
+  height: auto;
+  width: 700px;
+  margin: 100px auto;
 `;
 
 const TextAreaStyled = styled.textarea`
@@ -130,4 +183,32 @@ const TextAreaStyled = styled.textarea`
   resize: none;
   width: var(--text-area-width);
   height: var(--text-area-height);
+`;
+
+const Ul = styled.ul`
+  list-style: none;
+`;
+
+const Li = styled.li`
+  margin: 0 10px;
+`;
+
+const DropdownSelect = styled.select`
+  font-family: "Roboto", monospace;
+  color: white;
+  border: 1px solid #fafafa;
+  border-radius: 8px;
+  background: transparent;
+  padding: 8px;
+  margin: 0 10px;
+`;
+
+const Options = styled.option`
+  font-family: "Roboto", monospace;
+  background: transparent;
+  color: white;
+`;
+
+const RepoTitle = styled.h3`
+  color: lightgreen;
 `;
