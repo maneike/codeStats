@@ -47,7 +47,7 @@ export function App() {
       <form>
         <InputsWrapper>
           <TextAreaStyled
-            placeholder="Paste the repo URLs... (with .git at the end)"
+            placeholder="Paste the repo URLs (with .git at the end) separated by commas..."
             value={repoUrls}
             onChange={(e) => setRepoUrls(e.target.value)}
           ></TextAreaStyled>
