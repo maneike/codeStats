@@ -1,4 +1,4 @@
-import { useEffect, useState } from "preact/hooks";
+import { useMemo, useEffect, useState } from "preact/hooks";
 import styled from "@emotion/styled";
 import { postFiles } from "./services/postFiles";
 import { postUrls } from "./services/postUrls";
@@ -14,10 +14,19 @@ export function App() {
   const [fetchedRepos, setFetchedRepos] = useState(null);
   const [aggregatedRepos, setAggregatedRepos] = useState(fetchedRepos ?? []);
 
+  console.log(aggregatedRepos);
+
   useEffect(() => {
+    const temp = [];
     fetchedRepos?.data?.map((repo) => {
-      setAggregatedRepos(aggregateRepoData(repo));
+      temp.push(
+        aggregateRepoData(repo)
+        // repo_name: aggregateRepoData(repo).repo_name,
+        // merged_users: aggregateRepoData(repo).merged_users,
+      );
     });
+
+    setAggregatedRepos(temp);
   }, [fetchedRepos]);
 
   const submitForm = (e) => {

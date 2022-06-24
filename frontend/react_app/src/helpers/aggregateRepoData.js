@@ -22,7 +22,10 @@ const aggregateRepoData = (repos) => {
         })),
       });
 
-  return newRepos;
+  if (newRepos.length > 1) return newRepos;
+  else {
+    return newRepos[0];
+  }
 };
 
 export default aggregateRepoData;
