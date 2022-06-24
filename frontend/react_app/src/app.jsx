@@ -10,16 +10,17 @@ import aggregateRepoData from "./helpers/aggregateRepoData";
 
 export function App() {
   const [selectedFile, setSelectedFile] = useState(null);
-  const [repoUrl, setRepoUrl] = useState("");
+  const [repoUrls, setRepoUrls] = useState("");
   const [fetchedRepos, setFetchedRepos] = useState(null);
   const [aggregatedRepos, setAggregatedRepos] = useState(fetchedRepos ?? []);
 
-  console.log(aggregatedRepos);
-
   useEffect(() => {
+    const temp = [];
     fetchedRepos?.data?.map((repo) => {
-      setAggregatedRepos(aggregateRepoData(repo));
+      temp.push(aggregateRepoData(repo));
     });
+
+    setAggregatedRepos(temp);
   }, [fetchedRepos]);
 
   const submitForm = (e) => {
@@ -30,7 +31,11 @@ export function App() {
 
   const submitUrl = (e) => {
     e.preventDefault();
-    repoUrl && postUrls(repoUrl, setFetchedRepos);
+    repoUrls &&
+      postUrls(
+        repoUrls.split(",").map((item) => item.trim()),
+        setFetchedRepos
+      );
   };
 
   const submitRepoForm = (e, repoId) => {
@@ -45,9 +50,9 @@ export function App() {
       <form>
         <InputsWrapper>
           <TextAreaStyled
-            placeholder="Paste a repo URL... (with .git at the end)"
-            value={repoUrl}
-            onChange={(e) => setRepoUrl(e.target.value)}
+            placeholder="Paste the repo URLs (with .git at the end) separated by commas..."
+            value={repoUrls}
+            onChange={(e) => setRepoUrls(e.target.value)}
           ></TextAreaStyled>
           <SubmitButton onClick={submitUrl}>Submit</SubmitButton>
         </InputsWrapper>
