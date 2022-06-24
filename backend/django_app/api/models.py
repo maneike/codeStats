@@ -45,3 +45,8 @@ class Changes(models.Model):
     insertions = models.IntegerField()
     deletions = models.IntegerField()
     lines = models.IntegerField()
+
+
+class Report(models.Model):
+    repo_name = models.CharField(max_length=200)
+    report = models.JSONField()
