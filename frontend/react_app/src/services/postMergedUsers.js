@@ -1,6 +1,6 @@
 import axios from "redaxios";
 
-export const postMergedUsers = (repo) => {
+export const postMergedUsers = (repo, setReportVisibility) => {
   axios
     .post("http://localhost:80/api/merged/", {
       repo_name: repo.repo_name,
@@ -8,9 +8,10 @@ export const postMergedUsers = (repo) => {
     })
     .then((res) => {
       alert("Repositories upload success ✔", res);
+      // setRepoReports({ repo_name: repo.repo_name, reportVisible: true });
+      setReportVisibility(true);
     })
     .catch((err) => {
-      console.log(repo);
       alert("Repositories upload error ✘", err);
     });
 };

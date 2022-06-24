@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import { postFiles } from "./services/postFiles";
 import { postUrls } from "./services/postUrls";
 import { postMergedUsers } from "./services/postMergedUsers";
+import { getRepoReport } from "./services/getRepoReport";
 import FileUploader from "./components/FileUploader";
 import NavBar from "./components/NavBar";
 import "./index.css";
@@ -13,12 +14,14 @@ export function App() {
   const [repoUrl, setRepoUrl] = useState("");
   const [fetchedRepos, setFetchedRepos] = useState(null);
   const [aggregatedRepos, setAggregatedRepos] = useState(fetchedRepos ?? []);
-
-  console.log(aggregatedRepos);
+  const [repoReports, setRepoReports] = useState(null);
+  const [isReport, setReportVisibility] = useState(false);
+  const [repoReport, setRepoReport] = useState(null);
 
   useEffect(() => {
     fetchedRepos?.data?.map((repo) => {
       setAggregatedRepos(aggregateRepoData(repo));
+      // setRepoReports({ repo_name: repo.repo_name, reportVisible: false });
     });
   }, [fetchedRepos]);
 
@@ -35,7 +38,14 @@ export function App() {
 
   const submitRepoForm = (e, repoId) => {
     e.preventDefault();
-    aggregatedRepos != [] && postMergedUsers(aggregatedRepos[repoId]);
+    aggregatedRepos != [] &&
+      postMergedUsers(aggregatedRepos[repoId], setReportVisibility);
+  };
+
+  const handleGetReport = (e, repoId) => {
+    e.preventDefault();
+    aggregatedRepos[repoId] &&
+      getRepoReport(aggregatedRepos[repoId], setRepoReport);
   };
 
   return (
@@ -124,6 +134,13 @@ export function App() {
                   <SubmitButton onClick={(e) => submitRepoForm(e, repoId)}>
                     Submit
                   </SubmitButton>
+                  {/* repoReports?.repo_name == repo && 
+                     repoReports?.reportVisible &&  */}
+                  {isReport && (
+                    <SubmitButton onClick={(e) => handleGetReport(e, repoId)}>
+                      Get report
+                    </SubmitButton>
+                  )}
                 </InputsWrapper>
               )
             );
