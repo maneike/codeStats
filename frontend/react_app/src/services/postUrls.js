@@ -1,9 +1,9 @@
 import axios from "redaxios";
 
-export const postUrls = (repoUrl, setFetchedRepos) => {
+export const postUrls = (repoUrls, setFetchedRepos) => {
   axios
     .post("http://localhost:80/api/url/", {
-      url: [repoUrl],
+      url: repoUrls,
     })
     .then((res) => {
       alert("Link upload success ✔", res);
