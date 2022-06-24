@@ -1,7 +1,8 @@
 import { useEffect, useState } from "preact/hooks";
 import styled from "@emotion/styled";
-import { postUrls } from "./services/postUrls";
 import { postFiles } from "./services/postFiles";
+import { postUrls } from "./services/postUrls";
+import { postMergedUsers } from "./services/postMergedUsers";
 import FileUploader from "./components/FileUploader";
 import NavBar from "./components/NavBar";
 import MultiFileUploader from "./components/MultiFileUploader";
@@ -15,25 +16,13 @@ export function App() {
   const [aggregatedRepos, setAggregatedRepos] = useState(fetchedRepos ?? []);
   const [file, setFile] = useState(null);
 
-  // fetchedRepos?.data?.map((repo) => {
-  //   console.log(aggregateRepoData(repo));
-  // });
+  console.log(aggregatedRepos);
 
-  console.log(fetchedRepos?.data);
-
-  // TODO: naprawić pętlę rerenderów
   useEffect(() => {
     fetchedRepos?.data?.map((repo) => {
       setAggregatedRepos(aggregateRepoData(repo));
     });
   }, [fetchedRepos]);
-
-  // useEffect(() => {
-  //   fetchedRepos?.data?.map((repo) => {
-  //     setAggregatedRepos(aggregateRepoData(repo));
-  //   });
-  // }),
-  //   [fetchedRepos];
 
   const submitForm = (e) => {
     e.preventDefault();
@@ -46,8 +35,9 @@ export function App() {
     repoUrl && postUrls(repoUrl, setFetchedRepos);
   };
 
-  const submitRepoForm = (e) => {
+  const submitRepoForm = (e, repoId) => {
     e.preventDefault();
+    aggregatedRepos != [] && postMergedUsers(aggregatedRepos[repoId]);
   };
 
   return (
@@ -83,12 +73,12 @@ export function App() {
       </form>
 
       <form>
-        {aggregatedRepos?.map((repo) => {
+        {aggregatedRepos?.map((repo, repoId) => {
           {
             return (
               repo.merged_users && (
                 <InputsWrapper>
-                  <RepoTitle>{repo.repoName}</RepoTitle>
+                  <RepoTitle>{repo.repo_name}</RepoTitle>
                   {repo?.merged_users.map((user, userId) => {
                     return (
                       user && (
@@ -97,11 +87,10 @@ export function App() {
                             <Li>
                               <DropdownSelect
                                 onChange={(e) => {
-                                  setAggregatedRepos((aggregatedRepos) => [
-                                    ...aggregatedRepos,
-                                    (repo.merged_users[userId].new_name =
-                                      e.target.value),
-                                  ]);
+                                  aggregatedRepos[repoId].merged_users[
+                                    userId
+                                  ].new_name = e.target.value;
+                                  setAggregatedRepos([...aggregatedRepos]);
                                 }}
                               >
                                 {repo.merged_users.map(
@@ -118,11 +107,10 @@ export function App() {
 
                               <DropdownSelect
                                 onChange={(e) => {
-                                  setAggregatedRepos((aggregatedRepos) => [
-                                    ...aggregatedRepos,
-                                    (repo.merged_users[userId].new_email =
-                                      e.target.value),
-                                  ]);
+                                  aggregatedRepos[repoId].merged_users[
+                                    userId
+                                  ].new_email = e.target.value;
+                                  setAggregatedRepos([...aggregatedRepos]);
                                 }}
                               >
                                 {repo.merged_users.map(
@@ -142,7 +130,9 @@ export function App() {
                       )
                     );
                   })}
-                  <SubmitButton onClick={submitRepoForm}>Submit</SubmitButton>
+                  <SubmitButton onClick={(e) => submitRepoForm(e, repoId)}>
+                    Submit
+                  </SubmitButton>
                 </InputsWrapper>
               )
             );

@@ -1,9 +1,10 @@
 from celery import shared_task
 import os
 from git import Repo, exc
-from .models import Repositories, Authors, Branches, Commits, Changes
+from .models import Repositories, Authors, Branches, Commits, Changes, Report
 from django.core.exceptions import ObjectDoesNotExist
 import numpy as np
+import json
 
 
 @shared_task(bind=True)
@@ -52,12 +53,15 @@ def generate_basic_report(self, repo_name, merged_users):
                 Changes.objects.create(commit=Commits.objects.latest('id'), file_name=key,
                                        insertions=stats['insertions'],
                                        deletions=stats['deletions'], lines=stats['lines'])
+            changes = commit.stats.files
+            changes_filtered = [{"file_name": x, "changes": changes[x]} for x in changes]
             curr_branch['commits'].append({'author': Authors.objects.get(old_email=commit.author.email,
                                                                          repository=Repositories.objects.latest('id')).name,
                                            'branch': Branches.objects.latest('id').name,
                                            'date': commit.committed_datetime,
                                            'message': commit.message.replace('\n', ''),
-                                           'changes': commit.stats.files})
+                                           'changed_files': changes_filtered})
         report["branches"].append(curr_branch)
+    Report.objects.create(repo_name=repo_name, report=json.dumps(report, default=str))
     os.system(f"rm -rf {repo_name}")
     return report

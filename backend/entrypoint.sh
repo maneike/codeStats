@@ -11,6 +11,7 @@ then
 fi
 
 python3 manage.py collectstatic --noinput
+python3 manage.py makemigrations --noinput
 python3 manage.py migrate --noinput
 echo "from django.contrib.auth.models import User;
 User.objects.filter(username='$DB_USER').delete();
