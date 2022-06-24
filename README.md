@@ -1,24 +1,30 @@
 # Uruchomienie aplikacji
 
-```docker-compose up --build```
+`docker-compose up --build`
 
 # Wymagane pliki środowiskowe
+
 <ul>
     <li>root/.env</li>
     <li>backend/.env</li>
     <li>postgres/.env</li>
 </ul>
 
-# Dostepne sa dwa endpointy
+# Dostepne sa cztery endpointy
+
 <ul>
 <li>/api/url/ - przyjmuje dict np.: {"url": "https://github.com/WitMar/PRA2021-PRA2022.git"} w body</li>
-<li>/api/zip/ - przyjmuje zip z repo (TODO)</li>
+<li>/api/zip/ - przyjmuje zip z repo (narazie pojedynczy plik)</li>
+<li>/api/merged/ - uruchamia proces tworzenia raportu ze scalonych autorów/emaili</li>
+<li>report/:{repo_name}/ - zwraca raport gotowy do wyświetlenia </li>
 </ul>
 
 ## Przykladowe zapytanie
+
 <img src="readme/example_request.jpg" alt="example_req">
 
 ## Przykladowy response(fragment)
+
 ```{
     "repo_name": "PRA2021-PRA2022",
     "HEAD": {
@@ -106,13 +112,14 @@
 }
 }
 ```
+
 ## Struktura bazy danych
+
 <ul>
 <li>Repositories</li>
     <ul>
         <li>repo_name = CharField(max_length=200)</li>
     </ul>
-
 
 <li>Authors</li>
     <ul>
@@ -127,7 +134,6 @@
         <li>commits_count = IntegerField()</li>
         <li>repository = ForeignKey(Repositories, on_delete=CASCADE)</li>
     </ul>
-
 
 <li>Commits</li>
     <ul>
