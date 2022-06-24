@@ -1,4 +1,4 @@
-import { useMemo, useEffect, useState } from "preact/hooks";
+import { useEffect, useState } from "preact/hooks";
 import styled from "@emotion/styled";
 import { postFiles } from "./services/postFiles";
 import { postUrls } from "./services/postUrls";
@@ -17,9 +17,7 @@ export function App() {
   useEffect(() => {
     const temp = [];
     fetchedRepos?.data?.map((repo) => {
-      temp.push(
-        aggregateRepoData(repo)
-      );
+      temp.push(aggregateRepoData(repo));
     });
 
     setAggregatedRepos(temp);
