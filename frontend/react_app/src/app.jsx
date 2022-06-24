@@ -14,12 +14,13 @@ export function App() {
   const [fetchedRepos, setFetchedRepos] = useState(null);
   const [aggregatedRepos, setAggregatedRepos] = useState(fetchedRepos ?? []);
 
+  console.log("fetchedRepos: ", fetchedRepos);
   useEffect(() => {
     const temp = [];
     fetchedRepos?.data?.map((repo) => {
       temp.push(aggregateRepoData(repo));
     });
-
+    console.log("temp: ", temp);
     setAggregatedRepos(temp);
   }, [fetchedRepos]);
 
