@@ -4,6 +4,7 @@ import { postUrls } from "./services/postUrls";
 import { postFiles } from "./services/postFiles";
 import FileUploader from "./components/FileUploader";
 import NavBar from "./components/NavBar";
+import MultiFileUploader from "./components/MultiFileUploader";
 import "./index.css";
 import aggregateRepoData from "./helpers/aggregateRepoData";
 
@@ -12,6 +13,7 @@ export function App() {
   const [repoUrl, setRepoUrl] = useState("");
   const [fetchedRepos, setFetchedRepos] = useState(null);
   const [aggregatedRepos, setAggregatedRepos] = useState(fetchedRepos ?? []);
+  const [file, setFile] = useState(null);
 
   // fetchedRepos?.data?.map((repo) => {
   //   console.log(aggregateRepoData(repo));
@@ -24,8 +26,7 @@ export function App() {
     fetchedRepos?.data?.map((repo) => {
       setAggregatedRepos(aggregateRepoData(repo));
     });
-  }),
-    [fetchedRepos];
+  }, [fetchedRepos]);
 
   // useEffect(() => {
   //   fetchedRepos?.data?.map((repo) => {
@@ -61,6 +62,13 @@ export function App() {
             onChange={(e) => setRepoUrl(e.target.value)}
           ></TextAreaStyled>
           <SubmitButton onClick={submitUrl}>Submit</SubmitButton>
+        </InputsWrapper>
+      </form>
+
+      <form>
+        <InputsWrapper>
+          <MultiFileUploader />
+          <SubmitButton>Submit</SubmitButton>
         </InputsWrapper>
       </form>
 
