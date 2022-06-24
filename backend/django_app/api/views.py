@@ -6,6 +6,7 @@ from django.http import JsonResponse
 from .functions import get_all_users, get_all_users_from_zip, handle_zip_save
 from .tasks import generate_basic_report
 from .models import Report
+from
 
 
 class ZipRepoView(views.APIView):
@@ -15,7 +16,7 @@ class ZipRepoView(views.APIView):
         file_obj = request.FILES['file']
         name = handle_zip_save(file_obj)
         users = get_all_users_from_zip(name)
-        os.system("rm -rf *.zip")
+        os.system("rm -rf *zip")
         return JsonResponse(users, status=200)
 
 

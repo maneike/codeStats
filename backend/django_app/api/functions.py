@@ -35,13 +35,19 @@ def handle_zip_save(file_obj):
         zip_ref.extractall("./from_zip")
         names = [name for name in os.listdir("./from_zip") if os.path.isdir(os.path.join("./from_zip", name))]
     try:
-        if len(names) == 1 and names[0] != ".git":
-            to_return = names[0]
+        if ".git" not in names:
+            for name in names:
+                tmp_names = [n for n in os.listdir(f"./from_zip/{name}")]
+                if ".git" in tmp_names:
+                    return name
+                else:
+                    return tmp_names
         else:
             to_return = "files"
+            return to_return
     except IndexError:
         to_return = "files"
-    return to_return
+        return to_return
 
 
 def get_all_users_from_zip(repo_name):
