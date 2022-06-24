@@ -50,6 +50,15 @@ services:
     image: redis:alpine
     depends_on:
       - db
+
+  grafana:
+    image: grafana/grafana-oss
+    ports:
+      - 3001:3000
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    user: '104'
+
   celery:
     build:
       context: ./backend
