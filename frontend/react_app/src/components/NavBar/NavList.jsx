@@ -17,16 +17,23 @@ const Ul = styled.ul`
     font-size: 1.2rem;
     padding: 20px;
   }
+  li:hover {
+    background-color: #353649;
+    cursor: pointer;
+  }
+  li:nth-of-type(5) {
+    color: lightgreen;
+  }
 `;
 
 const NavList = ({ open }) => {
   return (
     <Ul open={open}>
       <li>Home</li>
+      <li>About Us</li>
       <li>Raports</li>
-      <li>Raports</li>
-      <li>Raports</li>
-      <li>Raports</li>
+      <li>Settings</li>
+      <li>Contact</li>
     </Ul>
   );
 };

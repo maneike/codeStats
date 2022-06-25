@@ -1,10 +1,12 @@
 import styled from "@emotion/styled";
+import { useState } from "preact/hooks";
 
 const FileUploader = ({ onFileSelectError, onFileSelectSuccess }) => {
+  const [fileName, setFileName] = useState("");
   const handleFileInput = (e) => {
     const file = e.target.files[0];
     file
-      ? onFileSelectSuccess(file)
+      ? onFileSelectSuccess(file) & setFileName(file.name)
       : onFileSelectError({ error: "Please select a file" });
   };
 
@@ -25,16 +27,17 @@ const FileUploader = ({ onFileSelectError, onFileSelectSuccess }) => {
             />
           </svg>
         </CloudSVG>
-        <h2>Drag & Drop</h2>
+        <h2>Click here to choose file</h2>
       </Label>
-      <p>or</p>
+      <p>
+        <b>File:</b> {fileName}
+      </p>
       <FileInputStyled
         id="upload-files"
         type="file"
         onChange={handleFileInput}
         multiple
       />
-
       <H5>Supports: ZIP containing .git</H5>
     </>
   );
@@ -48,6 +51,7 @@ const FileInputStyled = styled.input`
   border-radius: 0.25rem;
   margin-bottom: 1rem;
   width: 400px;
+  display: none;
 `;
 
 const CloudSVG = styled.div`
@@ -60,6 +64,14 @@ const H5 = styled.h5`
 `;
 
 const Label = styled.label`
-  background-color: lightgreen;
-  border: 5px solid #323345;
+  background-color: #56576b;
+  width: 400px;
+  border: 3px dotted lightgreen;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    background-color: lightgreen;
+    opacity: 0.7;
+    border: 3px dotted black;
+    color: black;
+  }
 `;
