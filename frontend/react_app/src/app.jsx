@@ -13,35 +13,40 @@ export function App() {
   const [repoUrls, setRepoUrls] = useState("");
   const [fetchedRepos, setFetchedRepos] = useState(null);
   const [aggregatedRepos, setAggregatedRepos] = useState(fetchedRepos ?? []);
+  const [isLoading, setLoading] = useState(false);
 
-  console.log("fetchedRepos: ", fetchedRepos);
   useEffect(() => {
     const temp = [];
     fetchedRepos?.data?.map((repo) => {
       temp.push(aggregateRepoData(repo));
     });
-    console.log("temp: ", temp);
     setAggregatedRepos(temp);
   }, [fetchedRepos]);
 
   const submitForm = (e) => {
     e.preventDefault();
+    setLoading(true);
     const formData = new FormData();
-    selectedFile && postFiles(selectedFile, formData, setFetchedRepos);
+    selectedFile &&
+      postFiles(selectedFile, formData, setFetchedRepos, setLoading);
   };
 
   const submitUrl = (e) => {
     e.preventDefault();
+    setLoading(true);
     repoUrls &&
       postUrls(
         repoUrls.split(",").map((item) => item.trim()),
-        setFetchedRepos
+        setFetchedRepos,
+        setLoading
       );
   };
 
   const submitRepoForm = (e, repoId) => {
     e.preventDefault();
-    aggregatedRepos != [] && postMergedUsers(aggregatedRepos[repoId]);
+    setLoading(true);
+    aggregatedRepos != [] &&
+      postMergedUsers(aggregatedRepos[repoId], setLoading);
   };
 
   return (
@@ -55,7 +60,9 @@ export function App() {
             value={repoUrls}
             onChange={(e) => setRepoUrls(e.target.value)}
           ></TextAreaStyled>
-          <SubmitButton onClick={submitUrl}>Submit</SubmitButton>
+          <SubmitButton disabled={isLoading} onClick={submitUrl}>
+            Submit
+          </SubmitButton>
         </InputsWrapper>
       </form>
 
@@ -65,7 +72,9 @@ export function App() {
             onFileSelectSuccess={(file) => setSelectedFile(file)}
             onFileSelectError={({ error }) => alert(error)}
           />
-          <SubmitButton onClick={submitForm}>Submit</SubmitButton>
+          <SubmitButton disabled={isLoading} onClick={submitForm}>
+            Submit
+          </SubmitButton>
         </InputsWrapper>
       </form>
 
@@ -127,7 +136,10 @@ export function App() {
                       )
                     );
                   })}
-                  <SubmitButton onClick={(e) => submitRepoForm(e, repoId)}>
+                  <SubmitButton
+                    disabled={isLoading}
+                    onClick={(e) => submitRepoForm(e, repoId)}
+                  >
                     Submit
                   </SubmitButton>
                 </InputsWrapper>
@@ -151,6 +163,13 @@ const SubmitButton = styled.button`
   cursor: pointer;
   &:hover {
     background-color: #353649;
+  }
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  &:hover:disabled {
+    background-color: #323345;
   }
   padding: 0.5rem;
 `;

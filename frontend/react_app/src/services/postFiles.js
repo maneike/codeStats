@@ -1,6 +1,11 @@
 import axios from "redaxios";
 
-export const postFiles = (selectedFile, formData, setFetchedRepos) => {
+export const postFiles = (
+  selectedFile,
+  formData,
+  setFetchedRepos,
+  setLoading
+) => {
   formData.append("file", selectedFile);
   axios
     .post("http://localhost:80/api/zip/", formData)
@@ -8,5 +13,6 @@ export const postFiles = (selectedFile, formData, setFetchedRepos) => {
       alert("File upload success ✔", res);
       setFetchedRepos(res.data);
     })
-    .catch((err) => alert("File upload error ✘", err));
+    .catch((err) => alert("File upload error ✘", err))
+    .finally(() => setLoading(false));
 };
