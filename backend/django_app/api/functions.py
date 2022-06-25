@@ -7,8 +7,8 @@ from django.core.files.base import ContentFile
 
 def get_all_users(url):
     all_data = []
-    users = []
     for u in url:
+        users = []
         repo_name = u.split('.git')[0].split('/')[-1]
         path = os.getcwd()
         try:
