@@ -31,7 +31,7 @@ class UsersReportView(views.APIView):
 
     def post(self, request):
         merged_users = self.request.data
-        generate_basic_report(
+        generate_basic_report.delay(
             merged_users['repo_name'], merged_users['merged_users'])
         return JsonResponse({"ok": "Raport jest w trakcie tworzenia"}, status=200)
 
@@ -39,5 +39,5 @@ class UsersReportView(views.APIView):
 class GetReportView(views.APIView):
 
     def get(self, request, repo_name):
-        report = Report.objects.get(repo_name=repo_name).report
+        report = Report.objects.filter(repo_name=repo_name).values("report").order_by('-id')[0]["report"]
         return JsonResponse(json.loads(report), status=200)
