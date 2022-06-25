@@ -1,6 +1,6 @@
 import axios from "redaxios";
 
-export const postUrls = (repoUrls, setFetchedRepos) => {
+export const postUrls = (repoUrls, setFetchedRepos, setLoading) => {
   axios
     .post("http://localhost:80/api/url/", {
       url: repoUrls,
@@ -11,5 +11,6 @@ export const postUrls = (repoUrls, setFetchedRepos) => {
     })
     .catch((err) => {
       alert("Link upload error ✘", err);
-    });
+    })
+    .finally(() => setLoading(false));
 };
