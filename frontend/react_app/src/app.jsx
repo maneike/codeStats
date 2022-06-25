@@ -153,6 +153,8 @@ const SubmitButton = styled.button`
     background-color: #353649;
   }
   padding: 0.5rem;
+  width: 150px;
+  justify-self: center;
 `;
 
 const InputsWrapper = styled.div`
@@ -178,6 +180,10 @@ const TextAreaStyled = styled.textarea`
   resize: none;
   width: var(--text-area-width);
   height: var(--text-area-height);
+  ::placeholder {
+    color: lightgrey;
+    opacity: 0.8;
+  }
 `;
 
 const Ul = styled.ul`
@@ -193,15 +199,9 @@ const DropdownSelect = styled.select`
   color: white;
   border: 1px solid #fafafa;
   border-radius: 8px;
-  background: transparent;
+  background: #56576b;
   padding: 8px;
   margin: 0 10px;
-`;
-
-const Options = styled.option`
-  font-family: "Roboto", monospace;
-  background: transparent;
-  color: white;
 `;
 
 const RepoTitle = styled.h3`
