@@ -1,6 +1,6 @@
 import axios from "redaxios";
 
-export const postMergedUsers = (repo) => {
+export const postMergedUsers = (repo, useLoading) => {
   axios
     .post("http://localhost:80/api/merged/", {
       repo_name: repo.repo_name,
@@ -10,7 +10,7 @@ export const postMergedUsers = (repo) => {
       alert("Repositories upload success ✔", res);
     })
     .catch((err) => {
-      console.log(repo);
       alert("Repositories upload error ✘", err);
-    });
+    })
+    .finally(() => setLoading(false));
 };
