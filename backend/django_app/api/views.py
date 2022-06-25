@@ -39,5 +39,5 @@ class UsersReportView(views.APIView):
 class GetReportView(views.APIView):
 
     def get(self, request, repo_name):
-        report = Report.objects.latest(repo_name=repo_name)
+        report = Report.objects.filter(repo_name=repo_name).values("report").order_by('-id')[0]["report"]
         return JsonResponse(json.loads(report), status=200)
