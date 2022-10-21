@@ -41,3 +41,10 @@ class GetReportView(views.APIView):
     def get(self, request, repo_name):
         report = Report.objects.filter(repo_name=repo_name).values("report").order_by('-id')[0]["report"]
         return JsonResponse(json.loads(report), status=200)
+
+
+class GetGrafanaReportView(views.APIView):
+
+    def get(self, request, repo_name):
+        url = f'http://localhost:3001/d/vNBjJo3nz/new-dashboard?orgId=1&var-Repository={repo_name}'
+        return JsonResponse({'url': url}, status=200)
