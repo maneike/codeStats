@@ -140,3 +140,10 @@ CELERY_RESULT_BACKEND = "redis://redis:6379"
 
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
+
+# TODO: Add our smtp host
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'asdd@gmail.com'
+EMAIL_HOST_PASSWORD = 'asd'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True

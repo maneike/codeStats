@@ -5,6 +5,7 @@ from .models import Repositories, Authors, Branches, Commits, Changes, Report
 from django.core.exceptions import ObjectDoesNotExist
 import numpy as np
 import json
+from django.core.mail import send_mail
 
 
 @shared_task(bind=True)
@@ -64,4 +65,13 @@ def generate_basic_report(self, repo_name, merged_users):
         report["branches"].append(curr_branch)
     Report.objects.create(repo_name=repo_name, report=json.dumps(report, default=str))
     os.system(f"rm -rf {repo_name}")
+    report_url = f'http://localhost:3001/d/vNBjJo3nz/new-dashboard?orgId=1&var-Repository={repo_name}'
+    # TODO: Add our smpt user
+    send_mail(
+        f'Report for {repo_name}',
+        f'Link for report {report_url}',
+        'from@example.com',
+        ['to@example.com'],
+        fail_silently=False,
+    )
     return report
