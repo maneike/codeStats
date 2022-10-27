@@ -24,8 +24,6 @@ def get_all_users(url):
                 users.append({"name": author.author.name, "email": author.author.email})
         all_data.append({"repo_name": repo_name, "users": list({v['email']: v for v in users}.values())})
     return {"data": all_data}
-    # TODO zmień proszę na `return all_data` 
-    # ~Martin
 
 
 def handle_zip_save(file_obj):
