@@ -10,11 +10,19 @@ then
     echo "PostgreSQL started"
 fi
 
+echo "Migration started..."
+
 python3 manage.py collectstatic --noinput
 python3 manage.py makemigrations --noinput
 python3 manage.py migrate --noinput
+
+echo "Migration completed!"
+
 echo "from django.contrib.auth.models import User;
 User.objects.filter(username='$DB_USER').delete();
-User.objects.create_superuser('$DB_USER', '', '$DB_PASSWORD')" | python3 manage.py shell
+User.objects.create_superuser('$DB_USER', '', '$DB_PASSWORD')"
+
+python3 manage.py shell
+
 
 exec "$@"
