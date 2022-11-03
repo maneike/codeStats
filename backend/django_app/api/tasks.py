@@ -18,12 +18,7 @@ def generate_basic_report(self, repo_name, merged_users):
             repo = Repo(f"./from_zip")
         else:
             repo = Repo(f"./from_zip/{repo_name}")
-    try:
-        Repositories.objects.get(repo_name=repo_name).delete()
-        Repositories.objects.create(repo_name=repo.remote().url.split('.git')[0].split('/')[-1])
-    except ObjectDoesNotExist:
-        Repositories.objects.create(repo_name=repo.remote().url.split('.git')[0].split('/')[-1])
-    report['repo_name'] = Repositories.objects.latest('id').repo_name
+    report['repo_name'] = Repositories.objects.filter(repo_name=repo_name).latest('id')[0]['repo_name']
     remote_refs = repo.remote().refs
     for mu in merged_users:
         Authors.objects.create(name=mu["new_name"], email=mu["new_email"], old_name=mu['old_name'],
