@@ -3,13 +3,20 @@ from git import Repo, exc
 import zipfile
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
+from .models import Repositories
+from django.core.exceptions import ObjectDoesNotExist
 
 
-def get_all_users(url):
+def get_all_users(url, receivers):
     all_data = []
     for u in url:
         users = []
         repo_name = u.split('.git')[0].split('/')[-1]
+        try:
+            Repositories.objects.get(repo_name=repo_name).delete()
+            Repositories.objects.create(repo_name=repo_name, receivers=",".join(receivers))
+        except ObjectDoesNotExist:
+            Repositories.objects.create(repo_name=repo_name, receivers=",".join(receivers))
         path = os.getcwd()
         try:
             repo = Repo.clone_from(u, os.path.join(path, f"{repo_name}"))
