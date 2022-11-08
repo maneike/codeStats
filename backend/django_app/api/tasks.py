@@ -19,33 +19,31 @@ def generate_basic_report(self, repo_name, merged_users):
             repo = Repo(f"./from_zip")
         else:
             repo = Repo(f"./from_zip/{repo_name}")
-    try:
-        Repositories.objects.get(repo_name=repo_name).delete()
-        Repositories.objects.create(repo_name=repo.remote().url.split('.git')[0].split('/')[-1])
-    except ObjectDoesNotExist:
-        Repositories.objects.create(repo_name=repo.remote().url.split('.git')[0].split('/')[-1])
-    report['repo_name'] = Repositories.objects.latest('id').repo_name
+    report['repo_name'] = Repositories.objects.filter(repo_name=repo_name).latest('id')[0]['repo_name']
     remote_refs = repo.remote().refs
     for mu in merged_users:
         Authors.objects.create(name=mu["new_name"], email=mu["new_email"], old_name=mu['old_name'],
                                old_email=mu['old_email'],
-                               repository=Repositories.objects.latest('id'))
+                               repository=Repositories.objects.filter(repo_name=repo_name).latest('id')[0]['repo_name'])
     for refs in remote_refs:
         refs.checkout()
         # extensions = set([str(i).split('.')[-1] for i in list(Path(f"./{repo_name}").rglob("*.*"))])
         commits_list = list(repo.iter_commits())
         Branches.objects.create(name=refs.name.split('/')[1], commits_count=len(commits_list),
-                                repository=Repositories.objects.latest('id'))
+                                repository=Repositories.objects.filter(repo_name=repo_name).
+                                latest('id')[0]['repo_name'])
         branch = Branches.objects.latest('id').name
         curr_branch = {"branch_name": branch, 'commits': [], 'authors': list(
             np.unique([Authors.objects.get(old_email=author.author.email,
-                                           repository=Repositories.objects.latest('id')).name for author in
+                                           repository=Repositories.objects.filter(repo_name=repo_name).
+                                           latest('id')[0]['repo_name']).name for author in
                        reversed(commits_list)]))}
         # if extensions:
         #    f.write(f"File extensions: {extensions}\n")
         for commit in reversed(commits_list):
             Commits.objects.create(author=Authors.objects.get(old_email=commit.author.email,
-                                                              repository=Repositories.objects.latest('id')),
+                                                              repository=Repositories.objects.filter
+                                                              (repo_name=repo_name).latest('id')[0]['repo_name']),
                                    branch=Branches.objects.latest('id'),
                                    date=commit.committed_datetime,
                                    message=commit.message.replace('\n', ''))
@@ -57,7 +55,9 @@ def generate_basic_report(self, repo_name, merged_users):
             changes = commit.stats.files
             changes_filtered = [{"file_name": x, "changes": changes[x]} for x in changes]
             curr_branch['commits'].append({'author': Authors.objects.get(old_email=commit.author.email,
-                                                                         repository=Repositories.objects.latest('id')).name,
+                                                                         repository=Repositories.objects.
+                                                                         filter(repo_name=repo_name).latest('id')
+                                                                         [0]['repo_name']).name,
                                            'branch': Branches.objects.latest('id').name,
                                            'date': commit.committed_datetime,
                                            'message': commit.message.replace('\n', ''),
