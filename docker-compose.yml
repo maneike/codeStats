@@ -6,8 +6,7 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     volumes:
-      - django_static_volume:/usr/src/app/static
-      - static-content:/usr/src/app/
+      - .:/backend
     env_file:
       - ./backend/.env
     command: gunicorn --bind 0.0.0.0:8000 codestatsapi.wsgi --timeout 100000000
@@ -40,7 +39,7 @@ services:
     build: ./nginx
     volumes:
       - django_static_volume:/usr/src/app/django_files/static
-      - react_static_volume:/usr/src/app/react_files/static
+      - .:/backend
     ports:
       - 80:80
     depends_on:
