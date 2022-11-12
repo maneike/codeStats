@@ -14,14 +14,13 @@ def get_all_users(url, receivers):
         repo_name = u.split('.git')[0].split('/')[-1]
         try:
             Repositories.objects.get(repo_name=repo_name).delete()
-            Repositories.objects.create(repo_name=repo_name, receivers=",".join(receivers))
+            Repositories.objects.create(repo_name=repo_name, receivers=",".join(receivers), url=u)
         except ObjectDoesNotExist:
-            Repositories.objects.create(repo_name=repo_name, receivers=",".join(receivers))
+            Repositories.objects.create(repo_name=repo_name, receivers=",".join(receivers), url=u)
         path = os.getcwd()
         try:
             repo = Repo.clone_from(u, os.path.join(path, f"{repo_name}"))
         except exc.GitError:
-            os.system(f"rm -rf {repo_name}")
             repo = Repo.clone_from(u, os.path.join(path, f"{repo_name}"))
         remote_refs = repo.remote().refs
         for refs in remote_refs:
