@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='repositories',
             name='url',
-            field=models.CharField(default='asd', max_length=1000),
+            field=models.CharField(default='default_field', max_length=1000),
             preserve_default=False,
         ),
     ]
