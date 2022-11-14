@@ -51,13 +51,10 @@ services:
       - db
 
   grafana:
-    image: grafana/grafana-oss
+    build: './grafana'
+    container_name: 'grafana'
     ports:
       - 3001:3000
-    volumes:
-      - postgres_data:/var/lib/postgresql/data/
-      - ./grafana:/etc/grafana/provisioning/datasources
-      - grafana-data:/var/lib/grafana
     user: '104'
 
   celery:
@@ -68,6 +65,7 @@ services:
     command: celery -A codestatsapi worker -l INFO
     volumes:
       - static-content:/usr/src/app/
+      - .:/backend
     env_file:
       - ./backend/.env
     depends_on:
