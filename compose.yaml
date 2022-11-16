@@ -46,6 +46,8 @@ services:
       - 3001:3000
     volumes:
       - db-data:/var/lib/postgresql/data/
+      - ./grafana:/etc/grafana/provisioning/datasources
+      - grafana-data:/var/lib/grafana
     user: "104"
 
 networks:
@@ -55,3 +57,4 @@ networks:
 volumes:
   backend-cache: {}
   db-data: {}
+  grafana-data: {}
