@@ -71,7 +71,7 @@ def generate_basic_report(self, repo_name, merged_users):
         f'Report for {repo_name}',
         f'Link for report {report_url}',
         settings.DEFAULT_FROM_EMAIL,
-        Repositories.objects.filter(repo_name='PRA2021-PRA2022').values()[0]['receivers'].split(','),
+        Repositories.objects.filter(repo_name=repo_name).values()[0]['receivers'].split(','),
         fail_silently=False,
     )
     return report
