@@ -40,6 +40,14 @@ services:
     volumes:
       - db-data:/var/lib/postgresql/data
 
+  grafana:
+    image: grafana/grafana-oss
+    ports:
+      - 3001:3000
+    volumes:
+      - db-data:/var/lib/postgresql/data/
+    user: "104"
+
 networks:
   client-side: {}
   server-side: {}
