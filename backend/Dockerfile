@@ -8,12 +8,7 @@ RUN apk update && \
  apk add postgresql-dev gcc python3-dev musl-dev  && \
  pip3 install -r requirements.txt --no-cache-dir
 COPY . /code 
-ENTRYPOINT ["python3"] 
-CMD ["manage.py", "runserver", "0.0.0.0:8000"]
-# tu dziś pojawią się komendy: 
-# python3 manage.py collectstatic --noinput
-# python3 manage.py makemigrations --noinput
-# python3 manage.py migrate --noinput
+CMD ["gunicorn", "codestatsapi.wsgi:application", "--bind", "0.0.0.0:8000"]
 # python3 manage.py collectstatic --noinput && python3 manage.py makemigrations --noinput && python3 manage.py migrate --noinput && python3 manage.py createsuperuser
 
 FROM builder as development
@@ -25,4 +20,5 @@ adduser -S --shell /bin/bash --ingroup docker vscode
 EOF
 # install Docker tools (cli, buildx, compose)
 COPY --from=gloursdocker/docker / /
-CMD ["manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["gunicorn", "codestatsapi.wsgi:application", "--bind", "0.0.0.0:8000"]
+
