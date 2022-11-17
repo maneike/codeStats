@@ -40,6 +40,17 @@ services:
     volumes:
       - db-data:/var/lib/postgresql/data
 
+  redis:
+    image: redis:alpine
+    depends_on:
+      - db
+    networks:
+      - server-side
+    ports:
+      - 6379:6379
+    volumes:
+      - redis-data:/data
+
   grafana:
     image: grafana/grafana-oss
     ports:
@@ -50,6 +61,22 @@ services:
       - grafana-data:/var/lib/grafana
     user: "104"
 
+  celery:
+    build:
+      context: backend
+      target: development
+    command: celery -A codestatsapi worker -l info
+    networks:
+      - server-side
+    volumes:
+      - ./backend/codestatsapi:/code/codestatsapi
+      - backend-cache:/code/target
+    depends_on:
+      - db
+      - redis
+    env_file:
+      - ./backend/.dev.env
+
 networks:
   client-side: {}
   server-side: {}
@@ -58,3 +85,5 @@ volumes:
   backend-cache: {}
   db-data: {}
   grafana-data: {}
+  redis-data: {}
+  
