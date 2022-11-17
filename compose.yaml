@@ -23,6 +23,7 @@ services:
     volumes:
       - ./backend/codestatsapi:/code/codestatsapi
       - backend-cache:/code/target
+      - backend-static:/code/static
     depends_on:
       - db
     env_file:
@@ -39,6 +40,19 @@ services:
       - 5432:5432
     volumes:
       - db-data:/var/lib/postgresql/data
+
+  nginx:
+    build:
+      context: .nginx
+    ports:
+      - 80:80
+    networks:
+      - client-side
+    depends_on:
+      - frontend
+      - backend
+    volumes:
+      - backend-static:/code/static
 
   redis:
     image: redis:alpine
@@ -83,7 +97,7 @@ networks:
 
 volumes:
   backend-cache: {}
+  backend-static: {}
   db-data: {}
   grafana-data: {}
   redis-data: {}
-  
