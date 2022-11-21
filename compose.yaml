@@ -4,8 +4,6 @@ services:
     build:
       context: frontend
       target: development
-    networks:
-      - client-side
     ports:
       - 3000:3000
     volumes:
@@ -17,9 +15,6 @@ services:
       target: development
     ports:
       - "8000:8000"
-    networks:
-      - client-side
-      - server-side
     volumes:
       - ./backend/codestatsapi:/code/codestatsapi
       - backend-cache:/code/target
@@ -34,8 +29,6 @@ services:
     restart: always
     environment:
       - POSTGRES_PASSWORD=mysecretpassword
-    networks:
-      - server-side
     ports:
       - 5432:5432
     volumes:
@@ -46,8 +39,6 @@ services:
       context: .nginx
     ports:
       - 80:80
-    networks:
-      - client-side
     depends_on:
       - frontend
       - backend
@@ -58,8 +49,6 @@ services:
     image: redis:alpine
     depends_on:
       - db
-    networks:
-      - server-side
     ports:
       - 6379:6379
     volumes:
@@ -80,8 +69,6 @@ services:
       context: backend
       target: development
     command: celery -A codestatsapi worker -l info
-    networks:
-      - server-side
     volumes:
       - ./backend/codestatsapi:/code/codestatsapi
       - backend-cache:/code/target
@@ -90,10 +77,6 @@ services:
       - redis
     env_file:
       - ./backend/.dev.env
-
-networks:
-  client-side: {}
-  server-side: {}
 
 volumes:
   backend-cache: {}
