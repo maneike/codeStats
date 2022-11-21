@@ -1,43 +1,36 @@
-###########
-# BUILDER #
-###########
+# syntax=docker/dockerfile:1.4
+FROM node:lts AS development
 
-# pull official base image
-FROM node:18-alpine3.15 as builder
+ENV CI=true
+ENV PORT=3000
 
-# set work directory
-WORKDIR /usr/src/app
+WORKDIR /code
+COPY package.json /code/package.json
+COPY package-lock.json /code/package-lock.json
+RUN npm install
+COPY . /code
 
-# install dependencies and avoid `node-gyp rebuild` errors
-COPY ./react_app/package.json .
-RUN apk add --no-cache --virtual .gyp \
-        python3 \
-        make \
-        g++ \
-    && npm install \
-    && apk del .gyp
+CMD [ "npm", "start" ]
 
-# copy our react project
-COPY ./react_app .
+FROM development as dev-envs
+RUN <<EOF
+apt-get update
+apt-get install -y --no-install-recommends git
+EOF
 
-# perform npm build
-ARG API_SERVER
-ENV REACT_APP_API_SERVER=${API_SERVER}
-RUN REACT_APP_API_SERVER=${API_SERVER} \ 
-  npm run build
+RUN <<EOF
+useradd -s /bin/bash -m vscode
+groupadd docker
+usermod -aG docker vscode
+EOF
+# install Docker tools (cli, buildx, compose)
+COPY --from=gloursdocker/docker / /
+CMD [ "npm", "start" ]
 
-#########
-# FINAL #
-#########
+FROM development AS builder
 
-# pull official base image
-FROM node
+RUN npm run build
 
-# set work directory
-WORKDIR /usr/src/app
+FROM nginx:1.13-alpine
 
-# install serve - deployment static server suggested by official create-react-app
-RUN npm install -g serve
-
-# copy our build files from our builder stage
-COPY --from=builder /usr/src/app/dist ./build
+COPY --from=builder /code/build /usr/share/nginx/html

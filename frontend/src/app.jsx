@@ -65,7 +65,6 @@ export function App() {
           </SubmitButton>
         </InputsWrapper>
       </form>
-
       <form>
         <InputsWrapper>
           <FileUploader
@@ -77,7 +76,6 @@ export function App() {
           </SubmitButton>
         </InputsWrapper>
       </form>
-
       <form>
         {aggregatedRepos?.map((repo, repoId) => {
           {

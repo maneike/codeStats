@@ -1,51 +1,25 @@
-###########
-# BUILDER #
-###########
+# syntax=docker/dockerfile:1.4
 
-# pull official base image
-FROM python as builder
+FROM --platform=$BUILDPLATFORM python:3.7-alpine AS builder
+EXPOSE 8000
+WORKDIR /code 
+COPY requirements.txt /code
+RUN apk update && \
+ apk add postgresql-dev gcc python3-dev musl-dev  && \
+ pip3 install -r requirements.txt --no-cache-dir
+COPY . /code 
+RUN ["python3", "manage.py", "collectstatic", "--noinput"]
+CMD ["gunicorn", "codestatsapi.wsgi:application", "--bind", "0.0.0.0:8000"]
+# docker compose run backend python3 manage.py makemigrations && python3 manage.py migrate && python3 manage.py createsuperuser
 
-# set work directory 
-WORKDIR /usr/src/app
+FROM builder as development
+EXPOSE 8000
+RUN <<EOF
+apk add git
+addgroup -S docker
+adduser -S --shell /bin/bash --ingroup docker vscode
+EOF
+# install Docker tools (cli, buildx, compose)
+COPY --from=gloursdocker/docker / /
+CMD ["gunicorn", "codestatsapi.wsgi:application", "--bind", "0.0.0.0:8000"]
 
-# set environment variables 
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
-
-# install dependencies
-COPY ./requirements.txt .
-RUN pip3 wheel --no-cache-dir --no-deps --wheel-dir /usr/src/app/wheels -r requirements.txt
-
-
-#########
-# FINAL #
-#########
-
-# pull official base image
-FROM python
-
-# installing netcat (nc) since we are using that to listen to postgres server in entrypoint.sh
-RUN apt-get update && apt-get install -y --no-install-recommends netcat && \
-    apt-get install -y build-essential && \
-    apt-get install -y libpq-dev && \
-    apt-get autoremove -y && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
-
-# install dependencies
-COPY --from=builder /usr/src/app/wheels /wheels
-COPY --from=builder /usr/src/app/requirements.txt .
-RUN pip3 install --no-cache /wheels/*
-
-# set work directory
-WORKDIR /usr/src/app
-
-# copy entrypoint.sh
-COPY ./entrypoint.sh /usr/src/app/entrypoint.sh
-
-# copy our django project
-COPY ./django_app .
-
-# run entrypoint.sh
-RUN chmod +x /usr/src/app/entrypoint.sh
-ENTRYPOINT ["/usr/src/app/entrypoint.sh"]
