@@ -1,0 +1,86 @@
+name: codeStats
+services:
+  frontend:
+    build:
+      context: frontend
+      target: development
+    ports:
+      - 3000:3000
+    volumes:
+      - ./frontend/src:/code/src:ro
+
+  backend:
+    build:
+      context: backend
+      target: development
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend/codestatsapi:/code/codestatsapi
+      - backend-cache:/code/target
+      - backend-static:/code/static
+    depends_on:
+      - db
+    env_file:
+      - ./backend/.dev.env
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=mysecretpassword
+    ports:
+      - 5432:5432
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+  nginx:
+    build:
+      context: .nginx
+    ports:
+      - 80:80
+    depends_on:
+      - frontend
+      - backend
+    volumes:
+      - backend-static:/code/static
+
+  redis:
+    image: redis:alpine
+    depends_on:
+      - db
+    ports:
+      - 6379:6379
+    volumes:
+      - redis-data:/data
+
+  grafana:
+    image: grafana/grafana-oss
+    ports:
+      - 3001:3000
+    volumes:
+      - db-data:/var/lib/postgresql/data/
+      - ./grafana:/etc/grafana/provisioning/datasources
+      - grafana-data:/var/lib/grafana
+    user: "104"
+
+  celery:
+    build:
+      context: backend
+      target: development
+    command: celery -A codestatsapi worker -l info
+    volumes:
+      - ./backend/codestatsapi:/code/codestatsapi
+      - backend-cache:/code/target
+    depends_on:
+      - db
+      - redis
+    env_file:
+      - ./backend/.dev.env
+
+volumes:
+  backend-cache: {}
+  backend-static: {}
+  db-data: {}
+  grafana-data: {}
+  redis-data: {}

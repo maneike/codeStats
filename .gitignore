@@ -3,5 +3,5 @@ node_modules
 dist
 dist-ssr
 *.local
-.env
+*.env
 .idea/
