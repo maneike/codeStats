@@ -29,6 +29,8 @@ services:
     restart: always
     environment:
       - POSTGRES_PASSWORD=mysecretpassword
+      - POSTGRES_USER=postgres
+      - POSTGRES_DATABASE=postgres
     ports:
       - 5432:5432
     volumes:
@@ -55,13 +57,9 @@ services:
       - redis-data:/data
 
   grafana:
-    image: grafana/grafana-oss
+    build: './grafana'
     ports:
       - 3001:3000
-    volumes:
-      - db-data:/var/lib/postgresql/data/
-      - ./grafana:/etc/grafana/provisioning/datasources
-      - grafana-data:/var/lib/grafana
     user: "104"
 
   celery:

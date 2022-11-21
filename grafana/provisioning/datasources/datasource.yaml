@@ -4,10 +4,10 @@ datasources:
   - name: Postgres
     type: postgres
     url: db:5432
-    database: 'z enva'
-    user: 'z enva'
+    database: 'postgres'
+    user: 'postgres'
     secureJsonData:
-      password: 'z enva'
+      password: 'mysecretpassword'
     jsonData:
       sslmode: 'disable' # disable/require/verify-ca/verify-full
       maxOpenConns: 0 # Grafana v5.4+
