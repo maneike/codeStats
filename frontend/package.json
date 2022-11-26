@@ -5,7 +5,7 @@
     "start": "vite",
     "dev": "vite",
     "build": "vite build",
-    "prepare": "cd .. && husky install husky"
+    "prepare": "cd .. && husky install .husky"
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",
