@@ -14,6 +14,7 @@ export function App() {
   const [fetchedRepos, setFetchedRepos] = useState(null);
   const [aggregatedRepos, setAggregatedRepos] = useState(fetchedRepos ?? []);
   const [isLoading, setLoading] = useState(false);
+  const [receivers, setReceivers] = useState("");
 
   useEffect(() => {
     const temp = [];
@@ -35,8 +36,10 @@ export function App() {
     e.preventDefault();
     setLoading(true);
     repoUrls &&
+      receivers &&
       postUrls(
         repoUrls.split(",").map((item) => item.trim()),
+        receivers.split(",").map((item) => item.trim()),
         setFetchedRepos,
         setLoading
       );
@@ -55,6 +58,11 @@ export function App() {
 
       <form>
         <InputsWrapper>
+          <TextAreaReceivers
+            placeholder="emails"
+            value={receivers}
+            onChange={(e) => setReceivers(e.target.value)}
+          ></TextAreaReceivers>
           <TextAreaStyled
             placeholder="Paste the repo URLs (with .git at the end) separated by commas..."
             value={repoUrls}
@@ -197,6 +205,21 @@ const TextAreaStyled = styled.textarea`
   resize: none;
   width: var(--text-area-width);
   height: var(--text-area-height);
+  ::placeholder {
+    color: lightgrey;
+    opacity: 0.8;
+  }
+`;
+
+const TextAreaReceivers = styled.textarea`
+  font-family: "Roboto", monospace;
+  color: white;
+  background: transparent;
+  outline: none;
+  border: none;
+  resize: none;
+  width: var(--text-area-width);
+  height: 200px;
   ::placeholder {
     color: lightgrey;
     opacity: 0.8;
