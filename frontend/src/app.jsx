@@ -96,7 +96,7 @@ export function App() {
       )}
       {displayReceiver && hideForm ? (
         <ReceiversTitle>
-          Your raport will be sent to: {receivers}
+          Your report will be sent to: {receivers}
         </ReceiversTitle>
       ) : (
         <></>
