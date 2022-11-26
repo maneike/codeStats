@@ -53,6 +53,7 @@ export function App() {
   };
 
   const hideForm = fetchedRepos ? true : false;
+  const displayReceiver = aggregatedRepos ? true : false;
 
   return (
     <>
@@ -65,10 +66,11 @@ export function App() {
           <form>
             <InputsWrapper>
               <TextAreaReceivers
-                placeholder="emails"
+                placeholder="Enter email(s) to send report to"
                 value={receivers}
                 onChange={(e) => setReceivers(e.target.value)}
               ></TextAreaReceivers>
+              <Line></Line>
               <TextAreaStyled
                 placeholder="Paste the repo URLs (with .git at the end) separated by commas..."
                 value={repoUrls}
@@ -92,7 +94,13 @@ export function App() {
           </form>
         </>
       )}
-
+      {displayReceiver && hideForm ? (
+        <ReceiversTitle>
+          Your raport will be sent to: {receivers}
+        </ReceiversTitle>
+      ) : (
+        <></>
+      )}
       <form>
         {aggregatedRepos?.map((repo, repoId) => {
           {
@@ -202,7 +210,7 @@ const InputsWrapper = styled.div`
   border-radius: 1em;
   height: auto;
   width: 700px;
-  margin: 100px auto;
+  margin: 30px auto;
 `;
 
 const TextAreaStyled = styled.textarea`
@@ -255,4 +263,18 @@ const DropdownSelect = styled.select`
 
 const RepoTitle = styled.h3`
   color: lightgreen;
+`;
+
+const ReceiversTitle = styled.div`
+  color: white;
+  display: flex;
+  justify-content: center;
+  margin: 30px auto;
+  width: var(--text-area-width);
+`;
+
+const Line = styled.hr`
+  border-bottom: solid #323345;
+  border-width: 0 0 2px 0;
+  width: var(--text-area-width);
 `;
