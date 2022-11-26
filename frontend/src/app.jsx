@@ -52,38 +52,48 @@ export function App() {
       postMergedUsers(aggregatedRepos[repoId], setLoading);
   };
 
+  // on submitUrl success, hide the form from  displaying
+  const hideForm = fetchedRepos ? true : false;
+
   return (
     <>
       <NavBar />
 
-      <form>
-        <InputsWrapper>
-          <TextAreaReceivers
-            placeholder="emails"
-            value={receivers}
-            onChange={(e) => setReceivers(e.target.value)}
-          ></TextAreaReceivers>
-          <TextAreaStyled
-            placeholder="Paste the repo URLs (with .git at the end) separated by commas..."
-            value={repoUrls}
-            onChange={(e) => setRepoUrls(e.target.value)}
-          ></TextAreaStyled>
-          <SubmitButton disabled={isLoading} onClick={submitUrl}>
-            Submit
-          </SubmitButton>
-        </InputsWrapper>
-      </form>
-      <form>
-        <InputsWrapper>
-          <FileUploader
-            onFileSelectSuccess={(file) => setSelectedFile(file)}
-            onFileSelectError={({ error }) => alert(error)}
-          />
-          <SubmitButton disabled={isLoading} onClick={submitForm}>
-            Submit
-          </SubmitButton>
-        </InputsWrapper>
-      </form>
+      {hideForm ? (
+        <></>
+      ) : (
+        <>
+          <form>
+            <InputsWrapper>
+              <TextAreaReceivers
+                placeholder="emails"
+                value={receivers}
+                onChange={(e) => setReceivers(e.target.value)}
+              ></TextAreaReceivers>
+              <TextAreaStyled
+                placeholder="Paste the repo URLs (with .git at the end) separated by commas..."
+                value={repoUrls}
+                onChange={(e) => setRepoUrls(e.target.value)}
+              ></TextAreaStyled>
+              <SubmitButton disabled={isLoading} onClick={submitUrl}>
+                Submit
+              </SubmitButton>
+            </InputsWrapper>
+          </form>
+          <form>
+            <InputsWrapper>
+              <FileUploader
+                onFileSelectSuccess={(file) => setSelectedFile(file)}
+                onFileSelectError={({ error }) => alert(error)}
+              />
+              <SubmitButton disabled={isLoading} onClick={submitForm}>
+                Submit
+              </SubmitButton>
+            </InputsWrapper>
+          </form>
+        </>
+      )}
+
       <form>
         {aggregatedRepos?.map((repo, repoId) => {
           {
