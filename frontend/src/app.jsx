@@ -58,10 +58,7 @@ export function App() {
   return (
     <>
       <NavBar />
-
-      {hideForm ? (
-        <></>
-      ) : (
+      {!hideForm && (
         <>
           <form>
             <InputsWrapper>
@@ -94,12 +91,10 @@ export function App() {
           </form>
         </>
       )}
-      {displayReceiver && hideForm ? (
+      {displayReceiver && hideForm && (
         <ReceiversTitle>
           Your report will be sent to: {receivers}
         </ReceiversTitle>
-      ) : (
-        <></>
       )}
       <form>
         {aggregatedRepos?.map((repo, repoId) => {
