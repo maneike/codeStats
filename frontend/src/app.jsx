@@ -52,7 +52,6 @@ export function App() {
       postMergedUsers(aggregatedRepos[repoId], setLoading);
   };
 
-  // on submitUrl success, hide the form from  displaying
   const hideForm = fetchedRepos ? true : false;
 
   return (
