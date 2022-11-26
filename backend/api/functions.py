@@ -3,28 +3,33 @@ from git import Repo, exc
 import zipfile
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
+from .models import Repositories
+from django.core.exceptions import ObjectDoesNotExist
 
 
-def get_all_users(url):
+def get_all_users(url, receivers):
     all_data = []
     for u in url:
         users = []
         repo_name = u.split('.git')[0].split('/')[-1]
+        try:
+            Repositories.objects.get(repo_name=repo_name).delete()
+            Repositories.objects.create(repo_name=repo_name, receivers=",".join(receivers), url=u)
+        except ObjectDoesNotExist:
+            Repositories.objects.create(repo_name=repo_name, receivers=",".join(receivers), url=u)
         path = os.getcwd()
         try:
             repo = Repo.clone_from(u, os.path.join(path, f"{repo_name}"))
         except exc.GitError:
-            os.system(f"rm -rf {repo_name}")
             repo = Repo.clone_from(u, os.path.join(path, f"{repo_name}"))
         remote_refs = repo.remote().refs
-        for refs in remote_refs: 
+        for refs in remote_refs:
+            refs.checkout()
             commits_list = list(repo.iter_commits())
             for author in reversed(commits_list):
                 users.append({"name": author.author.name, "email": author.author.email})
         all_data.append({"repo_name": repo_name, "users": list({v['email']: v for v in users}.values())})
     return {"data": all_data}
-    # TODO zmień proszę na `return all_data` 
-    # ~Martin
 
 
 def handle_zip_save(file_obj):
