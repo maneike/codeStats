@@ -1,10 +1,11 @@
 {
   "name": "code-stats",
   "version": "0.0.0",
-  "scripts": {  
+  "scripts": {
     "start": "vite",
     "dev": "vite",
-    "build": "vite build"
+    "build": "vite build",
+    "prepare": "cd .. && husky install husky"
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",
@@ -16,6 +17,12 @@
   },
   "devDependencies": {
     "@prefresh/vite": "^1.2.1",
+    "husky": "^8.0.2",
+    "lint-staged": "^13.0.4",
+    "prettier": "^2.8.0",
     "vite": "^1.0.0-rc.13"
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
   }
 }
