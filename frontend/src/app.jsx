@@ -8,12 +8,13 @@ import NavBar from "./components/NavBar";
 import "./index.css";
 import aggregateRepoData from "./helpers/aggregateRepoData";
 
-export default function App() {
+export function App() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [repoUrls, setRepoUrls] = useState("");
   const [fetchedRepos, setFetchedRepos] = useState(null);
   const [aggregatedRepos, setAggregatedRepos] = useState(fetchedRepos ?? []);
   const [isLoading, setLoading] = useState(false);
+  const [receivers, setReceivers] = useState("");
 
   useEffect(() => {
     const temp = [];
@@ -35,8 +36,10 @@ export default function App() {
     e.preventDefault();
     setLoading(true);
     repoUrls &&
+      receivers &&
       postUrls(
         repoUrls.split(",").map((item) => item.trim()),
+        receivers.split(",").map((item) => item.trim()),
         setFetchedRepos,
         setLoading
       );
@@ -55,11 +58,16 @@ export default function App() {
 
       <form>
         <InputsWrapper>
+          <TextAreaReceivers
+            placeholder="emails"
+            value={receivers}
+            onChange={(e) => setReceivers(e.target.value)}
+          ></TextAreaReceivers>
           <TextAreaStyled
             placeholder="Paste the repo URLs (with .git at the end) separated by commas..."
             value={repoUrls}
             onChange={(e) => setRepoUrls(e.target.value)}
-          />
+          ></TextAreaStyled>
           <SubmitButton disabled={isLoading} onClick={submitUrl}>
             Submit
           </SubmitButton>
@@ -83,54 +91,57 @@ export default function App() {
               repo.merged_users && (
                 <InputsWrapper>
                   <RepoTitle>{repo.repo_name}</RepoTitle>
-                  {repo?.merged_users.map(
-                    (user, userId) =>
+                  {repo?.merged_users.map((user, userId) => {
+                    return (
                       user && (
-                        <Ul>
-                          <Li>
-                            <DropdownSelect
-                              onChange={(e) => {
-                                aggregatedRepos[repoId].merged_users[
-                                  userId
-                                ].new_name = e.target.value;
-                                setAggregatedRepos([...aggregatedRepos]);
-                              }}
-                            >
-                              {repo.merged_users.map(
-                                (selectUser, selectUserId) => (
-                                  <option
-                                    selected={userId === selectUserId}
-                                    value={selectUser.old_name}
-                                  >
-                                    {selectUser.old_name}
-                                  </option>
-                                )
-                              )}
-                            </DropdownSelect>
+                        <>
+                          <Ul>
+                            <Li>
+                              <DropdownSelect
+                                onChange={(e) => {
+                                  aggregatedRepos[repoId].merged_users[
+                                    userId
+                                  ].new_name = e.target.value;
+                                  setAggregatedRepos([...aggregatedRepos]);
+                                }}
+                              >
+                                {repo.merged_users.map(
+                                  (selectUser, selectUserId) => (
+                                    <option
+                                      selected={userId === selectUserId}
+                                      value={selectUser.old_name}
+                                    >
+                                      {selectUser.old_name}
+                                    </option>
+                                  )
+                                )}
+                              </DropdownSelect>
 
-                            <DropdownSelect
-                              onChange={(e) => {
-                                aggregatedRepos[repoId].merged_users[
-                                  userId
-                                ].new_email = e.target.value;
-                                setAggregatedRepos([...aggregatedRepos]);
-                              }}
-                            >
-                              {repo.merged_users.map(
-                                (selectUser, selectUserId) => (
-                                  <option
-                                    selected={userId === selectUserId}
-                                    value={selectUser.old_email}
-                                  >
-                                    {selectUser.old_email}
-                                  </option>
-                                )
-                              )}
-                            </DropdownSelect>
-                          </Li>
-                        </Ul>
+                              <DropdownSelect
+                                onChange={(e) => {
+                                  aggregatedRepos[repoId].merged_users[
+                                    userId
+                                  ].new_email = e.target.value;
+                                  setAggregatedRepos([...aggregatedRepos]);
+                                }}
+                              >
+                                {repo.merged_users.map(
+                                  (selectUser, selectUserId) => (
+                                    <option
+                                      selected={userId === selectUserId}
+                                      value={selectUser.old_email}
+                                    >
+                                      {selectUser.old_email}
+                                    </option>
+                                  )
+                                )}
+                              </DropdownSelect>
+                            </Li>
+                          </Ul>
+                        </>
                       )
-                  )}
+                    );
+                  })}
                   <SubmitButton
                     disabled={isLoading}
                     onClick={(e) => submitRepoForm(e, repoId)}
@@ -194,6 +205,21 @@ const TextAreaStyled = styled.textarea`
   resize: none;
   width: var(--text-area-width);
   height: var(--text-area-height);
+  ::placeholder {
+    color: lightgrey;
+    opacity: 0.8;
+  }
+`;
+
+const TextAreaReceivers = styled.textarea`
+  font-family: "Roboto", monospace;
+  color: white;
+  background: transparent;
+  outline: none;
+  border: none;
+  resize: none;
+  width: var(--text-area-width);
+  height: 200px;
   ::placeholder {
     color: lightgrey;
     opacity: 0.8;
