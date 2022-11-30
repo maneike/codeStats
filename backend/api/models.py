@@ -5,6 +5,7 @@ class Repositories(models.Model):
     repo_name = models.CharField(max_length=200)
     receivers = models.CharField(max_length=1000)
     url = models.CharField(max_length=1000)
+
     def __str__(self):
         return self.repo_name
 
@@ -47,7 +48,18 @@ class Changes(models.Model):
     deletions = models.IntegerField()
     lines = models.IntegerField()
 
+    def __str__(self):
+        return self.file_name
+
 
 class Report(models.Model):
     repo_name = models.CharField(max_length=200)
     report = models.JSONField()
+
+    def __str__(self):
+        return self.repo_name
+
+
+class RepoLanguages(models.Model):
+    languages = models.CharField(max_length=100)
+    repository = models.ForeignKey(Repositories, on_delete=models.CASCADE)
