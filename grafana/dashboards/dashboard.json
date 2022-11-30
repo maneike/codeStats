@@ -24,7 +24,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 1,
   "links": [],
   "liveNow": true,
   "panels": [
@@ -77,7 +76,7 @@
         },
         "showHeader": true
       },
-      "pluginVersion": "9.2.3",
+      "pluginVersion": "9.1.6",
       "targets": [
         {
           "datasource": {
@@ -162,7 +161,7 @@
         },
         "showHeader": true
       },
-      "pluginVersion": "9.2.3",
+      "pluginVersion": "9.1.6",
       "targets": [
         {
           "datasource": {
@@ -247,7 +246,7 @@
         },
         "showHeader": true
       },
-      "pluginVersion": "9.2.3",
+      "pluginVersion": "9.1.6",
       "targets": [
         {
           "datasource": {
@@ -616,6 +615,176 @@
       ],
       "title": "Commits selected branch",
       "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "postgres",
+        "uid": "P44368ADAD746BC27"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "displayMode": "auto",
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 25
+      },
+      "id": 16,
+      "options": {
+        "footer": {
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true
+      },
+      "pluginVersion": "9.1.6",
+      "targets": [
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "P44368ADAD746BC27"
+          },
+          "format": "table",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  insertions, deletions, lines\nFROM api_changes\nINNER JOIN api_commits ON api_commits.id = api_changes.commit_id\nINNER JOIN api_branches ON api_branches.id = api_commits.branch_id\nINNER JOIN api_authors ON api_authors.id = api_commits.author_id\nINNER JOIN api_repositories ON api_repositories.id = api_branches.repository_id\nWHERE api_branches.name = '$Branch' and api_repositories.repo_name = '$Repository'\n",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "timeColumn": "time",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "title": "Lines changed on Branch",
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "postgres",
+        "uid": "P44368ADAD746BC27"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "displayMode": "auto",
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 25
+      },
+      "id": 18,
+      "options": {
+        "footer": {
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true
+      },
+      "pluginVersion": "9.1.6",
+      "targets": [
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "P44368ADAD746BC27"
+          },
+          "format": "table",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  api_authors.name, SUM(insertions) as insertions, SUM(deletions) as deletions, SUM(lines) as lines\nFROM api_changes\nINNER JOIN api_commits ON api_commits.id = api_changes.commit_id\nINNER JOIN api_branches ON api_branches.id = api_commits.branch_id\nINNER JOIN api_authors ON api_authors.id = api_commits.author_id\nINNER JOIN api_repositories ON api_repositories.id = api_branches.repository_id\nWHERE api_branches.name = '$Branch' and api_repositories.repo_name = '$Repository'\nGROUP BY api_authors.name",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "timeColumn": "time",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "title": "Lines efected by branch and user",
+      "type": "table"
     }
   ],
   "schemaVersion": 37,
@@ -625,7 +794,7 @@
     "list": [
       {
         "current": {
-          "selected": false,
+          "selected": true,
           "text": "PRA2021-PRA2022",
           "value": "PRA2021-PRA2022"
         },
@@ -649,8 +818,8 @@
       {
         "current": {
           "selected": true,
-          "text": "ReactStart",
-          "value": "ReactStart"
+          "text": "HibernateEnd",
+          "value": "HibernateEnd"
         },
         "datasource": {
           "type": "postgres",
@@ -671,7 +840,7 @@
       },
       {
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "marcin witkowski",
           "value": "marcin witkowski"
         },
@@ -702,6 +871,6 @@
   "timezone": "",
   "title": "Codestats",
   "uid": "yZQk88D4k",
-  "version": 29,
+  "version": 1,
   "weekStart": ""
 }
