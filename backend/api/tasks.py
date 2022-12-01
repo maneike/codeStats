@@ -1,12 +1,12 @@
 from celery import shared_task
 import os
 from git import Repo, exc
-from .models import Repositories, Authors, Branches, Commits, Changes, Report
-from django.core.exceptions import ObjectDoesNotExist
+from .models import Repositories, Authors, Branches, Commits, Changes, Report, RepoLanguages
 import numpy as np
 import json
 from django.core.mail import send_mail
 from django.conf import settings
+import requests as req
 
 
 @shared_task(bind=True)
@@ -38,7 +38,8 @@ def generate_basic_report(self, repo_name, merged_users):
         branch = Branches.objects.latest('id').name
         curr_branch = {"branch_name": branch, 'commits': [], 'authors': list(
             np.unique([Authors.objects.get(old_email=author.author.email,
-                                           repository=Repositories.objects.filter(repo_name=repo_name).latest('id')).name for author in
+                                           repository=Repositories.objects.filter(repo_name=repo_name).latest(
+                                               'id')).name for author in
                        reversed(commits_list)]))}
         # if extensions:
         #    f.write(f"File extensions: {extensions}\n")
@@ -66,10 +67,17 @@ def generate_basic_report(self, repo_name, merged_users):
         report["branches"].append(curr_branch)
     Report.objects.create(repo_name=repo_name, report=json.dumps(report, default=str))
     os.system(f"rm -rf {repo_name}")
-    report_url = f'http://localhost:3001/d/vNBjJo3nz/new-dashboard?orgId=1&var-Repository={repo_name}'
+    if "github" in url:
+        splited = url.split("/")
+        r = req.get(f' https://api.github.com/repos/{splited[-2]}/{splited[-1].split(".")[0]}/languages',
+                    headers={'Authorization': f'Bearer {os.environ.get("github_key")}'})
+        for key, value in r.json().items():
+            RepoLanguages.objects.create(languages=key, repository=Repositories.objects.
+                                         filter(repo_name=repo_name).latest('id'))
+    repo_url = f'http://10.11.46.150:3001/d/yZQk88D4k/codestats?orgId=1&var-Repository=PRA2021-PRA2022'
     send_mail(
         f'Report for {repo_name}',
-        f'Link for report {report_url}',
+        f'Link for report {repo_url}',
         settings.DEFAULT_FROM_EMAIL,
         Repositories.objects.get(repo_name=repo_name).receivers.split(','),
         fail_silently=False,
