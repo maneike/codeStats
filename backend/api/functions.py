@@ -7,28 +7,54 @@ from .models import Repositories
 from django.core.exceptions import ObjectDoesNotExist
 
 
-def get_all_users(url, receivers):
+def get_all_users(url, receivers, merged):
     all_data = []
-    for u in url:
-        users = []
-        repo_name = u.split('.git')[0].split('/')[-1]
+    if not merged:
+        for u in url:
+            users = []
+            repo_name = u.split('.git')[0].split('/')[-1]
+            os.system(f"rm -rf /code/{repo_name}")
+            try:
+                Repositories.objects.get(repo_name=repo_name).delete()
+                Repositories.objects.create(repo_name=repo_name, receivers=",".join(receivers), url=u)
+            except ObjectDoesNotExist:
+                Repositories.objects.create(repo_name=repo_name, receivers=",".join(receivers), url=u)
+            path = os.getcwd()
+            try:
+                repo = Repo.clone_from(u, os.path.join(path, f"{repo_name}"))
+            except exc.GitError:
+                repo = Repo.clone_from(u, os.path.join(path, f"{repo_name}"))
+            remote_refs = repo.remote().refs
+            for refs in remote_refs:
+                refs.checkout()
+                commits_list = list(repo.iter_commits())
+                for author in reversed(commits_list):
+                    users.append({"name": author.author.name, "email": author.author.email})
+            all_data.append({"repo_name": repo_name, "users": list({v['email']: v for v in users}.values())})
+            os.system(f"rm -rf {repo_name}")
+    else:
+        main_repo_name = url[0].split('.git')[0].split('/')[-1]
         try:
-            Repositories.objects.get(repo_name=repo_name).delete()
-            Repositories.objects.create(repo_name=repo_name, receivers=",".join(receivers), url=u)
+            Repositories.objects.get(repo_name=main_repo_name).delete()
+            Repositories.objects.create(repo_name=main_repo_name, receivers=",".join(receivers), url=url[0])
         except ObjectDoesNotExist:
-            Repositories.objects.create(repo_name=repo_name, receivers=",".join(receivers), url=u)
-        path = os.getcwd()
-        try:
-            repo = Repo.clone_from(u, os.path.join(path, f"{repo_name}"))
-        except exc.GitError:
-            repo = Repo.clone_from(u, os.path.join(path, f"{repo_name}"))
-        remote_refs = repo.remote().refs
-        for refs in remote_refs:
-            refs.checkout()
-            commits_list = list(repo.iter_commits())
-            for author in reversed(commits_list):
-                users.append({"name": author.author.name, "email": author.author.email})
-        all_data.append({"repo_name": repo_name, "users": list({v['email']: v for v in users}.values())})
+            Repositories.objects.create(repo_name=main_repo_name, receivers=",".join(receivers), url=url[0])
+        users = []
+        for u in url:
+            repo_name = u[0].split('.git')[0].split('/')[-1]
+            path = os.getcwd()
+            try:
+                repo = Repo.clone_from(u, os.path.join(path, f"{repo_name}"))
+            except exc.GitError:
+                repo = Repo.init(os.path.join(path, f"{repo_name}"))
+            remote_refs = repo.remote().refs
+            for refs in remote_refs:
+                refs.checkout()
+                commits_list = list(repo.iter_commits())
+                for author in reversed(commits_list):
+                    users.append({"name": author.author.name, "email": author.author.email})
+            os.system(f"rm -rf /code/{repo_name}")
+        all_data.append({"repo_name": main_repo_name, "users": list({v['email']: v for v in users}.values())})
     return {"data": all_data}
 
 
