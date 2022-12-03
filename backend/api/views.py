@@ -24,7 +24,8 @@ class UrlRepoView(views.APIView):
     def post(self, request):
         url = self.request.data['url']
         receivers = self.request.data['receivers']
-        users = get_all_users(url, receivers)
+        merged = self.request.data['merged']
+        users = get_all_users(url, receivers, merged)
         return JsonResponse(users, status=200)
 
 

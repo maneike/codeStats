@@ -9,3 +9,4 @@ django-cors-headers
 django-celery-beat
 celery
 redis
+requests
