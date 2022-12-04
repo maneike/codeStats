@@ -1,12 +1,19 @@
 import { useEffect, useState } from "preact/hooks";
 import styled from "@emotion/styled";
+import "./index.css";
+
+import DropdownSelect from "./components/DropdownSelect";
+import FileUploader from "./components/FileUploader";
+import Li from "./components/Li";
+import NavBar from "./components/NavBar";
+import Ul from "./components/Ul";
+import UrlsToMergeList from "./components/urlsToMergeList";
+
+import aggregateRepoData from "./helpers/aggregateRepoData";
+
 import { postFiles } from "./services/postFiles";
 import { postUrls } from "./services/postUrls";
 import { postMergedUsers } from "./services/postMergedUsers";
-import FileUploader from "./components/FileUploader";
-import NavBar from "./components/NavBar";
-import "./index.css";
-import aggregateRepoData from "./helpers/aggregateRepoData";
 
 export function App() {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -15,6 +22,7 @@ export function App() {
   const [aggregatedRepos, setAggregatedRepos] = useState(fetchedRepos ?? []);
   const [isLoading, setLoading] = useState(false);
   const [receivers, setReceivers] = useState("");
+  const [repoUrlsToMerge, setRepoUrlsToMerge] = useState([]);
 
   useEffect(() => {
     const temp = [];
@@ -35,8 +43,7 @@ export function App() {
   const submitUrl = (e) => {
     e.preventDefault();
     receivers && setLoading(true);
-    repoUrls &&
-    !receivers
+    repoUrls && !receivers
       ? alert("Please provide an email ✘")
       : postUrls(
           repoUrls.split(",").map((item) => item.trim()),
@@ -56,6 +63,19 @@ export function App() {
   const hideForm = fetchedRepos ? true : false;
   const displayReceiver = aggregatedRepos ? true : false;
 
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+
+      event.target.value.split(",").map((item) => {
+        setRepoUrlsToMerge((repoUrlsToMerge) => [
+          ...repoUrlsToMerge,
+          item.trim(),
+        ]);
+      });
+    }
+  };
+  console.log(repoUrlsToMerge);
   return (
     <>
       <NavBar />
@@ -67,14 +87,27 @@ export function App() {
                 placeholder="Enter email(s) to send report to"
                 value={receivers}
                 onChange={(e) => setReceivers(e.target.value)}
-              ></TextAreaReceivers>
-              <Line></Line>
-              <TextAreaStyled
+              />
+              <Line />
+              <TextAreaReceivers
+                placeholder="Paste the repo URLs (with .git at the end) and submit them with enter"
+                type="text"
+                onKeyDown={handleKeyDown}
+              />
+              {repoUrlsToMerge && (
+                <UrlsToMergeList repoUrlsToMerge={repoUrlsToMerge} />
+              )}
+              <Line />
+              <TextAreaReceivers
                 placeholder="Paste the repo URLs (with .git at the end) separated by commas..."
                 value={repoUrls}
                 onChange={(e) => setRepoUrls(e.target.value)}
-              ></TextAreaStyled>
-              <SubmitButton disabled={isLoading} onClick={submitUrl}>
+              />
+              <SubmitButton
+                type="submit"
+                disabled={isLoading}
+                onClick={submitUrl}
+              >
                 Submit
               </SubmitButton>
             </InputsWrapper>
@@ -232,29 +265,11 @@ const TextAreaReceivers = styled.textarea`
   border: none;
   resize: none;
   width: var(--text-area-width);
-  height: 200px;
+  height: 100px;
   ::placeholder {
     color: lightgrey;
     opacity: 0.8;
   }
-`;
-
-const Ul = styled.ul`
-  list-style: none;
-`;
-
-const Li = styled.li`
-  margin: 0 10px;
-`;
-
-const DropdownSelect = styled.select`
-  font-family: "Roboto", monospace;
-  color: white;
-  border: 1px solid #fafafa;
-  border-radius: 8px;
-  background: #56576b;
-  padding: 8px;
-  margin: 0 10px;
 `;
 
 const RepoTitle = styled.h3`
@@ -273,4 +288,14 @@ const Line = styled.hr`
   border-bottom: solid #323345;
   border-width: 0 0 2px 0;
   width: var(--text-area-width);
+`;
+
+const Div = styled.input`
+  font-family: "Roboto", monospace;
+  color: white;
+  border: 1px solid #fafafa;
+  border-radius: 8px;
+  background: #56576b;
+  padding: 8px;
+  margin: 40px 0;
 `;

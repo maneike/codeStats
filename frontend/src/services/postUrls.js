@@ -1,10 +1,16 @@
 import axios from "redaxios";
 
-export const postUrls = (repoUrls, receivers, setFetchedRepos, setLoading) => {
+export const postUrls = (
+  repoUrls,
+  receivers,
+  setFetchedRepos,
+  setLoading,
+  merged
+) => {
   axios
     .post("http://localhost:80/api/url/", {
       url: repoUrls,
-      receivers: receivers,
+      receivers,
     })
     .then((res) => {
       alert("Link upload success ✔", res);
