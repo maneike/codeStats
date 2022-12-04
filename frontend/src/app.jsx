@@ -34,15 +34,16 @@ export function App() {
 
   const submitUrl = (e) => {
     e.preventDefault();
-    setLoading(true);
+    receivers && setLoading(true);
     repoUrls &&
-      receivers &&
-      postUrls(
-        repoUrls.split(",").map((item) => item.trim()),
-        receivers.split(",").map((item) => item.trim()),
-        setFetchedRepos,
-        setLoading
-      );
+    !receivers
+      ? alert("Please provide an email ✘")
+      : postUrls(
+          repoUrls.split(",").map((item) => item.trim()),
+          receivers.split(",").map((item) => item.trim()),
+          setFetchedRepos,
+          setLoading
+        );
   };
 
   const submitRepoForm = (e, repoId) => {
