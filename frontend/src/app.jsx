@@ -5,6 +5,7 @@ import "./index.css";
 import DropdownSelect from "./components/DropdownSelect";
 import FileUploader from "./components/FileUploader";
 import Li from "./components/Li";
+import Line from "./components/Line";
 import NavBar from "./components/NavBar";
 import Ul from "./components/Ul";
 import UrlsToMergeList from "./components/urlsToMergeList";
@@ -282,20 +283,4 @@ const ReceiversTitle = styled.div`
   justify-content: center;
   margin: 30px auto;
   width: var(--text-area-width);
-`;
-
-const Line = styled.hr`
-  border-bottom: solid #323345;
-  border-width: 0 0 2px 0;
-  width: var(--text-area-width);
-`;
-
-const Div = styled.input`
-  font-family: "Roboto", monospace;
-  color: white;
-  border: 1px solid #fafafa;
-  border-radius: 8px;
-  background: #56576b;
-  padding: 8px;
-  margin: 40px 0;
 `;
