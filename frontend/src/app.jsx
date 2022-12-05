@@ -11,6 +11,7 @@ import Ul from "./components/Ul";
 import UrlsToMergeList from "./components/urlsToMergeList";
 
 import aggregateRepoData from "./helpers/aggregateRepoData";
+import { regex } from "./helpers/extractRepoNameFromUrl";
 
 import { postFiles } from "./services/postFiles";
 import { postUrls } from "./services/postUrls";
@@ -18,12 +19,12 @@ import { postMergedUsers } from "./services/postMergedUsers";
 
 export function App() {
   const [selectedFile, setSelectedFile] = useState(null);
-  const [repoUrls, setRepoUrls] = useState("");
   const [fetchedRepos, setFetchedRepos] = useState(null);
   const [aggregatedRepos, setAggregatedRepos] = useState(fetchedRepos ?? []);
   const [isLoading, setLoading] = useState(false);
   const [receivers, setReceivers] = useState("");
   const [repoUrlsToMerge, setRepoUrlsToMerge] = useState([]);
+  const [mergedUrls, setMergedUrls] = useState([]);
 
   useEffect(() => {
     const temp = [];
@@ -43,14 +44,14 @@ export function App() {
 
   const submitUrl = (e) => {
     e.preventDefault();
-    receivers && setLoading(true);
-    repoUrls && !receivers
+    receivers && mergedUrls && setLoading(true);
+    !receivers
       ? alert("Please provide an email ✘")
       : postUrls(
-          repoUrls.split(",").map((item) => item.trim()),
-          receivers.split(",").map((item) => item.trim()),
           setFetchedRepos,
-          setLoading
+          receivers.split(",").map((item) => item.trim()),
+          setLoading,
+          mergedUrls
         );
   };
 
@@ -73,10 +74,17 @@ export function App() {
           ...repoUrlsToMerge,
           item.trim(),
         ]);
+
+        const repoName = regex.exec(item)[5].replace(".git", "").trim();
+
+        setMergedUrls((mergedUrls) => [
+          ...mergedUrls,
+          { [repoName.toString()]: repoName },
+        ]);
       });
     }
   };
-  console.log(repoUrlsToMerge);
+
   return (
     <>
       <NavBar />
@@ -96,14 +104,14 @@ export function App() {
                 onKeyDown={handleKeyDown}
               />
               {repoUrlsToMerge && (
-                <UrlsToMergeList repoUrlsToMerge={repoUrlsToMerge} />
+                <UrlsToMergeList
+                  repoUrlsToMerge={repoUrlsToMerge}
+                  mergedUrls={mergedUrls}
+                  setMergedUrls={setMergedUrls}
+                  value={mergedUrls}
+                  onChange={(e) => setMergedUrls(e.target.value)}
+                />
               )}
-              <Line />
-              <TextAreaReceivers
-                placeholder="Paste the repo URLs (with .git at the end) separated by commas..."
-                value={repoUrls}
-                onChange={(e) => setRepoUrls(e.target.value)}
-              />
               <SubmitButton
                 type="submit"
                 disabled={isLoading}
