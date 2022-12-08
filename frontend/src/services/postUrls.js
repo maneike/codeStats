@@ -14,10 +14,11 @@ export const postUrls = (
     .then((res) => {
       alert("Link upload success ✔", res);
       setFetchedRepos(res.data);
+      setLoading(false);
     })
     .catch((err) => {
       alert("Link upload error ✘");
+      setLoading(false);
       throw new Error(err);
-    })
-    .finally(() => setLoading(false));
+    });
 };
