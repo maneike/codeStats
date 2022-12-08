@@ -8,7 +8,7 @@ import Li from "./components/Li";
 import Line from "./components/Line";
 import NavBar from "./components/NavBar";
 import Ul from "./components/Ul";
-import UrlsToMergeList from "./components/urlsToMergeList";
+import UrlsToMergeList from "./components/UrlsToMergeList";
 
 import aggregateRepoData from "./helpers/aggregateRepoData";
 import { regex } from "./helpers/extractRepoNameFromUrl";
