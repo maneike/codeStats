@@ -8,7 +8,7 @@ import Li from "./components/Li";
 import Line from "./components/Line";
 import NavBar from "./components/NavBar";
 import Ul from "./components/Ul";
-import UrlsToMergeList from "./components/urlsToMergeList";
+import UrlsToMergeList from "./components/UrlsToMergeList";
 
 import aggregateRepoData from "./helpers/aggregateRepoData";
 import { regex } from "./helpers/extractRepoNameFromUrl";
@@ -44,15 +44,20 @@ export function App() {
 
   const submitUrl = (e) => {
     e.preventDefault();
+
     receivers && mergedUrls && setLoading(true);
-    !receivers
-      ? alert("Please provide an email ✘")
-      : postUrls(
-          setFetchedRepos,
-          receivers.split(",").map((item) => item.trim()),
-          setLoading,
-          mergedUrls
-        );
+
+    !receivers && alert("Please provide an email ✘");
+    !mergedUrls && alert("Please provide the urls (ending with .git) ✘");
+
+    mergedUrls &&
+      receivers &&
+      postUrls(
+        receivers.split(",").map((item) => item.trim()),
+        mergedUrls,
+        setFetchedRepos,
+        setLoading
+      );
   };
 
   const submitRepoForm = (e, repoId) => {
@@ -84,7 +89,7 @@ export function App() {
       });
     }
   };
-
+  console.log(receivers);
   return (
     <>
       <NavBar />
@@ -114,7 +119,7 @@ export function App() {
               )}
               <SubmitButton
                 type="submit"
-                disabled={isLoading}
+                disabled={isLoading || !receivers || !mergedUrls}
                 onClick={submitUrl}
               >
                 Submit
