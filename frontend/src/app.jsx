@@ -74,22 +74,31 @@ export function App() {
     if (event.key === "Enter") {
       event.preventDefault();
 
-      event.target.value.split(",").map((item) => {
+      event.target.value.split(",").map((url) => {
         setRepoUrlsToMerge((repoUrlsToMerge) => [
           ...repoUrlsToMerge,
-          item.trim(),
+          url.trim(),
         ]);
 
-        const repoName = regex.exec(item)[5].replace(".git", "").trim();
+        const repoName = regex.exec(url)[5].replace(".git", "").trim();
 
         setMergedUrls((mergedUrls) => [
           ...mergedUrls,
-          { [repoName.toString()]: repoName },
+          {
+            old: {
+              name: repoName,
+              url: url.trim(),
+            },
+            new: {
+              name: repoName,
+              url: url.trim(),
+            },
+          },
         ]);
       });
     }
   };
-  console.log(receivers);
+
   return (
     <>
       <NavBar />
