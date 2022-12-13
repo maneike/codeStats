@@ -21,6 +21,7 @@ def get_all_users(urls, receivers):
             merged = True
         try:
             repo_object = Repositories.objects.filter(repo_name=repo_name).latest('id')
+            repo_object.url = repo_object.url + f',{u.get("old").get("url")}'
             Repositories.objects.filter(repo_name=repo_name).update(url = repo_object.url + f',{u.get("old").get("url")}')
         except ObjectDoesNotExist:
             Repositories.objects.create(repo_name=repo_name, receivers=",".join(receivers),
