@@ -31,12 +31,13 @@ def generate_basic_report(self, repo_name, merged_users):
                                    old_email=mu['old_email'],
                                    repository=Repositories.objects.filter(repo_name=repo_name).latest('id'))
         for refs in remote_refs:
+            print(refs)
             refs.checkout()
             # extensions = set([str(i).split('.')[-1] for i in list(Path(f"./{repo_name}").rglob("*.*"))])
             commits_list = list(repo.iter_commits())
             Branches.objects.create(name=refs.name.split('/')[1], commits_count=len(commits_list),
                                     repository=Repositories.objects.filter(repo_name=repo_name).latest('id'))
-            branch = Branches.objects.latest('id').name
+            branch = Branches.objects.filter(name=refs.name.split('/')[1]).latest('id').name
             curr_branch = {"branch_name": branch, 'commits': [], 'authors': list(
                 np.unique([Authors.objects.get(old_email=author.author.email,
                                                repository=Repositories.objects.filter(repo_name=repo_name).latest(
@@ -45,15 +46,15 @@ def generate_basic_report(self, repo_name, merged_users):
             # if extensions:
             #    f.write(f"File extensions: {extensions}\n")
             for commit in reversed(commits_list):
-                Commits.objects.create(author=Authors.objects.get(old_email=commit.author.email,
+                commit_obj = Commits.objects.create(author=Authors.objects.get(old_email=commit.author.email,
                                                                   repository=Repositories.objects.filter
                                                                   (repo_name=repo_name).latest('id')),
-                                       branch=Branches.objects.latest('id'),
+                                       branch=Branches.objects.filter(name=refs.name.split('/')[1]).latest('id'),
                                        date=commit.committed_datetime,
                                        message=commit.message.replace('\n', ''))
                 for key in commit.stats.files:
                     stats = commit.stats.files[f'{key}']
-                    Changes.objects.create(commit=Commits.objects.latest('id'), file_name=key,
+                    Changes.objects.create(commit=commit_obj, file_name=key,
                                            insertions=stats['insertions'],
                                            deletions=stats['deletions'], lines=stats['lines'])
                 changes = commit.stats.files
@@ -61,13 +62,14 @@ def generate_basic_report(self, repo_name, merged_users):
                 curr_branch['commits'].append({'author': Authors.objects.get(old_email=commit.author.email,
                                                                              repository=Repositories.objects.
                                                                              filter(repo_name=repo_name).latest('id')).name,
-                                               'branch': Branches.objects.latest('id').name,
+                                               'branch': branch,
                                                'date': commit.committed_datetime,
                                                'message': commit.message.replace('\n', ''),
                                                'changed_files': changes_filtered})
             report["branches"].append(curr_branch)
         Report.objects.create(repo_name=repo_name, report=json.dumps(report, default=str))
         os.system(f"rm -rf {repo_name}")
+        print('yeet')
         if "github" in url:
             splited = url.split("/")
             r = req.get(f' https://api.github.com/repos/{splited[-2]}/{splited[-1].split(".")[0]}/languages',
@@ -76,11 +78,13 @@ def generate_basic_report(self, repo_name, merged_users):
                 RepoLanguages.objects.create(languages=key, repository=Repositories.objects.
                                              filter(repo_name=repo_name).latest('id'))
     repo_url = f'http://10.11.46.150:3001/d/yZQk88D4k/codestats?orgId=1&var-Repository=PRA2021-PRA2022'
-    send_mail(
+    print(Repositories.objects.filter(repo_name=repo_name).latest('id').receivers.split(','))
+    email = send_mail(
         f'Report for {repo_name}',
         f'Link for report {repo_url}',
         settings.DEFAULT_FROM_EMAIL,
         Repositories.objects.filter(repo_name=repo_name).latest('id').receivers.split(','),
         fail_silently=False,
     )
+    print(email)
     return report
