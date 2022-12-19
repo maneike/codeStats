@@ -31,7 +31,6 @@ def generate_basic_report(self, repo_name, merged_users):
                                    old_email=mu['old_email'],
                                    repository=Repositories.objects.filter(repo_name=repo_name).latest('id'))
         for refs in remote_refs:
-            print(refs)
             refs.checkout()
             # extensions = set([str(i).split('.')[-1] for i in list(Path(f"./{repo_name}").rglob("*.*"))])
             commits_list = list(repo.iter_commits())
@@ -69,7 +68,6 @@ def generate_basic_report(self, repo_name, merged_users):
             report["branches"].append(curr_branch)
         Report.objects.create(repo_name=repo_name, report=json.dumps(report, default=str))
         os.system(f"rm -rf {repo_name}")
-        print('yeet')
         if "github" in url:
             splited = url.split("/")
             r = req.get(f' https://api.github.com/repos/{splited[-2]}/{splited[-1].split(".")[0]}/languages',
@@ -77,14 +75,12 @@ def generate_basic_report(self, repo_name, merged_users):
             for key, value in r.json().items():
                 RepoLanguages.objects.create(languages=key, repository=Repositories.objects.
                                              filter(repo_name=repo_name).latest('id'))
-    repo_url = f'http://10.11.46.150:3001/d/yZQk88D4k/codestats?orgId=1&var-Repository=PRA2021-PRA2022'
-    print(Repositories.objects.filter(repo_name=repo_name).latest('id').receivers.split(','))
-    email = send_mail(
+    repo_url = f'http://10.11.46.150:3001/d/yZQk88D4k/codestats?orgId=1&var-Repository={repo_name}'
+    send_mail(
         f'Report for {repo_name}',
         f'Link for report {repo_url}',
         settings.DEFAULT_FROM_EMAIL,
         Repositories.objects.filter(repo_name=repo_name).latest('id').receivers.split(','),
         fail_silently=False,
     )
-    print(email)
     return report
