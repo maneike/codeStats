@@ -10,3 +10,4 @@ django-celery-beat
 celery
 redis
 requests
+ghlinguist
