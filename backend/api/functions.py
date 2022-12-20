@@ -31,7 +31,8 @@ def get_all_users(urls, receivers):
         path = os.getcwd()
         repo = Repo.clone_from(u.get('old').get('url'), os.path.join(path, f"{u.get('old').get('name')}"))
         for lng in ghl.linguist(f"./{u.get('old').get('name')}"):
-            RepoLanguages.objects.create(languages=lng[0], percentage=lng[1], repository=repo_object)
+            if float(lng[1]) > 0:
+                RepoLanguages.objects.create(languages=lng[0], percentage=lng[1], repository=repo_object)
         remote_refs = repo.remote().refs
         for refs in remote_refs:
             refs.checkout()
@@ -66,7 +67,8 @@ def handle_first_url(first_data, receivers):
         for author in reversed(commits_list):
             users.append({"name": author.author.name, "email": author.author.email})
     for lng in ghl.linguist(f"./{first_data.get('old').get('name')}"):
-        RepoLanguages.objects.create(languages=lng[0], percentage=lng[1], repository=repo_model)
+        if float(lng[1]) > 0:
+            RepoLanguages.objects.create(languages=lng[0], percentage=lng[1], repository=repo_model)
     return {"repo_name": repo_name, "users": list({v['email']: v for v in users}.values())}
 
 def handle_zip_save(file_obj):
