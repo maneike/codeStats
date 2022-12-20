@@ -62,4 +62,5 @@ class Report(models.Model):
 
 class RepoLanguages(models.Model):
     languages = models.CharField(max_length=100)
+    percentage = models.FloatField(default=100.0)
     repository = models.ForeignKey(Repositories, on_delete=models.CASCADE)
