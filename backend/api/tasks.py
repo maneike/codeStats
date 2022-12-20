@@ -1,12 +1,11 @@
 from celery import shared_task
 import os
 from git import Repo, exc
-from .models import Repositories, Authors, Branches, Commits, Changes, Report, RepoLanguages
+from .models import Repositories, Authors, Branches, Commits, Changes, Report
 import numpy as np
 import json
 from django.core.mail import send_mail
 from django.conf import settings
-import requests as req
 
 
 @shared_task(bind=True)
@@ -68,13 +67,6 @@ def generate_basic_report(self, repo_name, merged_users):
             report["branches"].append(curr_branch)
         Report.objects.create(repo_name=repo_name, report=json.dumps(report, default=str))
         os.system(f"rm -rf {repo_name}")
-        if "github" in url:
-            splited = url.split("/")
-            r = req.get(f' https://api.github.com/repos/{splited[-2]}/{splited[-1].split(".")[0]}/languages',
-                        headers={'Authorization': f'Bearer {os.environ.get("github_key")}'})
-            for key, value in r.json().items():
-                RepoLanguages.objects.create(languages=key, repository=Repositories.objects.
-                                             filter(repo_name=repo_name).latest('id'))
     repo_url = f'http://10.11.46.150:3001/d/yZQk88D4k/codestats?orgId=1&var-Repository={repo_name}'
     send_mail(
         f'Report for {repo_name}',
