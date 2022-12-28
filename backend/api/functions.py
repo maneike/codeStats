@@ -3,8 +3,9 @@ from git import Repo, exc
 import zipfile
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
-from .models import Repositories
+from .models import Repositories, RepoLanguages
 from django.core.exceptions import ObjectDoesNotExist
+import ghlinguist as ghl
 
 
 def get_all_users(urls, receivers):
@@ -19,16 +20,15 @@ def get_all_users(urls, receivers):
             merged = False
         else:
             merged = True
-        try:
-            repo_object = Repositories.objects.filter(repo_name=repo_name).latest('id')
-            repo_object.url = repo_object.url + f',{u.get("old").get("url")}'
-            Repositories.objects.filter(repo_name=repo_name).update(url = repo_object.url + f',{u.get("old").get("url")}')
-        except ObjectDoesNotExist:
-            Repositories.objects.create(repo_name=repo_name, receivers=",".join(receivers),
-                                                      url=u.get('old').get('url'))
+        repo_object = Repositories.objects.update_or_create(repo_name=repo_name).latest('id')[0]
+        repo_object.url = repo_object.url + f',{u.get("old").get("url")}'
+        Repositories.objects.filter(repo_name=repo_name).update(url = repo_object.url + f',{u.get("old").get("url")}')
         os.system(f"rm -rf /code/{u.get('old').get('name')}")
         path = os.getcwd()
         repo = Repo.clone_from(u.get('old').get('url'), os.path.join(path, f"{u.get('old').get('name')}"))
+        for lng in ghl.linguist(f"./{u.get('old').get('name')}"):
+            if float(lng[1]) > 0:
+                RepoLanguages.objects.update_or_create(languages=lng[0], percentage=lng[1], repository=repo_object)
         remote_refs = repo.remote().refs
         for refs in remote_refs:
             refs.checkout()
@@ -50,7 +50,7 @@ def handle_first_url(first_data, receivers):
     else:
         repo_name = first_data.get('new').get('name')
     os.system(f"rm -rf /code/{first_data.get('old').get('name')}")
-    Repositories.objects.create(repo_name=repo_name, receivers=",".join(receivers), url=first_data.get('old').get('url'))
+    repo_model = Repositories.objects.update_or_create(repo_name=repo_name, receivers=",".join(receivers), url=first_data.get('old').get('url'))[0]
     path = os.getcwd()
     try:
         repo = Repo.clone_from(first_data.get('old').get('url'), os.path.join(path, f"{repo_name}"))
@@ -62,6 +62,9 @@ def handle_first_url(first_data, receivers):
         commits_list = list(repo.iter_commits())
         for author in reversed(commits_list):
             users.append({"name": author.author.name, "email": author.author.email})
+    for lng in ghl.linguist(f"./{first_data.get('old').get('name')}"):
+        if float(lng[1]) > 0:
+            RepoLanguages.objects.update_or_create(languages=lng[0], percentage=lng[1], repository=repo_model)
     return {"repo_name": repo_name, "users": list({v['email']: v for v in users}.values())}
 
 def handle_zip_save(file_obj):
