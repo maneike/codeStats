@@ -1,20 +1,30 @@
 import { useEffect, useState } from "preact/hooks";
 import styled from "@emotion/styled";
+import "./index.css";
+
+import DropdownSelect from "./components/DropdownSelect";
+import FileUploader from "./components/FileUploader";
+import Li from "./components/Li";
+import Line from "./components/Line";
+import NavBar from "./components/NavBar";
+import Ul from "./components/Ul";
+import UrlsToMergeList from "./components/UrlsToMergeList";
+
+import aggregateRepoData from "./helpers/aggregateRepoData";
+import { regex } from "./helpers/extractRepoNameFromUrl";
+
 import { postFiles } from "./services/postFiles";
 import { postUrls } from "./services/postUrls";
 import { postMergedUsers } from "./services/postMergedUsers";
-import FileUploader from "./components/FileUploader";
-import NavBar from "./components/NavBar";
-import "./index.css";
-import aggregateRepoData from "./helpers/aggregateRepoData";
 
 export function App() {
   const [selectedFile, setSelectedFile] = useState(null);
-  const [repoUrls, setRepoUrls] = useState("");
   const [fetchedRepos, setFetchedRepos] = useState(null);
   const [aggregatedRepos, setAggregatedRepos] = useState(fetchedRepos ?? []);
   const [isLoading, setLoading] = useState(false);
   const [receivers, setReceivers] = useState("");
+  const [repoUrlsToMerge, setRepoUrlsToMerge] = useState([]);
+  const [mergedUrls, setMergedUrls] = useState([]);
 
   useEffect(() => {
     const temp = [];
@@ -34,12 +44,17 @@ export function App() {
 
   const submitUrl = (e) => {
     e.preventDefault();
-    setLoading(true);
-    repoUrls &&
+
+    receivers && mergedUrls && setLoading(true);
+
+    !receivers && alert("Please provide an email ✘");
+    !mergedUrls && alert("Please provide the urls (ending with .git) ✘");
+
+    mergedUrls &&
       receivers &&
       postUrls(
-        repoUrls.split(",").map((item) => item.trim()),
         receivers.split(",").map((item) => item.trim()),
+        mergedUrls,
         setFetchedRepos,
         setLoading
       );
@@ -55,6 +70,58 @@ export function App() {
   const hideForm = fetchedRepos ? true : false;
   const displayReceiver = aggregatedRepos ? true : false;
 
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+
+      event.target.value.split(",").map((url) => {
+        setRepoUrlsToMerge((repoUrlsToMerge) => [
+          ...repoUrlsToMerge,
+          url.trim(),
+        ]);
+
+        const repoName = regex.exec(url)[5].replace(".git", "").trim();
+
+        setMergedUrls((mergedUrls) => [
+          ...mergedUrls,
+          {
+            old: {
+              name: repoName,
+              url: url.trim(),
+            },
+            new: {
+              name: repoName,
+              url: url.trim(),
+            },
+          },
+        ]);
+      });
+    }
+  };
+
+  const confirmUrls = (e) => {
+    e.preventDefault();
+    e.target.value.split(",").map((url) => {
+      setRepoUrlsToMerge((repoUrlsToMerge) => [...repoUrlsToMerge, url.trim()]);
+
+      const repoName = regex.exec(url)[5].replace(".git", "").trim();
+
+      setMergedUrls((mergedUrls) => [
+        ...mergedUrls,
+        {
+          old: {
+            name: repoName,
+            url: url.trim(),
+          },
+          new: {
+            name: repoName,
+            url: url.trim(),
+          },
+        },
+      ]);
+    });
+  };
+
   return (
     <>
       <NavBar />
@@ -66,14 +133,33 @@ export function App() {
                 placeholder="Enter email(s) to send report to"
                 value={receivers}
                 onChange={(e) => setReceivers(e.target.value)}
-              ></TextAreaReceivers>
-              <Line></Line>
-              <TextAreaStyled
-                placeholder="Paste the repo URLs (with .git at the end) separated by commas..."
-                value={repoUrls}
-                onChange={(e) => setRepoUrls(e.target.value)}
-              ></TextAreaStyled>
-              <SubmitButton disabled={isLoading} onClick={submitUrl}>
+              />
+              <Line />
+              <TextAreaReceivers
+                placeholder="Paste the repo URLs (with .git at the end) and submit them with enter"
+                type="text"
+                onKeyDown={handleKeyDown}
+                // onChange={(e) => setRepoUrlsToMerge(e.target.value)}
+              />
+              {/* {mergedUrls.length === 0 && (
+                <SubmitButton onClick={(e) => confirmUrls(e)}>
+                  Confirm
+                </SubmitButton>
+              )} */}
+              {repoUrlsToMerge && (
+                <UrlsToMergeList
+                  repoUrlsToMerge={repoUrlsToMerge}
+                  mergedUrls={mergedUrls}
+                  setMergedUrls={setMergedUrls}
+                  value={mergedUrls}
+                  onChange={(e) => setMergedUrls(e.target.value)}
+                />
+              )}
+              <SubmitButton
+                type="submit"
+                disabled={isLoading || !receivers || !mergedUrls}
+                onClick={submitUrl}
+              >
                 Submit
               </SubmitButton>
             </InputsWrapper>
@@ -231,29 +317,11 @@ const TextAreaReceivers = styled.textarea`
   border: none;
   resize: none;
   width: var(--text-area-width);
-  height: 200px;
+  height: 100px;
   ::placeholder {
     color: lightgrey;
     opacity: 0.8;
   }
-`;
-
-const Ul = styled.ul`
-  list-style: none;
-`;
-
-const Li = styled.li`
-  margin: 0 10px;
-`;
-
-const DropdownSelect = styled.select`
-  font-family: "Roboto", monospace;
-  color: white;
-  border: 1px solid #fafafa;
-  border-radius: 8px;
-  background: #56576b;
-  padding: 8px;
-  margin: 0 10px;
 `;
 
 const RepoTitle = styled.h3`
@@ -265,11 +333,5 @@ const ReceiversTitle = styled.div`
   display: flex;
   justify-content: center;
   margin: 30px auto;
-  width: var(--text-area-width);
-`;
-
-const Line = styled.hr`
-  border-bottom: solid #323345;
-  border-width: 0 0 2px 0;
   width: var(--text-area-width);
 `;

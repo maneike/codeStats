@@ -22,10 +22,9 @@ class ZipRepoView(views.APIView):
 class UrlRepoView(views.APIView):
 
     def post(self, request):
-        url = self.request.data['url']
+        urls = self.request.data['mergedUrls']
         receivers = self.request.data['receivers']
-        merged = self.request.data['merged']
-        users = get_all_users(url, receivers, merged)
+        users = get_all_users(urls, receivers)
         return JsonResponse(users, status=200)
 
 
