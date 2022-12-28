@@ -99,6 +99,29 @@ export function App() {
     }
   };
 
+  const confirmUrls = (e) => {
+    e.preventDefault();
+    e.target.value.split(",").map((url) => {
+      setRepoUrlsToMerge((repoUrlsToMerge) => [...repoUrlsToMerge, url.trim()]);
+
+      const repoName = regex.exec(url)[5].replace(".git", "").trim();
+
+      setMergedUrls((mergedUrls) => [
+        ...mergedUrls,
+        {
+          old: {
+            name: repoName,
+            url: url.trim(),
+          },
+          new: {
+            name: repoName,
+            url: url.trim(),
+          },
+        },
+      ]);
+    });
+  };
+
   return (
     <>
       <NavBar />
@@ -116,7 +139,13 @@ export function App() {
                 placeholder="Paste the repo URLs (with .git at the end) and submit them with enter"
                 type="text"
                 onKeyDown={handleKeyDown}
+                // onChange={(e) => setRepoUrlsToMerge(e.target.value)}
               />
+              {/* {mergedUrls.length === 0 && (
+                <SubmitButton onClick={(e) => confirmUrls(e)}>
+                  Confirm
+                </SubmitButton>
+              )} */}
               {repoUrlsToMerge && (
                 <UrlsToMergeList
                   repoUrlsToMerge={repoUrlsToMerge}
