@@ -35,27 +35,16 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "thresholds"
+            "mode": "palette-classic"
           },
           "custom": {
-            "align": "auto",
-            "displayMode": "auto",
-            "inspect": false
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
           },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
+          "mappings": []
         },
         "overrides": []
       },
@@ -65,52 +54,92 @@
         "x": 0,
         "y": 0
       },
-      "id": 12,
+      "id": 20,
       "options": {
-        "footer": {
-          "fields": "",
-          "reducer": [
-            "sum"
-          ],
-          "show": false
+        "displayLabels": [
+          "name",
+          "percent"
+        ],
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
         },
-        "showHeader": true
+        "pieType": "pie",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
       },
-      "pluginVersion": "9.1.6",
+      "pluginVersion": "9.3.2",
       "targets": [
         {
           "datasource": {
             "type": "postgres",
             "uid": "P44368ADAD746BC27"
           },
+          "editorMode": "code",
           "format": "table",
-          "group": [],
-          "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT api_authors.name, COUNT(api_commits.message) from api_commits\nINNER JOIN api_branches ON api_branches.id = api_commits.branch_id\nINNER JOIN api_authors ON api_authors.id = api_commits.author_id\nINNER JOIN api_repositories ON api_repositories.id = api_branches.repository_id\nWHERE api_repositories.repo_name = '$Repository'\nGROUP BY api_authors.name",
+          "rawSql": "SELECT languages, percentage FROM api_repolanguages \nINNER JOIN api_repositories ON api_repositories.id = api_repolanguages.repository_id\nWHERE repo_name = '$Repository'",
           "refId": "A",
-          "select": [
-            [
+          "sql": {
+            "columns": [
               {
-                "params": [
-                  "value"
+                "parameters": [
+                  {
+                    "name": "languages",
+                    "type": "functionParameter"
+                  }
                 ],
-                "type": "column"
+                "type": "function"
+              },
+              {
+                "parameters": [
+                  {
+                    "name": "percentage",
+                    "type": "functionParameter"
+                  }
+                ],
+                "type": "function"
               }
-            ]
-          ],
-          "timeColumn": "time",
-          "where": [
-            {
-              "name": "$__timeFilter",
-              "params": [],
-              "type": "macro"
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50,
+            "whereJsonTree": {
+              "children1": [
+                {
+                  "id": "9b8a8b8b-0123-4456-b89a-b18530d53232",
+                  "properties": {
+                    "value": [],
+                    "valueSrc": []
+                  },
+                  "type": "rule"
+                }
+              ],
+              "id": "ba9aa999-89ab-4cde-b012-318530d3861b",
+              "type": "group"
             }
-          ]
+          },
+          "table": "api_repolanguages"
         }
       ],
-      "title": "Commits per user",
-      "type": "table"
+      "title": "Repo languages piechart",
+      "type": "piechart"
     },
     {
       "datasource": {
@@ -161,7 +190,7 @@
         },
         "showHeader": true
       },
-      "pluginVersion": "9.1.6",
+      "pluginVersion": "9.3.2",
       "targets": [
         {
           "datasource": {
@@ -235,7 +264,7 @@
         "x": 0,
         "y": 8
       },
-      "id": 4,
+      "id": 12,
       "options": {
         "footer": {
           "fields": "",
@@ -246,18 +275,19 @@
         },
         "showHeader": true
       },
-      "pluginVersion": "9.1.6",
+      "pluginVersion": "9.3.2",
       "targets": [
         {
           "datasource": {
             "type": "postgres",
             "uid": "P44368ADAD746BC27"
           },
+          "editorMode": "code",
           "format": "table",
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT api_branches.name, COUNT(api_commits.message) from api_commits\nINNER JOIN api_branches ON api_branches.id = api_commits.branch_id\nINNER JOIN api_authors ON api_authors.id = api_commits.author_id\nINNER JOIN api_repositories ON api_repositories.id = api_branches.repository_id\nWHERE api_repositories.repo_name = '$Repository'\nGROUP BY api_branches.name",
+          "rawSql": "SELECT api_authors.name, COUNT(api_commits.message) from api_commits\nINNER JOIN api_branches ON api_branches.id = api_commits.branch_id\nINNER JOIN api_authors ON api_authors.id = api_commits.author_id\nINNER JOIN api_repositories ON api_repositories.id = api_branches.repository_id\nWHERE api_repositories.repo_name = '$Repository'\nGROUP BY api_authors.name",
           "refId": "A",
           "select": [
             [
@@ -269,6 +299,23 @@
               }
             ]
           ],
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          },
           "timeColumn": "time",
           "where": [
             {
@@ -279,7 +326,7 @@
           ]
         }
       ],
-      "title": "Commits per branch",
+      "title": "Commits per user",
       "type": "table"
     },
     {
@@ -401,37 +448,12 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "palette-classic"
+            "mode": "thresholds"
           },
           "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "bars",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
+            "align": "auto",
+            "displayMode": "auto",
+            "inspect": false
           },
           "mappings": [],
           "thresholds": {
@@ -451,24 +473,23 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 9,
+        "h": 8,
         "w": 12,
         "x": 0,
         "y": 16
       },
-      "id": 2,
+      "id": 4,
       "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
+        "footer": {
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
         },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
+        "showHeader": true
       },
+      "pluginVersion": "9.3.2",
       "targets": [
         {
           "datasource": {
@@ -479,7 +500,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  api_commits.date,\n  count(message)\nFROM api_repositories \nINNER JOIN api_authors ON api_authors.repository_id = api_repositories.id\nINNER JOIN api_commits ON api_commits.author_id = api_authors.id\nWHERE repo_name = '$Repository' AND $__timeFilter(date)\nGROUP BY api_commits.date",
+          "rawSql": "SELECT api_branches.name, COUNT(api_commits.message) from api_commits\nINNER JOIN api_branches ON api_branches.id = api_commits.branch_id\nINNER JOIN api_authors ON api_authors.id = api_commits.author_id\nINNER JOIN api_repositories ON api_repositories.id = api_branches.repository_id\nWHERE api_repositories.repo_name = '$Repository'\nGROUP BY api_branches.name",
           "refId": "A",
           "select": [
             [
@@ -501,8 +522,8 @@
           ]
         }
       ],
-      "title": "Commits per date",
-      "type": "timeseries"
+      "title": "Commits per branch",
+      "type": "table"
     },
     {
       "datasource": {
@@ -624,12 +645,37 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "thresholds"
+            "mode": "palette-classic"
           },
           "custom": {
-            "align": "auto",
-            "displayMode": "auto",
-            "inspect": false
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "bars",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
           },
           "mappings": [],
           "thresholds": {
@@ -649,23 +695,24 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
+        "h": 9,
         "w": 12,
         "x": 0,
-        "y": 25
+        "y": 24
       },
-      "id": 16,
+      "id": 2,
       "options": {
-        "footer": {
-          "fields": "",
-          "reducer": [
-            "sum"
-          ],
-          "show": false
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
         },
-        "showHeader": true
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
       },
-      "pluginVersion": "9.1.6",
       "targets": [
         {
           "datasource": {
@@ -676,7 +723,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  insertions, deletions, lines\nFROM api_changes\nINNER JOIN api_commits ON api_commits.id = api_changes.commit_id\nINNER JOIN api_branches ON api_branches.id = api_commits.branch_id\nINNER JOIN api_authors ON api_authors.id = api_commits.author_id\nINNER JOIN api_repositories ON api_repositories.id = api_branches.repository_id\nWHERE api_branches.name = '$Branch' and api_repositories.repo_name = '$Repository'\n",
+          "rawSql": "SELECT\n  api_commits.date,\n  count(message)\nFROM api_repositories \nINNER JOIN api_authors ON api_authors.repository_id = api_repositories.id\nINNER JOIN api_commits ON api_commits.author_id = api_authors.id\nWHERE repo_name = '$Repository' AND $__timeFilter(date)\nGROUP BY api_commits.date",
           "refId": "A",
           "select": [
             [
@@ -698,8 +745,8 @@
           ]
         }
       ],
-      "title": "Lines changed on Branch",
-      "type": "table"
+      "title": "Commits per date",
+      "type": "timeseries"
     },
     {
       "datasource": {
@@ -750,7 +797,7 @@
         },
         "showHeader": true
       },
-      "pluginVersion": "9.1.6",
+      "pluginVersion": "9.3.2",
       "targets": [
         {
           "datasource": {
@@ -785,6 +832,90 @@
       ],
       "title": "Lines efected by branch and user",
       "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "postgres",
+        "uid": "P44368ADAD746BC27"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "displayMode": "auto",
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 33
+      },
+      "id": 16,
+      "options": {
+        "footer": {
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true
+      },
+      "pluginVersion": "9.3.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "P44368ADAD746BC27"
+          },
+          "format": "table",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  insertions, deletions, lines\nFROM api_changes\nINNER JOIN api_commits ON api_commits.id = api_changes.commit_id\nINNER JOIN api_branches ON api_branches.id = api_commits.branch_id\nINNER JOIN api_authors ON api_authors.id = api_commits.author_id\nINNER JOIN api_repositories ON api_repositories.id = api_branches.repository_id\nWHERE api_branches.name = '$Branch' and api_repositories.repo_name = '$Repository'\n",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "timeColumn": "time",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "title": "Lines changed on Branch",
+      "type": "table"
     }
   ],
   "schemaVersion": 37,
@@ -794,9 +925,9 @@
     "list": [
       {
         "current": {
-          "selected": true,
-          "text": "PRA2021-PRA2022",
-          "value": "PRA2021-PRA2022"
+          "selected": false,
+          "text": "guillotine-cutter",
+          "value": "guillotine-cutter"
         },
         "datasource": {
           "type": "postgres",
@@ -817,9 +948,9 @@
       },
       {
         "current": {
-          "selected": true,
-          "text": "HibernateEnd",
-          "value": "HibernateEnd"
+          "selected": false,
+          "text": "gh-pages",
+          "value": "gh-pages"
         },
         "datasource": {
           "type": "postgres",
@@ -841,8 +972,8 @@
       {
         "current": {
           "selected": false,
-          "text": "marcin witkowski",
-          "value": "marcin witkowski"
+          "text": "username",
+          "value": "username"
         },
         "datasource": {
           "type": "postgres",

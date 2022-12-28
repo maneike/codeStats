@@ -7,4 +7,8 @@ admin.site.register(Branches)
 admin.site.register(Commits)
 admin.site.register(Changes)
 admin.site.register(Report)
-admin.site.register(RepoLanguages)
+
+class RepoLanguagesAdmin(admin.ModelAdmin):
+    list_display = ['languages', 'percentage', 'repository']
+
+admin.site.register(RepoLanguages, RepoLanguagesAdmin)
