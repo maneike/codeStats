@@ -5,6 +5,7 @@ class Repositories(models.Model):
     repo_name = models.CharField(max_length=200)
     receivers = models.CharField(max_length=1000)
     url = models.CharField(max_length=1000)
+    created_on = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.repo_name
