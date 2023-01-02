@@ -57,7 +57,7 @@ services:
       - redis-data:/data
 
   grafana:
-    build: './grafana'
+    build: "./grafana"
     ports:
       - 3001:3000
     user: "104"
