@@ -10,8 +10,8 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AddField(
             model_name='repositories',
-            name='created_on',
-            field=models.DateTimeField(auto_now_add=True),
+            name='iteration',
+            field=models.IntegerField(),
             preserve_default=False,
         ),
     ]
