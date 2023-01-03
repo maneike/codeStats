@@ -88,7 +88,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT languages, percentage FROM api_repolanguages \nINNER JOIN api_repositories ON api_repositories.id = api_repolanguages.repository_id\nWHERE repo_name = '$Repository'",
+          "rawSql": "SELECT languages, percentage FROM api_repolanguages \nINNER JOIN api_repositories ON api_repositories.id = api_repolanguages.repository_id\nWHERE repo_name = '$Repository' and api_repositories.iteration = $Iteration ",
           "refId": "A",
           "sql": {
             "columns": [
@@ -197,11 +197,12 @@
             "type": "postgres",
             "uid": "P44368ADAD746BC27"
           },
+          "editorMode": "code",
           "format": "table",
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT api_authors.name, COUNT(api_commits.message) from api_commits\nINNER JOIN api_branches ON api_branches.id = api_commits.branch_id\nINNER JOIN api_authors ON api_authors.id = api_commits.author_id\nINNER JOIN api_repositories ON api_repositories.id = api_branches.repository_id\nWHERE api_branches.name = '$Branch' and api_repositories.repo_name = '$Repository'\nGROUP BY api_authors.name",
+          "rawSql": "SELECT api_authors.name, COUNT(api_commits.message) from api_commits\nINNER JOIN api_branches ON api_branches.id = api_commits.branch_id\nINNER JOIN api_authors ON api_authors.id = api_commits.author_id\nINNER JOIN api_repositories ON api_repositories.id = api_branches.repository_id\nWHERE api_branches.name = '$Branch' and api_repositories.repo_name = '$Repository' and api_repositories.iteration = $Iteration \nGROUP BY api_authors.name",
           "refId": "A",
           "select": [
             [
@@ -213,6 +214,23 @@
               }
             ]
           ],
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          },
           "timeColumn": "time",
           "where": [
             {
@@ -287,7 +305,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT api_authors.name, COUNT(api_commits.message) from api_commits\nINNER JOIN api_branches ON api_branches.id = api_commits.branch_id\nINNER JOIN api_authors ON api_authors.id = api_commits.author_id\nINNER JOIN api_repositories ON api_repositories.id = api_branches.repository_id\nWHERE api_repositories.repo_name = '$Repository'\nGROUP BY api_authors.name",
+          "rawSql": "SELECT api_authors.name, COUNT(api_commits.message) from api_commits\nINNER JOIN api_branches ON api_branches.id = api_commits.branch_id\nINNER JOIN api_authors ON api_authors.id = api_commits.author_id\nINNER JOIN api_repositories ON api_repositories.id = api_branches.repository_id\nWHERE api_repositories.repo_name = '$Repository' and api_repositories.iteration = $Iteration \nGROUP BY api_authors.name",
           "refId": "A",
           "select": [
             [
@@ -411,11 +429,12 @@
             "type": "postgres",
             "uid": "P44368ADAD746BC27"
           },
+          "editorMode": "code",
           "format": "table",
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT api_commits.date, count(api_commits.date) from api_commits\nINNER JOIN api_branches ON api_branches.id = api_commits.branch_id\nINNER JOIN api_authors ON api_authors.id = api_commits.author_id\nINNER JOIN api_repositories ON api_repositories.id = api_branches.repository_id\nWHERE api_branches.name = '$Branch' and api_repositories.repo_name = '$Repository' and api_authors.name = '$User'\nGROUP BY api_commits.date",
+          "rawSql": "SELECT api_commits.date, count(api_commits.date) from api_commits\nINNER JOIN api_branches ON api_branches.id = api_commits.branch_id\nINNER JOIN api_authors ON api_authors.id = api_commits.author_id\nINNER JOIN api_repositories ON api_repositories.id = api_branches.repository_id\nWHERE api_branches.name = '$Branch' and api_repositories.repo_name = '$Repository' and api_authors.name = '$User' and api_repositories.iteration = $Iteration \nGROUP BY api_commits.date",
           "refId": "A",
           "select": [
             [
@@ -427,6 +446,23 @@
               }
             ]
           ],
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          },
           "timeColumn": "time",
           "where": [
             {
@@ -496,11 +532,12 @@
             "type": "postgres",
             "uid": "P44368ADAD746BC27"
           },
+          "editorMode": "code",
           "format": "table",
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT api_branches.name, COUNT(api_commits.message) from api_commits\nINNER JOIN api_branches ON api_branches.id = api_commits.branch_id\nINNER JOIN api_authors ON api_authors.id = api_commits.author_id\nINNER JOIN api_repositories ON api_repositories.id = api_branches.repository_id\nWHERE api_repositories.repo_name = '$Repository'\nGROUP BY api_branches.name",
+          "rawSql": "SELECT api_branches.name, COUNT(api_commits.message) from api_commits\nINNER JOIN api_branches ON api_branches.id = api_commits.branch_id\nINNER JOIN api_authors ON api_authors.id = api_commits.author_id\nINNER JOIN api_repositories ON api_repositories.id = api_branches.repository_id\nWHERE api_repositories.repo_name = '$Repository' and api_repositories.iteration = $Iteration \nGROUP BY api_branches.name",
           "refId": "A",
           "select": [
             [
@@ -512,6 +549,23 @@
               }
             ]
           ],
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          },
           "timeColumn": "time",
           "where": [
             {
@@ -719,11 +773,12 @@
             "type": "postgres",
             "uid": "P44368ADAD746BC27"
           },
+          "editorMode": "code",
           "format": "table",
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  api_commits.date,\n  count(message)\nFROM api_repositories \nINNER JOIN api_authors ON api_authors.repository_id = api_repositories.id\nINNER JOIN api_commits ON api_commits.author_id = api_authors.id\nWHERE repo_name = '$Repository' AND $__timeFilter(date)\nGROUP BY api_commits.date",
+          "rawSql": "SELECT\n  api_commits.date,\n  count(message)\nFROM api_repositories \nINNER JOIN api_authors ON api_authors.repository_id = api_repositories.id\nINNER JOIN api_commits ON api_commits.author_id = api_authors.id\nWHERE repo_name = '$Repository' AND $__timeFilter(date) and api_repositories.iteration = $Iteration \nGROUP BY api_commits.date",
           "refId": "A",
           "select": [
             [
@@ -735,6 +790,23 @@
               }
             ]
           ],
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          },
           "timeColumn": "time",
           "where": [
             {
@@ -804,11 +876,12 @@
             "type": "postgres",
             "uid": "P44368ADAD746BC27"
           },
+          "editorMode": "code",
           "format": "table",
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  api_authors.name, SUM(insertions) as insertions, SUM(deletions) as deletions, SUM(lines) as lines\nFROM api_changes\nINNER JOIN api_commits ON api_commits.id = api_changes.commit_id\nINNER JOIN api_branches ON api_branches.id = api_commits.branch_id\nINNER JOIN api_authors ON api_authors.id = api_commits.author_id\nINNER JOIN api_repositories ON api_repositories.id = api_branches.repository_id\nWHERE api_branches.name = '$Branch' and api_repositories.repo_name = '$Repository'\nGROUP BY api_authors.name",
+          "rawSql": "SELECT\n  api_authors.name, SUM(insertions) as insertions, SUM(deletions) as deletions, SUM(lines) as lines\nFROM api_changes\nINNER JOIN api_commits ON api_commits.id = api_changes.commit_id\nINNER JOIN api_branches ON api_branches.id = api_commits.branch_id\nINNER JOIN api_authors ON api_authors.id = api_commits.author_id\nINNER JOIN api_repositories ON api_repositories.id = api_branches.repository_id\nWHERE api_branches.name = '$Branch' and api_repositories.repo_name = '$Repository' and api_repositories.iteration = $Iteration \nGROUP BY api_authors.name",
           "refId": "A",
           "select": [
             [
@@ -820,6 +893,23 @@
               }
             ]
           ],
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          },
           "timeColumn": "time",
           "where": [
             {
@@ -853,7 +943,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -888,11 +979,12 @@
             "type": "postgres",
             "uid": "P44368ADAD746BC27"
           },
+          "editorMode": "code",
           "format": "table",
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  insertions, deletions, lines\nFROM api_changes\nINNER JOIN api_commits ON api_commits.id = api_changes.commit_id\nINNER JOIN api_branches ON api_branches.id = api_commits.branch_id\nINNER JOIN api_authors ON api_authors.id = api_commits.author_id\nINNER JOIN api_repositories ON api_repositories.id = api_branches.repository_id\nWHERE api_branches.name = '$Branch' and api_repositories.repo_name = '$Repository'\n",
+          "rawSql": "SELECT\n  insertions, deletions, lines\nFROM api_changes\nINNER JOIN api_commits ON api_commits.id = api_changes.commit_id\nINNER JOIN api_branches ON api_branches.id = api_commits.branch_id\nINNER JOIN api_authors ON api_authors.id = api_commits.author_id\nINNER JOIN api_repositories ON api_repositories.id = api_branches.repository_id\nWHERE api_branches.name = '$Branch' and api_repositories.repo_name = '$Repository' and api_repositories.iteration = $Iteration \n",
           "refId": "A",
           "select": [
             [
@@ -904,6 +996,23 @@
               }
             ]
           ],
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          },
           "timeColumn": "time",
           "where": [
             {
@@ -948,9 +1057,10 @@
       },
       {
         "current": {
+          "isNone": true,
           "selected": false,
-          "text": "gh-pages",
-          "value": "gh-pages"
+          "text": "None",
+          "value": ""
         },
         "datasource": {
           "type": "postgres",
@@ -971,9 +1081,10 @@
       },
       {
         "current": {
+          "isNone": true,
           "selected": false,
-          "text": "username",
-          "value": "username"
+          "text": "None",
+          "value": ""
         },
         "datasource": {
           "type": "postgres",
@@ -986,6 +1097,25 @@
         "name": "User",
         "options": [],
         "query": "SELECT api_authors.name from api_commits\nINNER JOIN api_branches ON api_branches.id = api_commits.branch_id\nINNER JOIN api_authors ON api_authors.id = api_commits.author_id\nINNER JOIN api_repositories ON api_repositories.id = api_branches.repository_id\nWHERE repo_name = '$Repository'  AND api_branches.name = '$Branch'",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "1",
+          "value": "1"
+        },
+        "definition": "SELECT iteration FROM api_repositories \nWHERE repo_name = '$Repository'",
+        "hide": 0,
+        "includeAll": false,
+        "multi": false,
+        "name": "Iteration",
+        "options": [],
+        "query": "SELECT iteration FROM api_repositories \nWHERE repo_name = '$Repository'",
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
