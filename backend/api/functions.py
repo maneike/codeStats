@@ -45,9 +45,13 @@ def get_all_users(urls, receivers):
                 users.append({"name": author.author.name, "email": author.author.email})
         if merged:
             for i in all_data:
-                if i.get("repo_name") == repo_name: i.get('users').extend(list({v['email']: v for v in users}.values()))
+                if i.get("repo_name") == repo_name:
+                    i.get('users').extend(list({v['email']: v for v in users}.values()))
+                    i.get('languages').extend([l[0] for l in ghl.linguist(f"./{u.get('old').get('name')}")])
+                    i['languages'] = list(set(i.get('languages')))
         else:
-            all_data.append({"repo_name": repo_name, "users": list({v['email']: v for v in users}.values())})
+            all_data.append({"repo_name": repo_name, "users": list({v['email']: v for v in users}.values()),
+                             'languages': [l[0] for l in ghl.linguist(f"./{u.get('old').get('name')}")]})
     return {"data": all_data}
 
 
@@ -78,7 +82,8 @@ def handle_first_url(first_data, receivers):
     for lng in ghl.linguist(f"./{first_data.get('old').get('name')}"):
         if float(lng[1]) > 0:
             RepoLanguages.objects.update_or_create(languages=lng[0], percentage=lng[1], repository=repo_model)
-    return {"repo_name": repo_name, "users": list({v['email']: v for v in users}.values())}
+    return {"repo_name": repo_name, "users": list({v['email']: v for v in users}.values()),
+            'languages': [l[0] for l in ghl.linguist(f"./{first_data.get('old').get('name')}")]}
 
 def handle_zip_save(file_obj):
     name = file_obj.name
