@@ -1,4 +1,3 @@
-import json
 import os
 from rest_framework import views
 from rest_framework.parsers import MultiPartParser
@@ -6,6 +5,7 @@ from django.http import JsonResponse
 from .functions import get_all_users, get_all_users_from_zip, handle_zip_save
 from .tasks import generate_basic_report
 from .models import Report
+import json
 
 
 class ZipRepoView(views.APIView):
@@ -33,7 +33,7 @@ class UsersReportView(views.APIView):
     def post(self, request):
         merged_users = self.request.data
         generate_basic_report.delay(
-            merged_users['repo_name'], merged_users['merged_users'])
+            merged_users['repo_name'], merged_users['merged_users'], merged_users['languages'])
         return JsonResponse({"ok": "Raport jest w trakcie tworzenia"}, status=200)
 
 
