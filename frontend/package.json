@@ -11,8 +11,7 @@
     "@emotion/styled": "^11.9.3",
     "preact": "^10.4.1",
     "redaxios": "^0.5.0",
-    "serve": "^13.0.2",
-    "styled-components": "^5.3.5"
+    "serve": "^13.0.2"
   },
   "devDependencies": {
     "@prefresh/vite": "^1.2.1",

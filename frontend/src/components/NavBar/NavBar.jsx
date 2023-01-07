@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import Burger from "./Burger";
 
 const Nav = styled.nav`
   background-color: #323345;
@@ -24,7 +23,6 @@ const NavBar = () => {
     <>
       <Nav>
         <Logo>codeStats</Logo>
-        <Burger />
       </Nav>
     </>
   );
