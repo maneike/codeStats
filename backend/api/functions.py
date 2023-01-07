@@ -20,9 +20,17 @@ def get_all_users(urls, receivers):
             merged = False
         else:
             merged = True
-        repo_object = Repositories.objects.update_or_create(repo_name=repo_name).latest('id')[0]
-        repo_object.url = repo_object.url + f',{u.get("old").get("url")}'
-        Repositories.objects.filter(repo_name=repo_name).update(url = repo_object.url + f',{u.get("old").get("url")}')
+        if merged:
+            repo_object = Repositories.objects.filter(repo_name=repo_name).latest('iteration')
+            repo_object.url = repo_object.url + f',{u.get("old").get("url")}'
+            repo_object.save()
+        else:
+            try:
+                iteration = Repositories.objects.filter(repo_name=repo_name).latest('iteration').iteration + 1
+            except ObjectDoesNotExist:
+                iteration = 1
+            repo_object = Repositories.objects.create(repo_name=repo_name, receivers=",".join(receivers),
+                                                      url=u.get('old').get('url'), iteration=iteration)
         os.system(f"rm -rf /code/{u.get('old').get('name')}")
         path = os.getcwd()
         repo = Repo.clone_from(u.get('old').get('url'), os.path.join(path, f"{u.get('old').get('name')}"))
@@ -37,9 +45,13 @@ def get_all_users(urls, receivers):
                 users.append({"name": author.author.name, "email": author.author.email})
         if merged:
             for i in all_data:
-                if i.get("repo_name") == repo_name: i.get('users').extend(list({v['email']: v for v in users}.values()))
+                if i.get("repo_name") == repo_name:
+                    i.get('users').extend(list({v['email']: v for v in users}.values()))
+                    i.get('languages').extend([l[0] for l in ghl.linguist(f"./{u.get('old').get('name')}")])
+                    i['languages'] = list(set(i.get('languages')))
         else:
-            all_data.append({"repo_name": repo_name, "users": list({v['email']: v for v in users}.values())})
+            all_data.append({"repo_name": repo_name, "users": list({v['email']: v for v in users}.values()),
+                             'languages': [l[0] for l in ghl.linguist(f"./{u.get('old').get('name')}")]})
     return {"data": all_data}
 
 
@@ -50,7 +62,12 @@ def handle_first_url(first_data, receivers):
     else:
         repo_name = first_data.get('new').get('name')
     os.system(f"rm -rf /code/{first_data.get('old').get('name')}")
-    repo_model = Repositories.objects.update_or_create(repo_name=repo_name, receivers=",".join(receivers), url=first_data.get('old').get('url'))[0]
+    try:
+        iteration = Repositories.objects.filter(repo_name=repo_name).latest('id').iteration + 1
+    except ObjectDoesNotExist:
+        iteration = 1
+    repo_model = Repositories.objects.create(repo_name=repo_name, receivers=",".join(receivers),
+                                             url=first_data.get('old').get('url'), iteration=iteration)
     path = os.getcwd()
     try:
         repo = Repo.clone_from(first_data.get('old').get('url'), os.path.join(path, f"{repo_name}"))
@@ -65,7 +82,8 @@ def handle_first_url(first_data, receivers):
     for lng in ghl.linguist(f"./{first_data.get('old').get('name')}"):
         if float(lng[1]) > 0:
             RepoLanguages.objects.update_or_create(languages=lng[0], percentage=lng[1], repository=repo_model)
-    return {"repo_name": repo_name, "users": list({v['email']: v for v in users}.values())}
+    return {"repo_name": repo_name, "users": list({v['email']: v for v in users}.values()),
+            'languages': [l[0] for l in ghl.linguist(f"./{first_data.get('old').get('name')}")]}
 
 def handle_zip_save(file_obj):
     name = file_obj.name
