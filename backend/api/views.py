@@ -12,7 +12,7 @@ class ZipRepoView(views.APIView):
     parser_classes = (MultiPartParser,)
 
     def post(self, request):
-        os.system("rm -rf ./target/from_zip/*")
+        os.system("rm -rf ./target/from_zip")
         file_obj = request.FILES['file']
         receivers = self.request.data['receivers']
         name = handle_zip_save(file_obj, receivers)
@@ -34,7 +34,7 @@ class UsersReportView(views.APIView):
     def post(self, request):
         merged_users = self.request.data
         generate_basic_report.delay(
-            merged_users['repo_name'], merged_users['merged_users'], merged_users['languages'])
+            merged_users['repo_name'], merged_users['merged_users'], ['JavaScript', 'CSS'])
         return JsonResponse({"ok": "Raport jest w trakcie tworzenia"}, status=200)
 
 

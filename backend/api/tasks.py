@@ -1,11 +1,17 @@
 from celery import shared_task
-import os
-from git import Repo, exc
+from django.core.files.base import ContentFile
+from django.core.files.storage import default_storage
+
 from .models import Repositories, Authors, Branches, Commits, Changes, Report, RepoLanguages
 import numpy as np
 import json
 from django.core.mail import send_mail
 from django.conf import settings
+from git import Repo, exc
+import zipfile
+from django.core.exceptions import ObjectDoesNotExist
+import ghlinguist as ghl
+import os
 
 
 @shared_task(bind=True)
@@ -29,10 +35,10 @@ def generate_basic_report(self, repo_name, merged_users, lng_to_chk):
             Repo.clone_from(url, os.path.join(path, f"{repo_name}"))
             repo = Repo(os.path.join(path, f"{repo_name}"))
         except exc.GitError:
-            if repo_name == "files":
-                repo = Repo(f"./from_zip")
+            if url == "zip":
+                repo = Repo(f"./target/from_zip")
             else:
-                repo = Repo(f"./from_zip/{repo_name}")
+                repo = Repo(f"./target/from_zip/{repo_name}")
         report['repo_name'] = repo_obj.repo_name
         remote_refs = repo.remote().refs
         for mu in merged_users:
@@ -42,8 +48,16 @@ def generate_basic_report(self, repo_name, merged_users, lng_to_chk):
         for refs in remote_refs:
             refs.checkout()
             if extensions_to_delete:
-                dir_name = os.path.join(os.getcwd(), f"{repo_name}")
-                test = os.listdir(dir_name)
+                try:
+                    dir_name = os.path.join(os.getcwd(), f"{repo_name}")
+                    test = os.listdir(dir_name)
+                except FileNotFoundError:
+                    if repo_name == "files":
+                        dir_name = os.path.join(os.getcwd(), f"./target/from_zip")
+                        test = os.listdir(dir_name)
+                    else:
+                        dir_name = os.path.join(os.getcwd(), f"./target/from_zip/{repo_name}")
+                        test = os.listdir(dir_name)
                 for ext in extensions_to_delete:
                     for item in test:
                         if item.endswith(ext):
@@ -95,3 +109,67 @@ def generate_basic_report(self, repo_name, merged_users, lng_to_chk):
         fail_silently=False,
     )
     return report
+
+
+@shared_task(bind=True)
+def handle_zip_save(self, file_obj, receivers):
+    name = file_obj.name
+    default_storage.save(name, ContentFile(file_obj.read()))
+    with zipfile.ZipFile(name, "r") as zip_ref:
+        zip_ref.extractall("./target/from_zip")
+        names = [name for name in os.listdir("./target/from_zip")
+                 if os.path.isdir(os.path.join("./target/from_zip", name))]
+    repo_names = []
+    try:
+        if ".git" not in names:
+            for name in names:
+                tmp_names = [n for n in os.listdir(f"./target/from_zip/{name}")]
+                if ".git" in tmp_names:
+                    try:
+                        iteration = Repositories.objects.filter(repo_name=name).latest('id').iteration + 1
+                    except ObjectDoesNotExist:
+                        iteration = 1
+                    Repositories.objects.create(repo_name=name, receivers=",".join(receivers),
+                                                url=name, iteration=iteration)
+                    repo_names.append(name)
+            return repo_names
+        else:
+            try:
+                iteration = Repositories.objects.filter(repo_name=name.split(".")[0]).latest('id').iteration + 1
+            except ObjectDoesNotExist:
+                iteration = 1
+            Repositories.objects.create(repo_name=name.split(".")[0], receivers=",".join(receivers),
+                                        url='zip', iteration=iteration)
+            return [name.split(".")[0]]
+    except IndexError:
+        to_return = "files"
+        return [to_return]
+
+
+@shared_task(bind=True)
+def get_all_users_from_zip(self, repo_name):
+    all_data = []
+    for item in repo_name:
+        model_item = Repositories.objects.filter(repo_name=item).latest('id')
+        users = []
+        if model_item.url == "zip":
+            path = f"./target/from_zip/"
+            repo = Repo(f"./target/from_zip/")
+        else:
+            path = f"./target/from_zip/{item}"
+            repo = Repo(f"./target/from_zip/{item}")
+        remote_refs = repo.remote().refs
+        for refs in remote_refs:
+            refs.checkout()
+            commits_list = list(repo.iter_commits())
+            for author in reversed(commits_list):
+                users.append({"name": author.author.name, "email": author.author.email})
+        print(path)
+        for lng in ghl.linguist(path):
+            if float(lng[1]) > 0:
+                RepoLanguages.objects.update_or_create(languages=lng[0], percentage=lng[1],
+                                                       repository=Repositories.objects.filter(repo_name=item).
+                                                       latest('id'))
+        all_data.append({"repo_name": item, "users": list({v['email']: v for v in users}.values()),
+                         'languages': [l[0] for l in ghl.linguist(path)]})
+    return {"data": all_data}
