@@ -34,7 +34,7 @@ class UsersReportView(views.APIView):
     def post(self, request):
         merged_users = self.request.data
         generate_basic_report.delay(
-            merged_users['repo_name'], merged_users['merged_users'], ['JavaScript', 'CSS'])
+            merged_users['repo_name'], merged_users['merged_users'], merged_users['languages'])
         return JsonResponse({"ok": "Raport jest w trakcie tworzenia"}, status=200)
 
 
