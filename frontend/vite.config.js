@@ -1,10 +1,7 @@
-// @ts-check
 import preactRefresh from "@prefresh/vite";
+import defineConfig from "vite";
 
-/**
- * @type { import('vite').UserConfig }
- */
-const config = {
+export default defineConfig({
   jsx: "preact",
   plugins: [preactRefresh()],
   alias: {
@@ -12,6 +9,11 @@ const config = {
     "react-dom/test-utils": "preact/test-utils",
     "react-dom": "preact/compat",
   },
-};
-
-export default config;
+  server: {
+    port: 3000,
+    host: "0.0.0.0",
+    hmr: {
+      clientPort: 80,
+    },
+  },
+});
