@@ -28,7 +28,8 @@ def generate_basic_report(self, repo_name, merged_users, lng_to_chk):
             if lng not in lng_to_chk:
                 for data in list(filter(lambda to_delete: to_delete['name'] == lng, contents)):
                     for d in data.get('extensions'):
-                        extensions_to_delete.append(d)
+                        extensions_to_delete.append(d.split('.')[-1])
+                RepoLanguages.objects.filter(repository=repo_obj, languages=lng).delete()
     for url in urls:
         try:
             path = os.getcwd()
@@ -42,29 +43,14 @@ def generate_basic_report(self, repo_name, merged_users, lng_to_chk):
         report['repo_name'] = repo_obj.repo_name
         remote_refs = repo.remote().refs
         for mu in merged_users:
-            Authors.objects.update_or_create(name=mu["new_name"], email=mu["new_email"], old_name=mu['old_name'],
-                                             old_email=mu['old_email'],
-                                             repository=repo_obj)
+            Authors.objects.create(name=mu["new_name"], email=mu["new_email"], old_name=mu['old_name'],
+                                   old_email=mu['old_email'],
+                                   repository=repo_obj)
         for refs in remote_refs:
             refs.checkout()
-            if extensions_to_delete:
-                try:
-                    dir_name = os.path.join(os.getcwd(), f"{repo_name}")
-                    test = os.listdir(dir_name)
-                except FileNotFoundError:
-                    if repo_name == "files":
-                        dir_name = os.path.join(os.getcwd(), f"./target/from_zip")
-                        test = os.listdir(dir_name)
-                    else:
-                        dir_name = os.path.join(os.getcwd(), f"./target/from_zip/{repo_name}")
-                        test = os.listdir(dir_name)
-                for ext in extensions_to_delete:
-                    for item in test:
-                        if item.endswith(ext):
-                            os.remove(os.path.join(dir_name, item))
             commits_list = list(repo.iter_commits())
-            Branches.objects.update_or_create(name=refs.name.split('/')[1], commits_count=len(commits_list),
-                                              repository=repo_obj)
+            Branches.objects.create(name=refs.name.split('/')[1], commits_count=len(commits_list),
+                                    repository=repo_obj)
             branch = Branches.objects.filter(name=refs.name.split('/')[1]).latest('id').name
             curr_branch = {"branch_name": branch, 'commits': [], 'authors': list(
                 np.unique([Authors.objects.get(old_email=author.author.email,
@@ -74,31 +60,34 @@ def generate_basic_report(self, repo_name, merged_users, lng_to_chk):
             # if extensions:
             #    f.write(f"File extensions: {extensions}\n")
             for commit in reversed(commits_list):
-                commit_obj = Commits.objects.update_or_create(author=Authors.objects.get(old_email=commit.author.email,
-                                                                                         repository=Repositories.objects.filter
-                                                                                         (repo_name=repo_name).latest(
-                                                                                             'id')),
-                                                              branch=Branches.objects.filter(
-                                                                  name=refs.name.split('/')[1]).latest('id'),
-                                                              date=commit.committed_datetime,
-                                                              message=commit.message.replace('\n', ''))[0]
-                for key in commit.stats.files:
-                    stats = commit.stats.files[f'{key}']
-                    Changes.objects.update_or_create(commit=commit_obj, file_name=key,
-                                                     insertions=stats['insertions'],
-                                                     deletions=stats['deletions'], lines=stats['lines'])
-                changes = commit.stats.files
-                changes_filtered = [{"file_name": x, "changes": changes[x]} for x in changes]
-                curr_branch['commits'].append({'author': Authors.objects.get(old_email=commit.author.email,
-                                                                             repository=Repositories.objects.
-                                                                             filter(repo_name=repo_name).latest(
-                                                                                 'id')).name,
-                                               'branch': branch,
-                                               'date': commit.committed_datetime,
-                                               'message': commit.message.replace('\n', ''),
-                                               'changed_files': changes_filtered})
+                if [key.split('.')[-1] for key in commit.stats.files] != extensions_to_delete:
+                    commit_obj = Commits.objects.create(author=Authors.objects.get(old_email=commit.author.email,
+                                                                                   repository=Repositories.objects.filter
+                                                                                   (repo_name=repo_name).latest(
+                                                                                       'id')),
+                                                        branch=Branches.objects.filter(
+                                                            name=refs.name.split('/')[1]).latest('id'),
+                                                        date=commit.committed_datetime,
+                                                        message=commit.message.replace('\n', ''))
+                    for key in commit.stats.files:
+                        if key.split('.')[-1] not in extensions_to_delete:
+                            stats = commit.stats.files[f'{key}']
+                            Changes.objects.create(commit=commit_obj, file_name=key,
+                                                   insertions=stats['insertions'],
+                                                   deletions=stats['deletions'], lines=stats['lines'])
+                    changes = commit.stats.files
+                    changes_filtered = [{"file_name": x, "changes": changes[x]} for x in changes
+                                        if x.split('.')[-1] not in extensions_to_delete]
+                    curr_branch['commits'].append({'author': Authors.objects.get(old_email=commit.author.email,
+                                                                                 repository=Repositories.objects.
+                                                                                 filter(repo_name=repo_name).latest(
+                                                                                     'id')).name,
+                                                   'branch': branch,
+                                                   'date': commit.committed_datetime,
+                                                   'message': commit.message.replace('\n', ''),
+                                                   'changed_files': changes_filtered})
             report["branches"].append(curr_branch)
-        Report.objects.update_or_create(repo_name=repo_name, report=json.dumps(report, default=str))
+        Report.objects.create(repo_name=repo_name, report=json.dumps(report, default=str))
         os.system(f"rm -rf {repo_name}")
     repo_url = f'http://10.11.46.150:3001/d/yZQk88D4k/codestats?orgId=1&var-Repository={repo_name}'
     send_mail(
@@ -164,12 +153,11 @@ def get_all_users_from_zip(self, repo_name):
             commits_list = list(repo.iter_commits())
             for author in reversed(commits_list):
                 users.append({"name": author.author.name, "email": author.author.email})
-        print(path)
         for lng in ghl.linguist(path):
             if float(lng[1]) > 0:
-                RepoLanguages.objects.update_or_create(languages=lng[0], percentage=lng[1],
-                                                       repository=Repositories.objects.filter(repo_name=item).
-                                                       latest('id'))
+                RepoLanguages.objects.create(languages=lng[0], percentage=lng[1],
+                                             repository=Repositories.objects.filter(repo_name=item).
+                                             latest('id'))
         all_data.append({"repo_name": item, "users": list({v['email']: v for v in users}.values()),
                          'languages': [l[0] for l in ghl.linguist(path)]})
     return {"data": all_data}

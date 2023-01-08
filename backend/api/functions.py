@@ -33,7 +33,7 @@ def get_all_users(urls, receivers):
         repo = Repo.clone_from(u.get('old').get('url'), os.path.join(path, f"{u.get('old').get('name')}"))
         for lng in ghl.linguist(f"./{u.get('old').get('name')}"):
             if float(lng[1]) > 0:
-                RepoLanguages.objects.update_or_create(languages=lng[0], percentage=lng[1], repository=repo_object)
+                RepoLanguages.objects.create(languages=lng[0], percentage=lng[1], repository=repo_object)
         remote_refs = repo.remote().refs
         for refs in remote_refs:
             refs.checkout()
@@ -78,7 +78,7 @@ def handle_first_url(first_data, receivers):
             users.append({"name": author.author.name, "email": author.author.email})
     for lng in ghl.linguist(f"./{first_data.get('old').get('name')}"):
         if float(lng[1]) > 0:
-            RepoLanguages.objects.update_or_create(languages=lng[0], percentage=lng[1], repository=repo_model)
+            RepoLanguages.objects.create(languages=lng[0], percentage=lng[1], repository=repo_model)
     return {"repo_name": repo_name, "users": list({v['email']: v for v in users}.values()),
             'languages': [l[0] for l in ghl.linguist(f"./{first_data.get('old').get('name')}")]}
 
