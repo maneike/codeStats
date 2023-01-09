@@ -1,5 +1,5 @@
 import preactRefresh from "@prefresh/vite";
-import defineConfig from "vite";
+import { defineConfig } from "vite";
 
 export default defineConfig({
   jsx: "preact",
@@ -10,7 +10,10 @@ export default defineConfig({
     "react-dom": "preact/compat",
   },
   server: {
+    port: 3000,
     host: "0.0.0.0",
-    hmr: {},
+    hmr: {
+      clientPort: 80,
+    },
   },
 });
