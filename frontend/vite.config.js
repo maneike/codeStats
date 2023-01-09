@@ -10,8 +10,7 @@ export default defineConfig({
     "react-dom": "preact/compat",
   },
   server: {
-    hmr: {
-      port: 80,
-    },
+    host: "0.0.0.0",
+    hmr: {},
   },
 });

@@ -29,6 +29,9 @@ RUN useradd -s /bin/bash -m vscode && groupadd docker && usermod -aG docker vsco
 # Copy Docker tools from another image
 COPY --from=gloursdocker/docker / /
 
+# Expose port 3000
+EXPOSE 3000
+
 # Set entrypoint for the dev-envs stage
 CMD [ "npm", "start" ]
 
