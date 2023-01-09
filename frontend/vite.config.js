@@ -10,9 +10,10 @@ export default defineConfig({
     "react-dom": "preact/compat",
   },
   server: {
-    port: 3000,
-    host: "0.0.0.0",
+    port: 80,
+    host: "http://codestats.projektstudencki.pl/",
     hmr: {
+      host: "http://codestats.projektstudencki.pl/",
       clientPort: 80,
     },
   },
