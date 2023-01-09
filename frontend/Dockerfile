@@ -8,9 +8,8 @@ ENV PORT=3000
 # Set working directory
 WORKDIR /code
 
-# Copy package files and install dependencies
+# Copy package file and install dependencies
 COPY package.json /code/package.json
-COPY package-lock.json /code/package-lock.json
 RUN npm install
 
 # Copy source code
