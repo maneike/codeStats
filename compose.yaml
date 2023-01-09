@@ -3,16 +3,15 @@ services:
   frontend:
     build:
       context: frontend
-      target: builder
     ports:
-      - 3000:3000
+      - "80:3000"
+      - "3000:3000"
     volumes:
       - ./frontend/src:/code/src:ro
 
   backend:
     build:
       context: backend
-      target: development
     ports:
       - "8000:8000"
     volumes:
@@ -39,8 +38,6 @@ services:
   nginx:
     build:
       context: .nginx
-    ports:
-      - 80:80
     depends_on:
       - frontend
       - backend
@@ -65,7 +62,6 @@ services:
   celery:
     build:
       context: backend
-      target: development
     command: celery -A codestatsapi worker -l info
     volumes:
       - ./backend/codestatsapi:/code/codestatsapi
