@@ -3,7 +3,7 @@ services:
   frontend:
     build:
       context: frontend
-      target: development
+      target: builder
     ports:
       - 3000:3000
     volumes:
