@@ -4,7 +4,6 @@ services:
     build:
       context: frontend
     ports:
-      - "80:3000"
       - "3000:3000"
     volumes:
       - ./frontend/src:/code/src:ro
@@ -41,6 +40,8 @@ services:
     depends_on:
       - frontend
       - backend
+    ports:
+      - 80:80
     volumes:
       - backend-static:/code/static
 
