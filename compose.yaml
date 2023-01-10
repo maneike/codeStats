@@ -2,15 +2,13 @@ name: codeStats
 services:
   frontend:
     build:
-      context: frontend
-    ports:
-      - "3000:3000"
+      context: ./frontend
     volumes:
       - ./frontend/src:/code/src:ro
 
   backend:
     build:
-      context: backend
+      context: ./backend
     ports:
       - "8000:8000"
     volumes:
@@ -36,12 +34,11 @@ services:
 
   nginx:
     build:
-      context: .nginx
+      context: ./.nginx
     depends_on:
       - frontend
       - backend
-    ports:
-      - 80:80
+
     volumes:
       - backend-static:/code/static
 
@@ -62,7 +59,7 @@ services:
 
   celery:
     build:
-      context: backend
+      context: ./backend
     command: celery -A codestatsapi worker -l info
     volumes:
       - ./backend/codestatsapi:/code/codestatsapi

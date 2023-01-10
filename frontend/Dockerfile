@@ -1,19 +1,22 @@
-# syntax=docker/dockerfile:1.4
+FROM node:lts AS development
 
-FROM node:lts AS builder
-
-# Set the working directory
+# Set working directory
 WORKDIR /code
 
-# Copy the package.json file to the working directory
+# 
 COPY package.json /code/package.json
+COPY package-lock.json /code/package-lock.json
 
-# Install project dependencies
+# Same as npm install
 RUN npm ci
 
-# Copy the rest of the source code to the working directory
 COPY . /code
 
-# Build the project
-RUN npm run build
+ENV CI=true
+ENV PORT=3000
 
+CMD [ "npm", "start" ]
+
+FROM development AS build
+
+RUN npm run build
