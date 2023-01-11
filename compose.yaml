@@ -3,6 +3,8 @@ services:
   frontend:
     build:
       context: ./frontend
+    ports:
+      - 3000:3000
     volumes:
       - ./frontend/src:/code/src:ro
 
@@ -10,7 +12,7 @@ services:
     build:
       context: ./backend
     ports:
-      - "8000:8000"
+      - 8000:8000
     volumes:
       - ./backend/codestatsapi:/code/codestatsapi
       - backend-cache:/code/target
@@ -37,8 +39,9 @@ services:
       context: ./.nginx
     depends_on:
       - frontend
+    ports:
+      - 80:80
       - backend
-
     volumes:
       - backend-static:/code/static
 
