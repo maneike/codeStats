@@ -8,6 +8,7 @@ services:
       - 3000:3000
     volumes:
       - ./frontend/src:/code/src:ro
+      - frontend-dist:/code/dist
 
   backend:
     build:
@@ -45,6 +46,7 @@ services:
       - frontend
       - backend
     volumes:
+      - frontend-dist:/code/dist
       - backend-static:/code/static
 
   redis:
@@ -77,6 +79,7 @@ services:
       - ./backend/.dev.env
 
 volumes:
+  frontend-dist: {}
   backend-cache: {}
   backend-static: {}
   db-data: {}
