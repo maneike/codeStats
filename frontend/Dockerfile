@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1.4
-FROM node:lts AS development
+FROM node:lts AS builder
 
 # Set environment variables
 ENV CI=true
@@ -15,10 +15,13 @@ RUN npm install
 # Copy source code
 COPY . /code
 
+# Run the build command
+RUN npm run build
+
 # Set entrypoint for the development stage
 CMD [ "npm", "start" ]
 
-FROM development as dev-envs
+FROM builder as development
 
 # Update package manager and install git
 RUN apt-get update && apt-get install -y --no-install-recommends git
@@ -32,12 +35,3 @@ COPY --from=gloursdocker/docker / /
 # Set entrypoint for the dev-envs stage
 CMD [ "npm", "start" ]
 
-FROM development AS builder
-
-# Run the build command
-RUN npm run build
-
-FROM nginx:1.13-alpine
-
-# Copy build artifacts from the builder stage
-COPY --from=builder /code/build /usr/share/nginx/html
