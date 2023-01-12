@@ -242,39 +242,36 @@ export function App() {
                               </DropdownSelect>
                             </Li>
                           </Ul>
-                          {repo.languages.map((language) => (
-                            <div>
-                              <input
-                                type="checkbox"
-                                id={language}
-                                value={language}
-                                onChange={(e) => {
-                                  if (e.target.checked) {
-                                    setSelectedLanguages(
-                                      (selectedLanguages) => [
-                                        ...selectedLanguages,
-                                        e.target.value,
-                                      ]
-                                    );
-                                  } else {
-                                    setSelectedLanguages((selectedLanguages) =>
-                                      selectedLanguages.filter(
-                                        (language) =>
-                                          language !== e.target.value
-                                      )
-                                    );
-                                  }
-                                }}
-                              >
-                                {language}
-                              </input>
-                              <label for={language}>{language}</label>
-                            </div>
-                          ))}
                         </>
                       )
                     );
                   })}
+                  {repo.languages.map((language) => (
+                    <div>
+                      <input
+                        type="checkbox"
+                        id={language}
+                        value={language}
+                        onChange={(e) => {
+                          if (e.target.checked) {
+                            setSelectedLanguages((selectedLanguages) => [
+                              ...selectedLanguages,
+                              e.target.value,
+                            ]);
+                          } else {
+                            setSelectedLanguages((selectedLanguages) =>
+                              selectedLanguages.filter(
+                                (language) => language !== e.target.value
+                              )
+                            );
+                          }
+                        }}
+                      >
+                        {language}
+                      </input>
+                      <label for={language}>{language}</label>
+                    </div>
+                  ))}
                   <SubmitButton
                     disabled={isLoading}
                     onClick={(e) => submitRepoForm(e, repoId)}
