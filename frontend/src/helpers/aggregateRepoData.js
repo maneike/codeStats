@@ -7,6 +7,7 @@ const aggregateRepoData = (repo) => {
       new_name: user.name,
       new_email: user.email,
     })),
+    languages: repo.languages,
   };
 
   return aggregatedRepo;
