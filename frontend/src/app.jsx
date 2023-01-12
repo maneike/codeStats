@@ -1,5 +1,6 @@
 import { useEffect, useState } from "preact/hooks";
 import styled from "@emotion/styled";
+import { keyframes } from "@emotion/react";
 import "./index.css";
 
 import DropdownSelect from "./components/DropdownSelect";
@@ -25,6 +26,7 @@ export function App() {
   const [receivers, setReceivers] = useState("");
   const [repoUrlsToMerge, setRepoUrlsToMerge] = useState([]);
   const [mergedUrls, setMergedUrls] = useState([]);
+  const [selectedLanguages, setSelectedLanguages] = useState([]);
 
   useEffect(() => {
     const temp = [];
@@ -64,7 +66,7 @@ export function App() {
     e.preventDefault();
     setLoading(true);
     aggregatedRepos != [] &&
-      postMergedUsers(aggregatedRepos[repoId], setLoading);
+      postMergedUsers(aggregatedRepos[repoId], setLoading, selectedLanguages);
   };
 
   const hideForm = fetchedRepos ? true : false;
@@ -163,6 +165,13 @@ export function App() {
                 Submit
               </SubmitButton>
             </InputsWrapper>
+            {isLoading && (
+              <Blackout>
+                <SpinnerContainer>
+                  <Spinner></Spinner>
+                </SpinnerContainer>
+              </Blackout>
+            )}
           </form>
           <form>
             <InputsWrapper>
@@ -240,6 +249,35 @@ export function App() {
                       )
                     );
                   })}
+                  <RepoTitle>Pick languages to include in the report</RepoTitle>
+                  <LanguagesDiv>
+                    {repo.languages.map((language) => (
+                      <div>
+                        <Checkbox
+                          type="checkbox"
+                          id={language}
+                          value={language}
+                          onChange={(e) => {
+                            if (e.target.checked) {
+                              setSelectedLanguages((selectedLanguages) => [
+                                ...selectedLanguages,
+                                e.target.value,
+                              ]);
+                            } else {
+                              setSelectedLanguages((selectedLanguages) =>
+                                selectedLanguages.filter(
+                                  (language) => language !== e.target.value
+                                )
+                              );
+                            }
+                          }}
+                        >
+                          {language}
+                        </Checkbox>
+                        <label for={language}>{language}</label>
+                      </div>
+                    ))}
+                  </LanguagesDiv>
                   <SubmitButton
                     disabled={isLoading}
                     onClick={(e) => submitRepoForm(e, repoId)}
@@ -255,6 +293,51 @@ export function App() {
     </>
   );
 }
+
+const Blackout = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+`;
+
+const SpinnerContainer = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;
+const spin = keyframes`
+0% { transform: rotate(0deg); }
+100% { transform: rotate(360deg); }`;
+
+const Spinner = styled.div`
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid lightgreen;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: ${spin} 0.8s linear infinite;
+`;
+
+const Checkbox = styled.input`
+  accent-color: lightgreen;
+`;
+
+const LanguagesDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 0 auto;
+  padding: 0.5rem;
+  gap: 0.1rem;
+  border-radius: 0.25rem;
+  background-color: #323345;
+  color: white;
+  font-family: "Roboto", monospace;
+`;
 
 const SubmitButton = styled.button`
   font-family: "Roboto", monospace;
