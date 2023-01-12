@@ -20,5 +20,6 @@ export const postUrls = (
       alert("Link upload error ✘");
       setLoading(false);
       throw new Error(err);
-    });
+    })
+    .finally(() => setLoading(false));
 };
