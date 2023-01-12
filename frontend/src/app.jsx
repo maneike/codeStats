@@ -27,11 +27,6 @@ export function App() {
   const [mergedUrls, setMergedUrls] = useState([]);
   const [selectedLanguages, setSelectedLanguages] = useState([]);
 
-  //REMOVE
-  useEffect(() => {
-    console.log(selectedLanguages);
-  }, [selectedLanguages]);
-
   useEffect(() => {
     const temp = [];
     fetchedRepos?.data?.map((repo) => {
