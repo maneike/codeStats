@@ -25,6 +25,12 @@ export function App() {
   const [receivers, setReceivers] = useState("");
   const [repoUrlsToMerge, setRepoUrlsToMerge] = useState([]);
   const [mergedUrls, setMergedUrls] = useState([]);
+  const [selectedLanguages, setSelectedLanguages] = useState([]);
+
+  //REMOVE
+  useEffect(() => {
+    console.log(selectedLanguages);
+  }, [selectedLanguages]);
 
   useEffect(() => {
     const temp = [];
@@ -64,7 +70,7 @@ export function App() {
     e.preventDefault();
     setLoading(true);
     aggregatedRepos != [] &&
-      postMergedUsers(aggregatedRepos[repoId], setLoading);
+      postMergedUsers(aggregatedRepos[repoId], setLoading, selectedLanguages);
   };
 
   const hideForm = fetchedRepos ? true : false;
@@ -236,6 +242,35 @@ export function App() {
                               </DropdownSelect>
                             </Li>
                           </Ul>
+                          {repo.languages.map((language) => (
+                            <div>
+                              <input
+                                type="checkbox"
+                                id={language}
+                                value={language}
+                                onChange={(e) => {
+                                  if (e.target.checked) {
+                                    setSelectedLanguages(
+                                      (selectedLanguages) => [
+                                        ...selectedLanguages,
+                                        e.target.value,
+                                      ]
+                                    );
+                                  } else {
+                                    setSelectedLanguages((selectedLanguages) =>
+                                      selectedLanguages.filter(
+                                        (language) =>
+                                          language !== e.target.value
+                                      )
+                                    );
+                                  }
+                                }}
+                              >
+                                {language}
+                              </input>
+                              <label for={language}>{language}</label>
+                            </div>
+                          ))}
                         </>
                       )
                     );
