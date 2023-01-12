@@ -5,7 +5,7 @@ services:
       context: frontend
       target: development
     ports:
-      - 3000:3000
+      - "3000:3000"
     volumes:
       - ./frontend/src:/code/src:ro
       - frontend-dist:/code/dist
@@ -37,14 +37,21 @@ services:
     volumes:
       - db-data:/var/lib/postgresql/data
 
+  grafana:
+    build: "./grafana"
+    ports:
+      - "3001:3001"
+    user: "104"
+
   nginx:
     build:
       context: .nginx
     ports:
-      - 80:80
+      - "80:80"
     depends_on:
       - frontend
       - backend
+      - grafana
     volumes:
       - frontend-dist:/code/dist
       - backend-static:/code/static
@@ -57,12 +64,6 @@ services:
       - 6379:6379
     volumes:
       - redis-data:/data
-
-  grafana:
-    build: "./grafana"
-    ports:
-      - 3001:3000
-    user: "104"
 
   celery:
     build:
@@ -83,5 +84,4 @@ volumes:
   backend-cache: {}
   backend-static: {}
   db-data: {}
-  grafana-data: {}
   redis-data: {}
