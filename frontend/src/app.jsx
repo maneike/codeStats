@@ -246,32 +246,35 @@ export function App() {
                       )
                     );
                   })}
-                  {repo.languages.map((language) => (
-                    <div>
-                      <input
-                        type="checkbox"
-                        id={language}
-                        value={language}
-                        onChange={(e) => {
-                          if (e.target.checked) {
-                            setSelectedLanguages((selectedLanguages) => [
-                              ...selectedLanguages,
-                              e.target.value,
-                            ]);
-                          } else {
-                            setSelectedLanguages((selectedLanguages) =>
-                              selectedLanguages.filter(
-                                (language) => language !== e.target.value
-                              )
-                            );
-                          }
-                        }}
-                      >
-                        {language}
-                      </input>
-                      <label for={language}>{language}</label>
-                    </div>
-                  ))}
+                  <RepoTitle>Pick languages to include in the report</RepoTitle>
+                  <LanguagesDiv>
+                    {repo.languages.map((language) => (
+                      <div>
+                        <Checkbox
+                          type="checkbox"
+                          id={language}
+                          value={language}
+                          onChange={(e) => {
+                            if (e.target.checked) {
+                              setSelectedLanguages((selectedLanguages) => [
+                                ...selectedLanguages,
+                                e.target.value,
+                              ]);
+                            } else {
+                              setSelectedLanguages((selectedLanguages) =>
+                                selectedLanguages.filter(
+                                  (language) => language !== e.target.value
+                                )
+                              );
+                            }
+                          }}
+                        >
+                          {language}
+                        </Checkbox>
+                        <label for={language}>{language}</label>
+                      </div>
+                    ))}
+                  </LanguagesDiv>
                   <SubmitButton
                     disabled={isLoading}
                     onClick={(e) => submitRepoForm(e, repoId)}
@@ -287,6 +290,23 @@ export function App() {
     </>
   );
 }
+
+const Checkbox = styled.input`
+  accent-color: lightgreen;
+`;
+
+const LanguagesDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 0 auto;
+  padding: 0.5rem;
+  gap: 0.1rem;
+  border-radius: 0.25rem;
+  background-color: #323345;
+  color: white;
+  font-family: "Roboto", monospace;
+`;
 
 const SubmitButton = styled.button`
   font-family: "Roboto", monospace;
