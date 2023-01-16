@@ -53,18 +53,18 @@ def generate_basic_report(self, repo_name, merged_users, lng_to_chk):
                                     repository=repo_obj)
             branch = Branches.objects.filter(name=refs.name.split('/')[1]).latest('id').name
             curr_branch = {"branch_name": branch, 'commits': [], 'authors': list(
-                np.unique([Authors.objects.get(old_email=author.author.email,
+                np.unique([Authors.objects.filter(old_email=author.author.email,
                                                repository=Repositories.objects.filter(repo_name=repo_name).latest(
-                                                   'id')).name for author in
+                                                   'id')).latest('id').name for author in
                            reversed(commits_list)]))}
             # if extensions:
             #    f.write(f"File extensions: {extensions}\n")
             for commit in reversed(commits_list):
                 if [key.split('.')[-1] for key in commit.stats.files] != extensions_to_delete:
-                    commit_obj = Commits.objects.create(author=Authors.objects.get(old_email=commit.author.email,
+                    commit_obj = Commits.objects.create(author=Authors.objects.filter(old_email=commit.author.email,
                                                                                    repository=Repositories.objects.filter
                                                                                    (repo_name=repo_name).latest(
-                                                                                       'id')),
+                                                                                       'id')).latest('id'),
                                                         branch=Branches.objects.filter(
                                                             name=refs.name.split('/')[1]).latest('id'),
                                                         date=commit.committed_datetime,
@@ -78,10 +78,10 @@ def generate_basic_report(self, repo_name, merged_users, lng_to_chk):
                     changes = commit.stats.files
                     changes_filtered = [{"file_name": x, "changes": changes[x]} for x in changes
                                         if x.split('.')[-1] not in extensions_to_delete]
-                    curr_branch['commits'].append({'author': Authors.objects.get(old_email=commit.author.email,
+                    curr_branch['commits'].append({'author': Authors.objects.filter(old_email=commit.author.email,
                                                                                  repository=Repositories.objects.
                                                                                  filter(repo_name=repo_name).latest(
-                                                                                     'id')).name,
+                                                                                     'id')).latest('id').name,
                                                    'branch': branch,
                                                    'date': commit.committed_datetime,
                                                    'message': commit.message.replace('\n', ''),
@@ -89,7 +89,8 @@ def generate_basic_report(self, repo_name, merged_users, lng_to_chk):
             report["branches"].append(curr_branch)
         Report.objects.create(repo_name=repo_name, report=json.dumps(report, default=str))
         os.system(f"rm -rf {repo_name}")
-    repo_url = f'http://10.11.46.150:3001/d/yZQk88D4k/codestats?orgId=1&var-Repository={repo_name}'
+    grafana_url = os.environ.get('GRAFANA_URL')
+    repo_url = f'{grafana_url}/d/yZQk88D4k/codestats?orgId=1&var-Repository={repo_name}'
     send_mail(
         f'Report for {repo_name}',
         f'Link for report {repo_url}',
