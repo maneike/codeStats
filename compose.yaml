@@ -5,12 +5,10 @@ services:
       context: frontend
       target: development
     ports:
-      - 3000:3000
+      - "3000:3000"
     volumes:
       - ./frontend/src:/code/src:ro
-    networks:
-      network:
-        ipv4_address: 10.5.0.5
+      - frontend-dist:/code/dist
 
   backend:
     build:
@@ -26,9 +24,6 @@ services:
       - db
     env_file:
       - ./backend/.dev.env
-    networks:
-      network:
-        ipv4_address: 10.5.0.4
 
   db:
     image: postgres:14
@@ -41,23 +36,25 @@ services:
       - 5432:5432
     volumes:
       - db-data:/var/lib/postgresql/data
-    networks:
-      network:
-        ipv4_address: 10.5.0.3
+
+  grafana:
+    build: "./grafana"
+    ports:
+      - "3001:3001"
+    user: "104"
 
   nginx:
     build:
       context: .nginx
     ports:
-      - 80:80
+      - "80:80"
     depends_on:
       - frontend
       - backend
+      - grafana
     volumes:
+      - frontend-dist:/code/dist
       - backend-static:/code/static
-    networks:
-      network:
-        ipv4_address: 10.5.0.2
 
   redis:
     image: redis:alpine
@@ -67,18 +64,6 @@ services:
       - 6379:6379
     volumes:
       - redis-data:/data
-    networks:
-      network:
-        ipv4_address: 10.5.0.6
-
-  grafana:
-    build: "./grafana"
-    ports:
-      - 3001:3000
-    user: "104"
-    networks:
-      network:
-        ipv4_address: 10.5.0.7
 
   celery:
     build:
@@ -93,21 +78,10 @@ services:
       - redis
     env_file:
       - ./backend/.dev.env
-    networks:
-      network:
-        ipv4_address: 10.5.0.8
 
 volumes:
+  frontend-dist: {}
   backend-cache: {}
   backend-static: {}
   db-data: {}
-  grafana-data: {}
   redis-data: {}
-
-networks:
-  network:
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 10.5.0.0/16
-          gateway: 10.5.0.1
