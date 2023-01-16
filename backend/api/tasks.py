@@ -37,9 +37,9 @@ def generate_basic_report(self, repo_name, merged_users, lng_to_chk):
             repo = Repo(os.path.join(path, f"{repo_name}"))
         except exc.GitError:
             if url == "zip":
-                repo = Repo(f"./target/from_zip")
-            else:
                 repo = Repo(f"./target/from_zip/{repo_name}")
+            else:
+                repo = Repo(f"./target/from_zip/{repo_name}/{repo_name}")
         report['repo_name'] = repo_obj.repo_name
         remote_refs = repo.remote().refs
         for mu in merged_users:
@@ -107,15 +107,17 @@ def generate_basic_report(self, repo_name, merged_users, lng_to_chk):
 def handle_zip_save(self, file_obj, receivers):
     name = file_obj.name
     default_storage.save(name, ContentFile(file_obj.read()))
+    tmp_name = name.split('.')[0]
+    os.system(f"rm -rf ./target/from_zip/{tmp_name}")
     with zipfile.ZipFile(name, "r") as zip_ref:
-        zip_ref.extractall("./target/from_zip")
-        names = [name for name in os.listdir("./target/from_zip")
-                 if os.path.isdir(os.path.join("./target/from_zip", name))]
+        zip_ref.extractall(f"./target/from_zip/{tmp_name}")
+        names = [name for name in os.listdir(f"./target/from_zip/{tmp_name}")
+                 if os.path.isdir(os.path.join(f"./target/from_zip/{tmp_name}", name))]
     repo_names = []
     try:
         if ".git" not in names:
             for name in names:
-                tmp_names = [n for n in os.listdir(f"./target/from_zip/{name}")]
+                tmp_names = [n for n in os.listdir(f"./target/from_zip/{tmp_name}/{name}")]
                 if ".git" in tmp_names:
                     try:
                         iteration = Repositories.objects.filter(repo_name=name).latest('id').iteration + 1
@@ -145,11 +147,11 @@ def get_all_users_from_zip(self, repo_name):
         model_item = Repositories.objects.filter(repo_name=item).latest('id')
         users = []
         if model_item.url == "zip":
-            path = f"./target/from_zip/"
-            repo = Repo(f"./target/from_zip/")
+            path = f"./target/from_zip/{item}/"
+            repo = Repo(f"./target/from_zip/{item}/")
         else:
-            path = f"./target/from_zip/{item}"
-            repo = Repo(f"./target/from_zip/{item}")
+            path = f"./target/from_zip/{item}/{item}/"
+            repo = Repo(f"./target/from_zip/{item}/{item}/")
         remote_refs = repo.remote().refs
         for refs in remote_refs:
             refs.checkout()
