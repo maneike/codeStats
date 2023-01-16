@@ -90,7 +90,9 @@ def generate_basic_report(self, repo_name, merged_users, lng_to_chk):
         Report.objects.create(repo_name=repo_name, report=json.dumps(report, default=str))
         os.system(f"rm -rf {repo_name}")
     grafana_url = os.environ.get('GRAFANA_URL')
-    repo_url = f'{grafana_url}/d/yZQk88D4k/codestats?orgId=1&var-Repository={repo_name}'
+    branch_to_url = Branches.objects.filter(repository=repo_obj).values('name')[0].get('name')
+    repo_url = f'{grafana_url}/d/yZQk88D4k/codestats?orgId=1&var-Repository={repo_name}' \
+               f'&var-Iteration={repo_obj.iteration}&var-Branch={branch_to_url}'
     send_mail(
         f'Report for {repo_name}',
         f'Link for report {repo_url}',
