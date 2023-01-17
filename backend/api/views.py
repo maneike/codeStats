@@ -12,7 +12,6 @@ class ZipRepoView(views.APIView):
     parser_classes = (MultiPartParser,)
 
     def post(self, request):
-        os.system("rm -rf ./target/from_zip")
         file_obj = request.FILES['file']
         receivers = self.request.data['receivers']
         name = handle_zip_save(file_obj, receivers)
