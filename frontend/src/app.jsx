@@ -67,6 +67,8 @@ export function App() {
     setLoading(true);
     aggregatedRepos != [] &&
       postMergedUsers(aggregatedRepos[repoId], setLoading, selectedLanguages);
+
+    setSelectedLanguages([]);
   };
 
   const hideForm = fetchedRepos ? true : false;
@@ -82,7 +84,7 @@ export function App() {
           url.trim(),
         ]);
 
-        const repoName = regex.exec(url)[5].replace(".git", "").trim();
+        const repoName = url.match(/\/([^/]+)\.git$/)[1];
 
         setMergedUrls((mergedUrls) => [
           ...mergedUrls,
