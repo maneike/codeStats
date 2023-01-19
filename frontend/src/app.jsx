@@ -67,6 +67,11 @@ export function App() {
     setLoading(true);
     aggregatedRepos != [] &&
       postMergedUsers(aggregatedRepos[repoId], setLoading, selectedLanguages);
+
+    setSelectedLanguages([]);
+    setAggregatedRepos((prevState) =>
+      prevState.filter((repo, index) => index !== repoId)
+    );
   };
 
   const hideForm = fetchedRepos ? true : false;
@@ -82,8 +87,9 @@ export function App() {
           url.trim(),
         ]);
 
-        const repoName = regex.exec(url)[5].replace(".git", "").trim();
+        const repoName = url.match(/\/([^/]+)\.git$/)[1];
 
+        // if(new_name == name) add({old_name: name, new_name:name})
         setMergedUrls((mergedUrls) => [
           ...mergedUrls,
           {
@@ -191,6 +197,7 @@ export function App() {
           Your report will be sent to: {receivers}
         </ReceiversTitle>
       )}
+
       <form>
         {aggregatedRepos?.map((repo, repoId) => {
           {
