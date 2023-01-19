@@ -69,6 +69,9 @@ export function App() {
       postMergedUsers(aggregatedRepos[repoId], setLoading, selectedLanguages);
 
     setSelectedLanguages([]);
+    setAggregatedRepos((prevState) =>
+      prevState.filter((repo, index) => index !== repoId)
+    );
   };
 
   const hideForm = fetchedRepos ? true : false;
@@ -193,6 +196,7 @@ export function App() {
           Your report will be sent to: {receivers}
         </ReceiversTitle>
       )}
+
       <form>
         {aggregatedRepos?.map((repo, repoId) => {
           {
