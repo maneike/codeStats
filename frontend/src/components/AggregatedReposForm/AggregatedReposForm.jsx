@@ -23,6 +23,11 @@ const AggregatedReposForm = ({
     setLoading(true);
     aggregatedRepos.length > 0 &&
       postMergedUsers(aggregatedRepos[repoId], setLoading, selectedLanguages);
+
+    setSelectedLanguages([]);
+    setAggregatedRepos((prevState) =>
+      prevState.filter((repo, index) => index !== repoId)
+    );
   };
 
   return (

@@ -49,8 +49,9 @@ const UrlsForm = ({
           url.trim(),
         ]);
 
-        const repoName = regex.exec(url)[5].replace(".git", "").trim();
+        const repoName = url.match(/\/([^/]+)\.git$/)[1];
 
+        // if(new_name == name) add({old_name: name, new_name:name})
         setMergedUrls((mergedUrls) => [
           ...mergedUrls,
           {
