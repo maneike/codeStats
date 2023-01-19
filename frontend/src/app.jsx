@@ -89,6 +89,7 @@ export function App() {
 
         const repoName = url.match(/\/([^/]+)\.git$/)[1];
 
+        // if(new_name == name) add({old_name: name, new_name:name})
         setMergedUrls((mergedUrls) => [
           ...mergedUrls,
           {
