@@ -29,7 +29,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/maneike/codeStats">
-    <img src="icon-512.png" alt="Logo" width="80" height="80">
+    <img src="readme/icon-512.png" alt="Logo" width="80" height="80">
   </a>
 
 <h3 align="center">codeStats</h3>
@@ -150,7 +150,7 @@ docker compose run backend python3 manage.py createsuperuser
 ## App
 
   <a href="https://github.com/maneike/codeStats">
-    <img src="scheme.png" alt="Logo" >
+    <img src="readme/scheme.png" alt="Logo" >
   </a>
 
 _For more examples, please refer to the [Documentation](https://example.com)_
