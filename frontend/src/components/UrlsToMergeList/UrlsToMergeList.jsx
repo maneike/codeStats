@@ -4,11 +4,9 @@ import DropdownSelect from "../DropdownSelect";
 import Ul from "../Ul";
 import Li from "../Li";
 
-import { regex } from "../../helpers/extractRepoNameFromUrl";
-
 const UrlsToMergeList = ({ repoUrlsToMerge, mergedUrls, setMergedUrls }) => {
   const repoNames = repoUrlsToMerge.map((repoUrl) => {
-    const repoName = regex.exec(repoUrl)[5].replace(".git", "");
+    const repoName = repoUrl.match(/\/([^/]+)\.git$/)[1];
     return { name: repoName, url: repoUrl };
   });
   return (
@@ -21,24 +19,16 @@ const UrlsToMergeList = ({ repoUrlsToMerge, mergedUrls, setMergedUrls }) => {
               <Line />
               <StyledDropdownSelect
                 onChange={(e) => {
-                  // remove repo.name from mergedUrls first
                   const filteredMergedUrls = mergedUrls.filter(
                     (mergedUrl) => Object.keys(mergedUrl)[0] !== repo.name
                   );
-                  filteredMergedUrls.push({
-                    old: {
-                      name: repo.name,
-                      url: repo.url,
-                    },
+                  filteredMergedUrls[index] = {
+                    ...filteredMergedUrls[index],
                     new: {
+                      ...filteredMergedUrls[index].old,
                       name: e.target.value,
-                      url: repoUrlsToMerge.find(
-                        (repoUrl) =>
-                          regex.exec(repoUrl)[5].replace(".git", "") ===
-                          e.target.value
-                      ),
                     },
-                  });
+                  };
                   setMergedUrls([...filteredMergedUrls]);
                 }}
               >
