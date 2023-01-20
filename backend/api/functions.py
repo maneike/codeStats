@@ -13,7 +13,7 @@ def get_all_users(urls, receivers):
     for u in urls[1:]:
         users = []
         repo_name = u.get('new').get('name')
-        if u.get('new').get('name') == u.get('old').get('name'):
+        if u.get('new').get('name') == u.get('old').get('name') and urls[urls.index(u)-1].get('new').get('name') != u.get('new').get('name'):
             merged = False
         else:
             merged = True
@@ -67,9 +67,9 @@ def handle_first_url(first_data, receivers):
                                              url=first_data.get('old').get('url'), iteration=iteration)
     path = os.getcwd()
     try:
-        repo = Repo.clone_from(first_data.get('old').get('url'), os.path.join(path, f"{repo_name}"))
+        repo = Repo.clone_from(first_data.get('old').get('url'), os.path.join(path, f"{first_data.get('old').get('name')}"))
     except exc.GitError:
-        repo = Repo.clone_from(first_data.get('old').get('url'), os.path.join(path, f"{repo_name}"))
+        repo = Repo.clone_from(first_data.get('old').get('url'), os.path.join(path, f"{first_data.get('old').get('name')}"))
     remote_refs = repo.remote().refs
     for refs in remote_refs:
         refs.checkout()
