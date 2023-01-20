@@ -24,10 +24,10 @@ const AggregatedReposForm = ({
     aggregatedRepos.length > 0 &&
       postMergedUsers(aggregatedRepos[repoId], setLoading, selectedLanguages);
 
-    setSelectedLanguages([]);
     setAggregatedRepos((prevState) =>
       prevState.filter((repo, index) => index !== repoId)
     );
+    setSelectedLanguages([]);
   };
 
   return (
@@ -94,9 +94,9 @@ const AggregatedReposForm = ({
                   {repo.languages.map((language) => (
                     <div>
                       <Checkbox
-                        type="checkbox"
                         id={language}
                         value={language}
+                        checked={selectedLanguages.includes(language)}
                         onChange={(e) => {
                           if (e.target.checked) {
                             setSelectedLanguages((selectedLanguages) => [
@@ -142,6 +142,7 @@ const RepoTitle = styled.h3`
 const Checkbox = styled.input`
   accent-color: lightgreen;
 `;
+Checkbox.defaultProps = { type: "checkbox" };
 
 const LanguagesDiv = styled.div`
   display: flex;
