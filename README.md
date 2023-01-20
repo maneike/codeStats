@@ -65,8 +65,6 @@
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#known-issues-and-basic-troubleshooting">Known issues and basic troubleshooting</a></li>
@@ -144,6 +142,20 @@ docker compose run backend python3 manage.py createsuperuser
 ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Usage
+
+To start the project after building
+
+```sh
+docker compose up
+```
+
+To stop the project
+
+```sh
+docker compose down -v
+```
 
 <!-- USAGE EXAMPLES -->
 
