@@ -4,8 +4,6 @@ import DropdownSelect from "../DropdownSelect";
 import Ul from "../Ul";
 import Li from "../Li";
 
-import { regex } from "../../helpers/extractRepoNameFromUrl";
-
 const UrlsToMergeList = ({ repoUrlsToMerge, mergedUrls, setMergedUrls }) => {
   const repoNames = repoUrlsToMerge.map((repoUrl) => {
     const repoName = repoUrl.match(/\/([^/]+)\.git$/)[1];
