@@ -11,3 +11,5 @@ celery
 redis
 requests
 ghlinguist
+pytest-cov
+pytest
