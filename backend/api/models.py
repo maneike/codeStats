@@ -6,6 +6,7 @@ class Repositories(models.Model):
     receivers = models.CharField(max_length=1000)
     url = models.CharField(max_length=1000)
     iteration = models.IntegerField()
+    date_created = models.DateField(auto_now_add=True)
 
     def __str__(self):
         return self.repo_name
@@ -34,7 +35,7 @@ class Branches(models.Model):
 class Commits(models.Model):
     author = models.ForeignKey(Authors, on_delete=models.CASCADE)
     branch = models.ForeignKey(Branches, on_delete=models.CASCADE)
-    date = models.DateTimeField()
+    date = models.DateField()
     message = models.CharField(max_length=500)
     edited_files = models.CharField(max_length=1000)
 
