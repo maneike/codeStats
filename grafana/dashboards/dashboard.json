@@ -88,7 +88,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT languages, percentage FROM api_repolanguages \nINNER JOIN api_repositories ON api_repositories.id = api_repolanguages.repository_id\nWHERE repo_name = '$Repository' and api_repositories.iteration = $Iteration ",
+          "rawSql": "SELECT languages, SUM(percentage) FROM api_repolanguages \nINNER JOIN api_repositories ON api_repositories.id = api_repolanguages.repository_id\nWHERE repo_name = '$Repository' and api_repositories.iteration = $Iteration \nGROUP BY languages",
           "refId": "A",
           "sql": {
             "columns": [
@@ -1057,10 +1057,9 @@
       },
       {
         "current": {
-          "isNone": true,
           "selected": false,
-          "text": "None",
-          "value": ""
+          "text": "gh-pages",
+          "value": "gh-pages"
         },
         "datasource": {
           "type": "postgres",
@@ -1081,10 +1080,9 @@
       },
       {
         "current": {
-          "isNone": true,
           "selected": false,
-          "text": "None",
-          "value": ""
+          "text": "username",
+          "value": "username"
         },
         "datasource": {
           "type": "postgres",
@@ -1108,6 +1106,10 @@
           "selected": false,
           "text": "1",
           "value": "1"
+        },
+        "datasource": {
+          "type": "postgres",
+          "uid": "P44368ADAD746BC27"
         },
         "definition": "SELECT iteration FROM api_repositories \nWHERE repo_name = '$Repository'",
         "hide": 0,
