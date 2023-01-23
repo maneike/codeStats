@@ -100,7 +100,8 @@ const UrlsForm = ({
           value={receivers}
           onChange={(e) => setReceivers(e.target.value)}
         />
-        <Line />
+      </InputsWrapper>
+      <InputsWrapper>
         <TextAreaReceivers
           placeholder="Paste the repo URLs (with .git at the end) and submit them with enter"
           type="text"
