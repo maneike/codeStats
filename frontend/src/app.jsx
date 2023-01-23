@@ -38,7 +38,10 @@ export function App() {
             setLoading={setLoading}
             setFetchedRepos={setFetchedRepos}
           />
+
           <UploadForm
+            receivers={receivers}
+            setReceivers={setReceivers}
             isLoading={isLoading}
             setLoading={setLoading}
             setFetchedRepos={setFetchedRepos}
