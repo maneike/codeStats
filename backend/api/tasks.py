@@ -67,7 +67,7 @@ def generate_basic_report(self, repo_name, merged_users, lng_to_chk):
                                                                                        'id')).latest('id'),
                                                         branch=Branches.objects.filter(
                                                             name=refs.name.split('/')[1]).latest('id'),
-                                                        date=commit.committed_datetime,
+                                                        date=commit.committed_datetime.strftime("%Y-%m-%d"),
                                                         message=commit.message.replace('\n', ''))
                     for key in commit.stats.files:
                         if key.split('.')[-1] not in extensions_to_delete:
@@ -83,7 +83,7 @@ def generate_basic_report(self, repo_name, merged_users, lng_to_chk):
                                                                                  filter(repo_name=repo_name).latest(
                                                                                      'id')).latest('id').name,
                                                    'branch': branch,
-                                                   'date': commit.committed_datetime,
+                                                   'date': commit.committed_datetime.strftime("%Y-%m-%d"),
                                                    'message': commit.message.replace('\n', ''),
                                                    'changed_files': changes_filtered})
             report["branches"].append(curr_branch)
