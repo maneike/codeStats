@@ -363,7 +363,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
-            "drawStyle": "bars",
+            "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
             "hideFrom": {
@@ -423,6 +423,7 @@
           "sort": "none"
         }
       },
+      "pluginVersion": "9.3.2",
       "targets": [
         {
           "datasource": {
@@ -595,7 +596,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
-            "drawStyle": "bars",
+            "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
             "hideFrom": {
@@ -707,7 +708,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
-            "drawStyle": "bars",
+            "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
             "hideFrom": {
@@ -1027,6 +1028,7 @@
       "type": "table"
     }
   ],
+  "refresh": false,
   "schemaVersion": 37,
   "style": "dark",
   "tags": [],
@@ -1035,8 +1037,8 @@
       {
         "current": {
           "selected": false,
-          "text": "guillotine-cutter",
-          "value": "guillotine-cutter"
+          "text": "searchApp",
+          "value": "searchApp"
         },
         "datasource": {
           "type": "postgres",
@@ -1057,9 +1059,9 @@
       },
       {
         "current": {
-          "selected": false,
-          "text": "gh-pages",
-          "value": "gh-pages"
+          "selected": true,
+          "text": "main",
+          "value": "main"
         },
         "datasource": {
           "type": "postgres",
@@ -1080,9 +1082,9 @@
       },
       {
         "current": {
-          "selected": false,
-          "text": "username",
-          "value": "username"
+          "selected": true,
+          "text": "MateuszBa",
+          "value": "MateuszBa"
         },
         "datasource": {
           "type": "postgres",
@@ -1103,9 +1105,9 @@
       },
       {
         "current": {
-          "selected": false,
-          "text": "1",
-          "value": "1"
+          "selected": true,
+          "text": "2",
+          "value": "2"
         },
         "datasource": {
           "type": "postgres",
@@ -1127,8 +1129,8 @@
     ]
   },
   "time": {
-    "from": "now-5y",
-    "to": "now"
+    "from": "2022-01-15T20:49:59.211Z",
+    "to": "2022-05-11T22:21:07.001Z"
   },
   "timepicker": {},
   "timezone": "",
