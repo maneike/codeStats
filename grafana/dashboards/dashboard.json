@@ -88,7 +88,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT languages, percentage FROM api_repolanguages \nINNER JOIN api_repositories ON api_repositories.id = api_repolanguages.repository_id\nWHERE repo_name = '$Repository' and api_repositories.iteration = $Iteration ",
+          "rawSql": "SELECT languages, SUM(percentage) FROM api_repolanguages \nINNER JOIN api_repositories ON api_repositories.id = api_repolanguages.repository_id\nWHERE repo_name = '$Repository' and api_repositories.iteration = $Iteration \nGROUP BY languages",
           "refId": "A",
           "sql": {
             "columns": [
@@ -363,7 +363,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
-            "drawStyle": "bars",
+            "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
             "hideFrom": {
@@ -423,6 +423,7 @@
           "sort": "none"
         }
       },
+      "pluginVersion": "9.3.2",
       "targets": [
         {
           "datasource": {
@@ -595,7 +596,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
-            "drawStyle": "bars",
+            "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
             "hideFrom": {
@@ -707,7 +708,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
-            "drawStyle": "bars",
+            "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
             "hideFrom": {
@@ -1027,6 +1028,7 @@
       "type": "table"
     }
   ],
+  "refresh": false,
   "schemaVersion": 37,
   "style": "dark",
   "tags": [],
@@ -1035,8 +1037,8 @@
       {
         "current": {
           "selected": false,
-          "text": "guillotine-cutter",
-          "value": "guillotine-cutter"
+          "text": "searchApp",
+          "value": "searchApp"
         },
         "datasource": {
           "type": "postgres",
@@ -1057,10 +1059,9 @@
       },
       {
         "current": {
-          "isNone": true,
-          "selected": false,
-          "text": "None",
-          "value": ""
+          "selected": true,
+          "text": "main",
+          "value": "main"
         },
         "datasource": {
           "type": "postgres",
@@ -1081,10 +1082,9 @@
       },
       {
         "current": {
-          "isNone": true,
-          "selected": false,
-          "text": "None",
-          "value": ""
+          "selected": true,
+          "text": "MateuszBa",
+          "value": "MateuszBa"
         },
         "datasource": {
           "type": "postgres",
@@ -1105,9 +1105,13 @@
       },
       {
         "current": {
-          "selected": false,
-          "text": "1",
-          "value": "1"
+          "selected": true,
+          "text": "2",
+          "value": "2"
+        },
+        "datasource": {
+          "type": "postgres",
+          "uid": "P44368ADAD746BC27"
         },
         "definition": "SELECT iteration FROM api_repositories \nWHERE repo_name = '$Repository'",
         "hide": 0,
@@ -1125,8 +1129,8 @@
     ]
   },
   "time": {
-    "from": "now-5y",
-    "to": "now"
+    "from": "2022-01-15T20:49:59.211Z",
+    "to": "2022-05-11T22:21:07.001Z"
   },
   "timepicker": {},
   "timezone": "",
