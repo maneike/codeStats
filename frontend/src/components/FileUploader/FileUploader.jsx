@@ -3,7 +3,21 @@ import { useState } from "preact/hooks";
 
 const FileUploader = ({ onFileSelectError, onFileSelectSuccess }) => {
   const [fileName, setFileName] = useState("");
-  const handleFileInput = (e) => {
+
+  const handleFileInput = (files) => {
+    const file = files[0];
+    file
+      ? onFileSelectSuccess(file) & setFileName(file.name)
+      : onFileSelectError({ error: "Please select a file" });
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    handleFileInput(e.dataTransfer.files);
+  };
+
+  const handleClick = (e) => {
+    e.preventDefault();
     const file = e.target.files[0];
     file
       ? onFileSelectSuccess(file) & setFileName(file.name)
@@ -12,7 +26,11 @@ const FileUploader = ({ onFileSelectError, onFileSelectSuccess }) => {
 
   return (
     <>
-      <Label for="upload-files">
+      <Label
+        for="upload-files"
+        onDrop={handleDrop}
+        onDragOver={(e) => e.preventDefault()}
+      >
         <CloudSVG>
           <svg
             width="135"
@@ -27,7 +45,7 @@ const FileUploader = ({ onFileSelectError, onFileSelectSuccess }) => {
             />
           </svg>
         </CloudSVG>
-        <h2>Click here to choose file</h2>
+        <h2>Choose a file or drag it here</h2>
       </Label>
       <p>
         <b>File:</b> {fileName}
@@ -35,7 +53,7 @@ const FileUploader = ({ onFileSelectError, onFileSelectSuccess }) => {
       <FileInputStyled
         id="upload-files"
         type="file"
-        onChange={handleFileInput}
+        onChange={handleClick}
         multiple
       />
       <H5>Supports: ZIP containing .git</H5>
