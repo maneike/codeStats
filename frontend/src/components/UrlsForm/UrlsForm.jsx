@@ -100,7 +100,8 @@ const UrlsForm = ({
           value={receivers}
           onChange={(e) => setReceivers(e.target.value)}
         />
-        <Line />
+      </InputsWrapper>
+      <InputsWrapper>
         <TextAreaReceivers
           placeholder="Paste the repo URLs (with .git at the end) and submit them with enter"
           type="text"
@@ -154,6 +155,16 @@ const TextAreaReceivers = styled.textarea`
   ::placeholder {
     color: lightgrey;
     opacity: 0.8;
+  }
+  margin: 0 auto;
+  @media (min-width: 320px) {
+    width: var(--text-area-width-320);
+  }
+  @media (min-width: 768px) {
+    width: var(--text-area-width-768);
+  }
+  @media (min-width: 1024px) {
+    width: var(--text-area-width);
   }
 `;
 

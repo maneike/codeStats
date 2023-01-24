@@ -6,15 +6,26 @@ import SubmitButton from "../SubmitButton";
 
 import { postFiles } from "../../services/postFiles";
 
-const UploadForm = ({ isLoading, setLoading, setFetchedRepos }) => {
+const UploadForm = ({ receivers, isLoading, setLoading, setFetchedRepos }) => {
   const [selectedFile, setSelectedFile] = useState(null);
 
   const submitForm = (e) => {
     e.preventDefault();
-    setLoading(true);
+
+    receivers && setLoading(true);
+
+    !receivers && alert("Please provide an email ✘");
+
     const formData = new FormData();
+
     selectedFile &&
-      postFiles(selectedFile, formData, setFetchedRepos, setLoading);
+      postFiles(
+        receivers.split(",").map((item) => item.trim()),
+        selectedFile,
+        formData,
+        setFetchedRepos,
+        setLoading
+      );
   };
 
   return (
