@@ -13,7 +13,7 @@ class ZipRepoView(views.APIView):
 
     def post(self, request):
         file_obj = request.FILES['file']
-        receivers = self.request.data['receivers']
+        receivers = json.load(request.FILES['receivers'])
         name = handle_zip_save(file_obj, receivers)
         users = get_all_users_from_zip(name)
         return JsonResponse(users, status=200)
@@ -40,5 +40,6 @@ class UsersReportView(views.APIView):
 class GetReportView(views.APIView):
 
     def get(self, request, repo_name):
-        report = Report.objects.filter(repo_name=repo_name).values("report").order_by('-id')[0]["report"]
+        report = Report.objects.filter(repo_name=repo_name).values(
+            "report").order_by('-id')[0]["report"]
         return JsonResponse(json.loads(report), status=200)
