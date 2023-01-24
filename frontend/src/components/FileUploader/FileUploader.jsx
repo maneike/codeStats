@@ -66,6 +66,7 @@ const H5 = styled.h5`
 const Label = styled.label`
   background-color: #56576b;
   width: 400px;
+  margin: 0 auto;
   border: 3px dotted lightgreen;
   transition: all 0.3s ease-in-out;
   &:hover {
@@ -73,5 +74,8 @@ const Label = styled.label`
     opacity: 0.7;
     border: 3px dotted black;
     color: black;
+  }
+  @media (max-width: 768px) {
+    width: 80%;
   }
 `;
