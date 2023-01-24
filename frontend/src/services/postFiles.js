@@ -8,7 +8,12 @@ export const postFiles = (
   setLoading
 ) => {
   formData.append("file", selectedFile);
-  formData.append("receivers", receivers);
+  formData.append(
+    "receivers",
+    new Blob([JSON.stringify(receivers)], {
+      type: "application/json",
+    })
+  );
   axios
     .post("http://localhost:80/api/zip/", formData)
     .then((res) => {
