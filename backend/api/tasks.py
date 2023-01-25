@@ -172,11 +172,14 @@ def get_all_users_from_zip(self, repo_name):
             commits_list = list(repo.iter_commits())
             for author in reversed(commits_list):
                 users.append({"name": author.author.name, "email": author.author.email})
-        for lng in ghl.linguist(path):
-            if float(lng[1]) > 0:
-                RepoLanguages.objects.create(languages=lng[0], percentage=lng[1],
-                                             repository=Repositories.objects.filter(repo_name=item[1]).
-                                             latest('id'))
+        try:
+            for lng in ghl.linguist(path):
+                if float(lng[1]) > 0:
+                    RepoLanguages.objects.create(languages=lng[0], percentage=lng[1],
+                                                 repository=Repositories.objects.filter(repo_name=item[1]).
+                                                 latest('id'))
+        except TypeError:
+            return {'error': 'Failed to get languages used in this repo'}
         try:
             all_data.append({"repo_name": item[1], "users": list({v['email']: v for v in users}.values()),
                              'languages': [l[0] for l in ghl.linguist(path)]})
