@@ -168,7 +168,7 @@ def get_all_users_from_zip(self, repo_name):
             try:
                 refs.checkout()
             except exc.GitCommandError:
-                return {'error' : 'Uncommitted files. Committ changes and try again'}
+                return {'error' : 'Uncommitted files. Commit changes and try again.'}
             commits_list = list(repo.iter_commits())
             for author in reversed(commits_list):
                 users.append({"name": author.author.name, "email": author.author.email})
