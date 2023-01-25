@@ -72,7 +72,7 @@ def handle_first_url(first_data, receivers):
     try:
         repo = Repo.clone_from(first_data.get('old').get('url'), os.path.join(path, f"{first_data.get('old').get('name')}"))
     except exc.GitCommandError:
-        return {'error': 'Requested repository is private or does not exists'}
+        return {'error': 'Requested repository is private or does not exist.'}
     remote_refs = repo.remote().refs
     for refs in remote_refs:
         refs.checkout()
