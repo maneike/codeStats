@@ -46,47 +46,54 @@ def generate_basic_report(self, repo_name, merged_users, lng_to_chk):
             Authors.objects.create(name=mu["new_name"], email=mu["new_email"], old_name=mu['old_name'],
                                    old_email=mu['old_email'],
                                    repository=repo_obj)
+        repo.git.checkout('-b', 'origin/main', 'origin/main')
         for refs in remote_refs:
-            refs.checkout()
-            commits_list = list(repo.iter_commits())
-            Branches.objects.create(name=refs.name.split('/')[1], commits_count=len(commits_list),
-                                    repository=repo_obj)
-            branch = Branches.objects.filter(name=refs.name.split('/')[1]).latest('id').name
-            curr_branch = {"branch_name": branch, 'commits': [], 'authors': list(
-                np.unique([Authors.objects.filter(old_email=author.author.email,
-                                               repository=Repositories.objects.filter(repo_name=repo_name).latest(
-                                                   'id')).latest('id').name for author in
-                           reversed(commits_list)]))}
-            # if extensions:
-            #    f.write(f"File extensions: {extensions}\n")
-            for commit in reversed(commits_list):
-                if [key.split('.')[-1] for key in commit.stats.files] != extensions_to_delete:
-                    commit_obj = Commits.objects.create(author=Authors.objects.filter(old_email=commit.author.email,
-                                                                                   repository=Repositories.objects.filter
-                                                                                   (repo_name=repo_name).latest(
-                                                                                       'id')).latest('id'),
-                                                        branch=Branches.objects.filter(
-                                                            name=refs.name.split('/')[1]).latest('id'),
-                                                        date=commit.committed_datetime.strftime("%Y-%m-%d"),
-                                                        message=commit.message.replace('\n', ''))
-                    for key in commit.stats.files:
-                        if key.split('.')[-1] not in extensions_to_delete:
-                            stats = commit.stats.files[f'{key}']
-                            Changes.objects.create(commit=commit_obj, file_name=key,
-                                                   insertions=stats['insertions'],
-                                                   deletions=stats['deletions'], lines=stats['lines'])
-                    changes = commit.stats.files
-                    changes_filtered = [{"file_name": x, "changes": changes[x]} for x in changes
-                                        if x.split('.')[-1] not in extensions_to_delete]
-                    curr_branch['commits'].append({'author': Authors.objects.filter(old_email=commit.author.email,
-                                                                                 repository=Repositories.objects.
-                                                                                 filter(repo_name=repo_name).latest(
-                                                                                     'id')).latest('id').name,
-                                                   'branch': branch,
-                                                   'date': commit.committed_datetime.strftime("%Y-%m-%d"),
-                                                   'message': commit.message.replace('\n', ''),
-                                                   'changed_files': changes_filtered})
-            report["branches"].append(curr_branch)
+            try:
+                repo.git.checkout('-b', refs, refs)
+                branch_tmp = repo.active_branch
+                unpushed_symbol = list(repo.iter_commits(f'origin/main@{{u}}..{branch_tmp}')) if \
+                    list(repo.iter_commits(f'origin/main@{{u}}..{branch_tmp}')) else 'pusto'
+            except exc.GitCommandError:
+                repo.git.checkout('origin/main')
+                branch_tmp = repo.active_branch
+                unpushed_symbol = list(repo.iter_commits(f'origin/main@{{u}}..{branch_tmp}')) if \
+                    list(repo.iter_commits(f'origin/main@{{u}}..{branch_tmp}')) else 'pusto'
+            if type(unpushed_symbol) == list or 'main' in refs.name:
+                refs.checkout()
+                if 'main' in refs.name:
+                    commits_list = list(repo.iter_commits())
+                else:
+                    commits_list = unpushed_symbol
+                branch_obj = Branches.objects.create(name=refs.name.split('/')[-1], commits_count=len(commits_list),
+                                                     repository=repo_obj)
+                branch = branch_obj.name
+                curr_branch = {"branch_name": branch, 'commits': [], 'authors': list(
+                    np.unique([Authors.objects.filter(old_email=author.author.email,
+                                                      repository=repo_obj).latest('id').name for author in
+                               reversed(commits_list)]))}
+                for commit in reversed(commits_list):
+                    if [key.split('.')[-1] for key in commit.stats.files] != extensions_to_delete:
+                        commit_obj = Commits.objects.create(author=Authors.objects.filter(old_email=commit.author.email,
+                                                                                          repository=repo_obj).latest('id'),
+                                                            branch=branch_obj,
+                                                            date=commit.committed_datetime.strftime("%Y-%m-%d"),
+                                                            message=commit.message.replace('\n', ''))
+                        for key in commit.stats.files:
+                            if key.split('.')[-1] not in extensions_to_delete:
+                                stats = commit.stats.files[f'{key}']
+                                Changes.objects.create(commit=commit_obj, file_name=key,
+                                                       insertions=stats['insertions'],
+                                                       deletions=stats['deletions'], lines=stats['lines'])
+                        changes = commit.stats.files
+                        changes_filtered = [{"file_name": x, "changes": changes[x]} for x in changes
+                                            if x.split('.')[-1] not in extensions_to_delete]
+                        curr_branch['commits'].append({'author': Authors.objects.filter(old_email=commit.author.email,
+                                                                                        repository=repo_obj).latest('id').name,
+                                                       'branch': branch,
+                                                       'date': commit.committed_datetime.strftime("%Y-%m-%d"),
+                                                       'message': commit.message.replace('\n', ''),
+                                                       'changed_files': changes_filtered})
+                report["branches"].append(curr_branch)
         Report.objects.create(repo_name=repo_name, report=json.dumps(report, default=str))
         os.system(f"rm -rf {repo_name}")
     grafana_url = os.environ.get('GRAFANA_URL')
@@ -168,7 +175,7 @@ def get_all_users_from_zip(self, repo_name):
             try:
                 refs.checkout()
             except exc.GitCommandError:
-                return {'error' : 'Uncommitted files. Commit changes and try again.'}
+                return {'error': 'Uncommitted files. Commit changes and try again.'}
             commits_list = list(repo.iter_commits())
             for author in reversed(commits_list):
                 users.append({"name": author.author.name, "email": author.author.email})

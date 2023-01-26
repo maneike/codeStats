@@ -190,7 +190,7 @@
         },
         "showHeader": true
       },
-      "pluginVersion": "9.3.2",
+      "pluginVersion": "9.2.3",
       "targets": [
         {
           "datasource": {
@@ -293,7 +293,7 @@
         },
         "showHeader": true
       },
-      "pluginVersion": "9.3.2",
+      "pluginVersion": "9.2.3",
       "targets": [
         {
           "datasource": {
@@ -526,7 +526,7 @@
         },
         "showHeader": true
       },
-      "pluginVersion": "9.3.2",
+      "pluginVersion": "9.2.3",
       "targets": [
         {
           "datasource": {
@@ -870,7 +870,7 @@
         },
         "showHeader": true
       },
-      "pluginVersion": "9.3.2",
+      "pluginVersion": "9.2.3",
       "targets": [
         {
           "datasource": {
@@ -973,7 +973,7 @@
         },
         "showHeader": true
       },
-      "pluginVersion": "9.3.2",
+      "pluginVersion": "9.2.3",
       "targets": [
         {
           "datasource": {
@@ -1036,9 +1036,9 @@
     "list": [
       {
         "current": {
-          "selected": false,
-          "text": "searchApp",
-          "value": "searchApp"
+          "selected": true,
+          "text": "codeStats",
+          "value": "codeStats"
         },
         "datasource": {
           "type": "postgres",
@@ -1067,13 +1067,13 @@
           "type": "postgres",
           "uid": "P44368ADAD746BC27"
         },
-        "definition": "SELECT api_branches.name FROM api_repositories INNER JOIN api_branches ON api_branches.repository_id = api_repositories.id \nWHERE repo_name = '$Repository' GROUP BY api_branches.name ORDER BY api_branches.name ",
+        "definition": "SELECT api_branches.name FROM api_repositories INNER JOIN api_branches ON api_branches.repository_id = api_repositories.id \nWHERE repo_name = '$Repository' and iteration='$Iteration' GROUP BY api_branches.name ORDER BY api_branches.name ",
         "hide": 0,
         "includeAll": false,
         "multi": false,
         "name": "Branch",
         "options": [],
-        "query": "SELECT api_branches.name FROM api_repositories INNER JOIN api_branches ON api_branches.repository_id = api_repositories.id \nWHERE repo_name = '$Repository' GROUP BY api_branches.name ORDER BY api_branches.name ",
+        "query": "SELECT api_branches.name FROM api_repositories INNER JOIN api_branches ON api_branches.repository_id = api_repositories.id \nWHERE repo_name = '$Repository' and iteration='$Iteration' GROUP BY api_branches.name ORDER BY api_branches.name ",
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
@@ -1082,7 +1082,7 @@
       },
       {
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "MateuszBa",
           "value": "MateuszBa"
         },
@@ -1106,8 +1106,8 @@
       {
         "current": {
           "selected": true,
-          "text": "2",
-          "value": "2"
+          "text": "22",
+          "value": "22"
         },
         "datasource": {
           "type": "postgres",
