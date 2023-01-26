@@ -27,8 +27,8 @@ jobs:
 
       # Installs frontend modules
       - name: Install modules
-        run: yarn
+        run: cd frontend && yarn
 
       # Runs frontend tests
       - name: Run tests
-        run: yarn test
+        run: cd frontend && yarn test
