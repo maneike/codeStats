@@ -23,7 +23,7 @@ COPY . /code
 RUN ["python3", "manage.py", "collectstatic", "--noinput"]
 
 # Set entrypoint for the builder stage
-CMD ["gunicorn", "codestatsapi.wsgi:application", "--bind", "0.0.0.0:8000"]
+CMD ["gunicorn", "codestatsapi.wsgi:application", "--bind", "0.0.0.0:8000", "--timeout", "120"]
 
 FROM builder as development
 
@@ -34,4 +34,4 @@ EXPOSE 8000
 COPY --from=gloursdocker/docker / /
 
 # Set entrypoint for the development stage
-CMD ["gunicorn", "codestatsapi.wsgi:application", "--bind", "0.0.0.0:8000"]
+CMD ["gunicorn", "codestatsapi.wsgi:application", "--bind", "0.0.0.0:8000", "--timeout", "120"]

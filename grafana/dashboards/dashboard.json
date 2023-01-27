@@ -56,10 +56,7 @@
       },
       "id": 20,
       "options": {
-        "displayLabels": [
-          "name",
-          "percent"
-        ],
+        "displayLabels": ["name", "percent"],
         "legend": {
           "displayMode": "list",
           "placement": "bottom",
@@ -67,9 +64,7 @@
         },
         "pieType": "pie",
         "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
+          "calcs": ["lastNotNull"],
           "fields": "",
           "values": true
         },
@@ -183,14 +178,12 @@
       "options": {
         "footer": {
           "fields": "",
-          "reducer": [
-            "sum"
-          ],
+          "reducer": ["sum"],
           "show": false
         },
         "showHeader": true
       },
-      "pluginVersion": "9.3.2",
+      "pluginVersion": "9.3.6",
       "targets": [
         {
           "datasource": {
@@ -207,9 +200,7 @@
           "select": [
             [
               {
-                "params": [
-                  "value"
-                ],
+                "params": ["value"],
                 "type": "column"
               }
             ]
@@ -286,14 +277,12 @@
       "options": {
         "footer": {
           "fields": "",
-          "reducer": [
-            "sum"
-          ],
+          "reducer": ["sum"],
           "show": false
         },
         "showHeader": true
       },
-      "pluginVersion": "9.3.2",
+      "pluginVersion": "9.3.6",
       "targets": [
         {
           "datasource": {
@@ -310,9 +299,7 @@
           "select": [
             [
               {
-                "params": [
-                  "value"
-                ],
+                "params": ["value"],
                 "type": "column"
               }
             ]
@@ -355,7 +342,7 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "palette-classic"
+            "mode": "continuous-GrYlRd"
           },
           "custom": {
             "axisCenteredZero": false,
@@ -364,15 +351,15 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
+            "fillOpacity": 20,
+            "gradientMode": "scheme",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
               "viz": false
             },
             "lineInterpolation": "linear",
-            "lineWidth": 1,
+            "lineWidth": 2,
             "pointSize": 5,
             "scaleDistribution": {
               "type": "linear"
@@ -440,9 +427,7 @@
           "select": [
             [
               {
-                "params": [
-                  "value"
-                ],
+                "params": ["value"],
                 "type": "column"
               }
             ]
@@ -519,14 +504,12 @@
       "options": {
         "footer": {
           "fields": "",
-          "reducer": [
-            "sum"
-          ],
+          "reducer": ["sum"],
           "show": false
         },
         "showHeader": true
       },
-      "pluginVersion": "9.3.2",
+      "pluginVersion": "9.3.6",
       "targets": [
         {
           "datasource": {
@@ -543,9 +526,7 @@
           "select": [
             [
               {
-                "params": [
-                  "value"
-                ],
+                "params": ["value"],
                 "type": "column"
               }
             ]
@@ -588,7 +569,7 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "palette-classic"
+            "mode": "continuous-GrYlRd"
           },
           "custom": {
             "axisCenteredZero": false,
@@ -597,15 +578,15 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
+            "fillOpacity": 20,
+            "gradientMode": "scheme",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
               "viz": false
             },
             "lineInterpolation": "linear",
-            "lineWidth": 1,
+            "lineWidth": 2,
             "pointSize": 5,
             "scaleDistribution": {
               "type": "linear"
@@ -672,9 +653,7 @@
           "select": [
             [
               {
-                "params": [
-                  "value"
-                ],
+                "params": ["value"],
                 "type": "column"
               }
             ]
@@ -700,7 +679,7 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "palette-classic"
+            "mode": "continuous-GrYlRd"
           },
           "custom": {
             "axisCenteredZero": false,
@@ -709,15 +688,15 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
+            "fillOpacity": 20,
+            "gradientMode": "scheme",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
               "viz": false
             },
             "lineInterpolation": "linear",
-            "lineWidth": 1,
+            "lineWidth": 2,
             "pointSize": 5,
             "scaleDistribution": {
               "type": "linear"
@@ -784,9 +763,7 @@
           "select": [
             [
               {
-                "params": [
-                  "value"
-                ],
+                "params": ["value"],
                 "type": "column"
               }
             ]
@@ -863,14 +840,12 @@
       "options": {
         "footer": {
           "fields": "",
-          "reducer": [
-            "sum"
-          ],
+          "reducer": ["sum"],
           "show": false
         },
         "showHeader": true
       },
-      "pluginVersion": "9.3.2",
+      "pluginVersion": "9.3.6",
       "targets": [
         {
           "datasource": {
@@ -887,9 +862,7 @@
           "select": [
             [
               {
-                "params": [
-                  "value"
-                ],
+                "params": ["value"],
                 "type": "column"
               }
             ]
@@ -966,14 +939,12 @@
       "options": {
         "footer": {
           "fields": "",
-          "reducer": [
-            "sum"
-          ],
+          "reducer": ["sum"],
           "show": false
         },
         "showHeader": true
       },
-      "pluginVersion": "9.3.2",
+      "pluginVersion": "9.3.6",
       "targets": [
         {
           "datasource": {
@@ -990,9 +961,7 @@
           "select": [
             [
               {
-                "params": [
-                  "value"
-                ],
+                "params": ["value"],
                 "type": "column"
               }
             ]
@@ -1037,8 +1006,8 @@
       {
         "current": {
           "selected": false,
-          "text": "searchApp",
-          "value": "searchApp"
+          "text": "meana",
+          "value": "meana"
         },
         "datasource": {
           "type": "postgres",
@@ -1059,7 +1028,7 @@
       },
       {
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "main",
           "value": "main"
         },
@@ -1067,13 +1036,13 @@
           "type": "postgres",
           "uid": "P44368ADAD746BC27"
         },
-        "definition": "SELECT api_branches.name FROM api_repositories INNER JOIN api_branches ON api_branches.repository_id = api_repositories.id \nWHERE repo_name = '$Repository' GROUP BY api_branches.name ORDER BY api_branches.name ",
+        "definition": "SELECT api_branches.name FROM api_repositories INNER JOIN api_branches ON api_branches.repository_id = api_repositories.id \nWHERE repo_name = '$Repository' and iteration='$Iteration' GROUP BY api_branches.name ORDER BY api_branches.name ",
         "hide": 0,
         "includeAll": false,
         "multi": false,
         "name": "Branch",
         "options": [],
-        "query": "SELECT api_branches.name FROM api_repositories INNER JOIN api_branches ON api_branches.repository_id = api_repositories.id \nWHERE repo_name = '$Repository' GROUP BY api_branches.name ORDER BY api_branches.name ",
+        "query": "SELECT api_branches.name FROM api_repositories INNER JOIN api_branches ON api_branches.repository_id = api_repositories.id \nWHERE repo_name = '$Repository' and iteration='$Iteration' GROUP BY api_branches.name ORDER BY api_branches.name ",
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
@@ -1083,8 +1052,8 @@
       {
         "current": {
           "selected": true,
-          "text": "MateuszBa",
-          "value": "MateuszBa"
+          "text": "Dawid Nowak",
+          "value": "Dawid Nowak"
         },
         "datasource": {
           "type": "postgres",
@@ -1105,9 +1074,9 @@
       },
       {
         "current": {
-          "selected": true,
-          "text": "2",
-          "value": "2"
+          "selected": false,
+          "text": "1",
+          "value": "1"
         },
         "datasource": {
           "type": "postgres",
@@ -1129,8 +1098,8 @@
     ]
   },
   "time": {
-    "from": "2022-01-15T20:49:59.211Z",
-    "to": "2022-05-11T22:21:07.001Z"
+    "from": "2022-04-23T14:16:56.643Z",
+    "to": "2023-01-26T19:54:10.630Z"
   },
   "timepicker": {},
   "timezone": "",

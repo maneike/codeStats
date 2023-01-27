@@ -1,0 +1,22 @@
+name: Tests
+
+on: [push]
+
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+      # Installs frontend modules
+      - name: Install modules
+        run: cd frontend && yarn
+
+      # Runs frontend tests
+      - name: Run tests
+        run: cd frontend && yarn test

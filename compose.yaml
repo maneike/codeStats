@@ -23,7 +23,7 @@ services:
     depends_on:
       - db
     env_file:
-      - ./backend/.dev.env
+      - ./backend/.example.env
 
   db:
     image: postgres:14
@@ -77,7 +77,7 @@ services:
       - db
       - redis
     env_file:
-      - ./backend/.dev.env
+      - ./backend/.example.env
 
 volumes:
   frontend-dist: {}

@@ -31,9 +31,12 @@ def get_all_users(urls, receivers):
         os.system(f"rm -rf /code/{u.get('old').get('name')}")
         path = os.getcwd()
         repo = Repo.clone_from(u.get('old').get('url'), os.path.join(path, f"{u.get('old').get('name')}"))
-        for lng in ghl.linguist(f"./{u.get('old').get('name')}"):
-            if float(lng[1]) > 0:
-                RepoLanguages.objects.create(languages=lng[0], percentage=lng[1], repository=repo_object)
+        try:
+            for lng in ghl.linguist(f"./{u.get('old').get('name')}"):
+                if float(lng[1]) > 0:
+                    RepoLanguages.objects.create(languages=lng[0], percentage=lng[1], repository=repo_object)
+        except TypeError:
+            return {'error': 'Failed to get languages used in this repo'}
         remote_refs = repo.remote().refs
         for refs in remote_refs:
             refs.checkout()
@@ -68,17 +71,20 @@ def handle_first_url(first_data, receivers):
     path = os.getcwd()
     try:
         repo = Repo.clone_from(first_data.get('old').get('url'), os.path.join(path, f"{first_data.get('old').get('name')}"))
-    except exc.GitError:
-        repo = Repo.clone_from(first_data.get('old').get('url'), os.path.join(path, f"{first_data.get('old').get('name')}"))
+    except exc.GitCommandError:
+        return {'error': 'Requested repository is private or does not exist.'}
     remote_refs = repo.remote().refs
     for refs in remote_refs:
         refs.checkout()
         commits_list = list(repo.iter_commits())
         for author in reversed(commits_list):
             users.append({"name": author.author.name, "email": author.author.email})
-    for lng in ghl.linguist(f"./{first_data.get('old').get('name')}"):
-        if float(lng[1]) > 0:
-            RepoLanguages.objects.create(languages=lng[0], percentage=lng[1], repository=repo_model)
+    try:
+        for lng in ghl.linguist(f"./{first_data.get('old').get('name')}"):
+            if float(lng[1]) > 0:
+                RepoLanguages.objects.create(languages=lng[0], percentage=lng[1], repository=repo_model)
+    except TypeError:
+        return {'error': 'Failed to get languages used in this repo'}
     return {"repo_name": repo_name, "users": list({v['email']: v for v in users}.values()),
             'languages': [l[0] for l in ghl.linguist(f"./{first_data.get('old').get('name')}")]}
 

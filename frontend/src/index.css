@@ -19,6 +19,9 @@ body {
   background: transparent;
 }
 :root {
-  --text-area-width: 650px;
+  --text-area-width-768: 500px;
   --text-area-height: 350px;
+  --text-area-width-320: 300px;
+  --text-area-width: 650px;
+  --inputs-wrapper-width: 700px;
 }
