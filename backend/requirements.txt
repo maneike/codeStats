@@ -11,3 +11,7 @@ celery
 redis
 requests
 ghlinguist
+pytest
+pytest-django
+pytest-cov
+coverage

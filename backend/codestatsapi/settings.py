@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'api.apps.ApiConfig',
     'corsheaders',
     'django_celery_beat',
+    'coverage'
 ]
 
 MIDDLEWARE = [
