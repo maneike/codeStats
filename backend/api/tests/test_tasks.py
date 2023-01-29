@@ -14,7 +14,7 @@ class TestTasks(TestCase):
             self.assertEqual(len(data), 1)
 
     def get_all_users_from_zip(self):
-        data = get_all_users_from_zip(['microshell'])
+        data = get_all_users_from_zip([['microshell', 'microshell']])
 
         self.assertEqual(type(data), dict)
         self.assertEqual(type(data.get('data')), list)
